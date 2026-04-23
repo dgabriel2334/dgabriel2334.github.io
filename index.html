@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="en" class="dark scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0b1220" />
+  <meta name="description" content="Dário Gabriel — Senior Backend Engineer. Backend, distributed systems, DDD and cloud-native services with PHP, Symfony and Node.js." />
+  <meta name="author" content="Dário Gabriel" />
+
+  <meta property="og:title" content="Dário Gabriel — Senior Backend Engineer" />
+  <meta property="og:type" content="website" />
+  <meta property="og:description" content="Backend, distributed systems and cloud-native services." />
+
+  <title>Dário Gabriel — Senior Backend Engineer</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;4Coloca00;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind via CDN with project-scoped config (brand palette + motion) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50:  '#eef6ff',
+              100: '#d9ebff',
+              200: '#bcdcff',
+              300: '#8ec7ff',
+              400: '#58a6ff',
+              500: '#2f83f4',
+              600: '#1864d8',
+              700: '#154fae',
+              800: '#14448c',
+              900: '#122f5f',
+              950: '#0b1f42',
+            },
+            ink: {
+              50:  '#f1f5f9',
+              100: '#e2e8f0',
+              200: '#cbd5e1',
+              300: '#94a3b8',
+              400: '#64748b',
+              500: '#475569',
+              600: '#334155',
+              700: '#1e293b',
+              800: '#0f172a',
+              900: '#0b1220',
+              950: '#060912',
+            },
+          },
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'ui-monospace', 'monospace'],
+          },
+          boxShadow: {
+            'glow': '0 0 0 1px rgb(47 131 244 / 0.25), 0 24px 48px -24px rgb(47 131 244 / 0.45)',
+            'card': '0 1px 0 0 rgb(255 255 255 / 0.04) inset, 0 20px 40px -24px rgb(0 0 0 / 0.6)',
+          },
+          animation: {
+            'fade-up': 'fadeUp .7s cubic-bezier(.2,.7,.2,1) both',
+            'blink':   'blink 1s steps(1) infinite',
+            'float':   'float 7s ease-in-out infinite',
+            'pulse-ring': 'pulseRing 2.2s cubic-bezier(.2,.7,.2,1) infinite',
+          },
+          keyframes: {
+            fadeUp: { '0%': { opacity: 0, transform: 'translateY(20px)' }, '100%': { opacity: 1, transform: 'none' } },
+            blink:  { '50%': { opacity: 0 } },
+            float:  { '0%,100%': { transform: 'translateY(0)' }, '50%': { transform: 'translateY(-8px)' } },
+            pulseRing: { '0%': { transform: 'scale(.8)', opacity: .6 }, '100%': { transform: 'scale(2.2)', opacity: 0 } },
+          },
+        },
+      },
+    };
+  </script>
+
+  <!-- Minimal project-level CSS: surface treatments the utility layer doesn't give for free -->
+  <style>
+    html { font-family: 'Inter', system-ui, sans-serif; }
+
+    /* Accent gradient used sparingly on a few heading fragments */
+    .gradient-text {
+      background-image: linear-gradient(100deg, #8ec7ff 0%, #2f83f4 50%, #154fae 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    /* Atmospheric background: radial brand glow + subtle grid on dark ink */
+    .atmosphere {
+      background:
+        radial-gradient(60rem 40rem at 80% -10%, rgba(47,131,244,.18), transparent 60%),
+        radial-gradient(50rem 30rem at 10% 10%, rgba(20,68,140,.25), transparent 60%),
+        linear-gradient(to right, rgba(148,163,184,.06) 1px, transparent 1px) 0 0 / 36px 36px,
+        linear-gradient(to bottom, rgba(148,163,184,.06) 1px, transparent 1px) 0 0 / 36px 36px;
+    }
+
+    /* Hairline dividers that adapt to the dark surface */
+    .hairline {
+      background: linear-gradient(to right, transparent, rgba(148,163,184,.25), transparent);
+      height: 1px;
+    }
+
+    /* Scroll-reveal primitives consumed by IntersectionObserver in main.js */
+    .reveal { opacity: 0; transform: translateY(18px); transition: opacity .7s cubic-bezier(.2,.7,.2,1), transform .7s cubic-bezier(.2,.7,.2,1); }
+    .reveal.is-visible { opacity: 1; transform: none; }
+
+    /* Timeline connector + node — centered on the ol's left border (pl-8 offset) */
+    .node { position: relative; }
+    .node::before {
+      content: '';
+      position: absolute;
+      left: calc(-2rem - 0.5rem - 0.5px); /* pl-8 + half dot + half border */
+      top: 0.5rem;
+      width: 1rem; height: 1rem;
+      border-radius: 9999px;
+      background: #0b1220;
+      border: 2px solid #2f83f4;
+      box-shadow: 0 0 0 4px rgba(47,131,244,.15);
+    }
+
+    /* Card hover lift + glow */
+    .card {
+      background: linear-gradient(180deg, rgba(30,41,59,.5) 0%, rgba(15,23,42,.5) 100%);
+      border: 1px solid rgba(148,163,184,.12);
+      transition: transform .3s ease, border-color .3s ease, box-shadow .3s ease;
+    }
+    .card:hover { transform: translateY(-3px); border-color: rgba(47,131,244,.45); box-shadow: 0 24px 48px -24px rgba(47,131,244,.35); }
+
+    /* Tag chips (used by stack + project badges) */
+    .chip {
+      display: inline-flex; align-items: center;
+      padding: 0.25rem 0.625rem;
+      border-radius: 9999px;
+      font-size: 0.72rem;
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      background: rgba(47,131,244,.08);
+      border: 1px solid rgba(47,131,244,.25);
+      color: #8ec7ff;
+    }
+  </style>
+</head>
+
+<body class="bg-ink-900 text-ink-100 antialiased selection:bg-brand-500/30 selection:text-brand-100">
+
+  <!-- Skip link for keyboard users -->
+  <a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-50 focus:rounded-md focus:bg-brand-600 focus:px-3 focus:py-2 focus:text-white">
+    Skip to content
+  </a>
+
+  <!-- ============================ NAV ============================ -->
+  <header class="fixed inset-x-0 top-0 z-40 border-b border-white/5 bg-ink-900/70 backdrop-blur-xl">
+    <nav aria-label="Primary" class="mx-auto flex max-w-5xl items-center justify-between px-4 py-3 sm:px-6">
+      <a href="#home" class="group inline-flex items-center gap-2">
+        <span class="grid h-8 w-8 place-items-center rounded-md bg-gradient-to-br from-brand-500 to-brand-800 font-mono text-xs font-semibold text-white">DG</span>
+        <span class="hidden font-medium text-white sm:inline">Dário Gabriel</span>
+        <span class="hidden font-mono text-xs text-ink-300 sm:inline">/ engineer</span>
+      </a>
+
+      <ul id="nav-links" class="hidden items-center gap-1 md:flex">
+        <li><a data-nav href="#about"      class="rounded-md px-3 py-2 text-sm text-ink-300 transition hover:text-white">About</a></li>
+        <li><a data-nav href="#stack"      class="rounded-md px-3 py-2 text-sm text-ink-300 transition hover:text-white">Stack</a></li>
+        <li><a data-nav href="#experience" class="rounded-md px-3 py-2 text-sm text-ink-300 transition hover:text-white">Experience</a></li>
+        <li><a data-nav href="#projects"   class="rounded-md px-3 py-2 text-sm text-ink-300 transition hover:text-white">Projects</a></li>
+        <li><a data-nav href="#contact"    class="rounded-md px-3 py-2 text-sm text-ink-300 transition hover:text-white">Contact</a></li>
+      </ul>
+
+      <div class="flex items-center gap-2">
+        <a href="#contact" class="hidden items-center gap-2 rounded-md border border-brand-400/40 bg-brand-500/10 px-3 py-1.5 text-xs font-medium text-brand-200 transition hover:border-brand-400 hover:text-white md:inline-flex">
+          <span class="relative flex h-1.5 w-1.5">
+            <span class="absolute inline-flex h-full w-full animate-pulse-ring rounded-full bg-brand-400"></span>
+            <span class="relative inline-flex h-1.5 w-1.5 rounded-full bg-brand-400"></span>
+          </span>
+          Open to work
+        </a>
+
+        <button id="menu-toggle" type="button" aria-controls="mobile-menu" aria-expanded="false" aria-label="Open menu"
+          class="inline-flex h-9 w-9 items-center justify-center rounded-md border border-white/10 bg-white/5 text-ink-200 transition hover:border-brand-400 hover:text-white md:hidden">
+          <svg data-icon="burger" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+          <svg data-icon="close"  class="h-5 w-5 hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+        </button>
+      </div>
+    </nav>
+
+    <div id="mobile-menu" hidden class="border-t border-white/5 bg-ink-900/95 backdrop-blur md:hidden">
+      <ul class="mx-auto flex max-w-5xl flex-col px-4 py-2 sm:px-6">
+        <li><a href="#about"      class="block rounded-md px-3 py-2 text-ink-200 hover:bg-white/5 hover:text-white">About</a></li>
+        <li><a href="#stack"      class="block rounded-md px-3 py-2 text-ink-200 hover:bg-white/5 hover:text-white">Stack</a></li>
+        <li><a href="#experience" class="block rounded-md px-3 py-2 text-ink-200 hover:bg-white/5 hover:text-white">Experience</a></li>
+        <li><a href="#projects"   class="block rounded-md px-3 py-2 text-ink-200 hover:bg-white/5 hover:text-white">Projects</a></li>
+        <li><a href="#contact"    class="block rounded-md px-3 py-2 text-ink-200 hover:bg-white/5 hover:text-white">Contact</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <!-- ============================ HERO ============================ -->
+    <section id="home" class="relative overflow-hidden">
+      <div class="atmosphere absolute inset-0 -z-10"></div>
+
+      <div class="mx-auto grid max-w-5xl grid-cols-1 items-center gap-8 px-4 pb-10 pt-20 sm:px-6 lg:grid-cols-12 lg:gap-8 lg:pb-14 lg:pt-24">
+        <div class="lg:col-span-7">
+          <p class="inline-flex items-center gap-2 rounded-full border border-brand-400/30 bg-brand-500/10 px-3 py-1 font-mono text-[11px] uppercase tracking-widest text-brand-200">
+            <span class="relative flex h-1.5 w-1.5">
+              <span class="absolute inline-flex h-full w-full animate-pulse-ring rounded-full bg-brand-400"></span>
+              <span class="relative inline-flex h-1.5 w-1.5 rounded-full bg-brand-400"></span>
+            </span>
+            Currently open to work
+          </p>
+
+          <h1 class="mt-4 text-4xl font-extrabold tracking-tight text-white sm:text-5xl lg:text-6xl">
+            Senior Backend Engineer
+            <span class="block gradient-text">building resilient backends.</span>
+          </h1>
+
+          <p class="mt-4 max-w-xl font-mono text-sm text-ink-300">
+            <span class="text-brand-300">&gt;</span>
+            <span id="typewriter"></span><span class="ml-0.5 inline-block h-4 w-0.5 animate-blink bg-brand-400 align-middle"></span>
+          </p>
+
+          <p class="mt-4 max-w-xl text-sm leading-relaxed text-ink-200 sm:text-base">
+            I design and ship distributed systems, APIs and event-driven platforms with
+            <span class="font-medium text-white">PHP, Symfony and Node.js</span> — grounded in
+            <span class="font-medium text-white">DDD, Hexagonal Architecture</span> and the SOLID principles.
+            Seven years shipping production software with international teams.
+          </p>
+
+          <p class="mt-3 max-w-xl text-sm leading-relaxed text-ink-200 sm:text-base">
+            Currently engineering event-driven platforms that move
+            <span class="font-semibold text-white">millions of daily transactions</span>
+            with predictable latency, clean domain boundaries and zero-downtime deploys.
+          </p>
+
+          <div class="mt-6 flex flex-wrap items-center gap-3">
+            <a href="#contact" class="inline-flex items-center gap-2 rounded-lg bg-brand-600 px-5 py-2.5 text-sm font-semibold text-white shadow-glow transition hover:bg-brand-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-2 focus-visible:ring-offset-ink-900">
+              Start a conversation
+              <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+            </a>
+            <a href="Resume EN-US.pdf" download
+               class="inline-flex items-center gap-2 rounded-lg border border-white/10 bg-white/5 px-5 py-2.5 text-sm font-semibold text-ink-100 transition hover:border-brand-400 hover:text-white">
+              <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 21h16"/></svg>
+              Download resume
+            </a>
+          </div>
+
+          <dl class="mt-7 grid max-w-md grid-cols-3 gap-4 border-t border-white/5 pt-4">
+            <div>
+              <dt class="font-mono text-[10px] uppercase tracking-widest text-ink-400">Experience</dt>
+              <dd class="mt-0.5 text-xl font-semibold text-white">7+ <span class="text-xs font-medium text-ink-400">yrs</span></dd>
+            </div>
+            <div>
+              <dt class="font-mono text-[10px] uppercase tracking-widest text-ink-400">Current</dt>
+              <dd class="mt-0.5 text-xl font-semibold text-white">Leadtech</dd>
+            </div>
+            <div>
+              <dt class="font-mono text-[10px] uppercase tracking-widest text-ink-400">Based in</dt>
+              <dd class="mt-0.5 text-xl font-semibold text-white">Manaus, BR</dd>
+            </div>
+          </dl>
+        </div>
+
+        <!-- Hero code card: visual anchor emphasising backend/architecture focus -->
+        <aside class="lg:col-span-5">
+          <div class="relative animate-float">
+            <div class="absolute -inset-3 rounded-2xl bg-gradient-to-br from-brand-400/30 via-brand-600/10 to-transparent blur-2xl"></div>
+
+            <div class="relative overflow-hidden rounded-xl border border-white/10 bg-ink-950/70 shadow-card backdrop-blur">
+              <header class="flex items-center justify-between gap-3 border-b border-white/5 bg-white/5 px-3 py-2">
+                <div class="flex items-center gap-1.5">
+                  <span class="h-2.5 w-2.5 rounded-full bg-rose-400/80"></span>
+                  <span class="h-2.5 w-2.5 rounded-full bg-amber-400/80"></span>
+                  <span class="h-2.5 w-2.5 rounded-full bg-emerald-400/80"></span>
+                </div>
+                <div role="tablist" aria-label="Code language" class="flex items-center gap-0.5 font-mono text-[11px]">
+                  <button role="tab" aria-selected="true"  data-code-tab="php"   class="rounded px-2 py-1 text-white bg-white/10 transition">PHP</button>
+                  <button role="tab" aria-selected="false" data-code-tab="node"  class="rounded px-2 py-1 text-ink-300 transition hover:bg-white/5 hover:text-white">Node</button>
+                  <button role="tab" aria-selected="false" data-code-tab="react" class="rounded px-2 py-1 text-ink-300 transition hover:bg-white/5 hover:text-white">React</button>
+                  <button role="tab" aria-selected="false" data-code-tab="java"  class="rounded px-2 py-1 text-ink-300 transition hover:bg-white/5 hover:text-white">Java</button>
+                </div>
+              </header>
+
+              <div class="relative min-h-[18rem]">
+                <!-- PHP -->
+                <div data-code-panel="php">
+                  <div class="border-b border-white/5 bg-white/[0.03] px-4 py-1.5 font-mono text-[11px] text-ink-300">LeadProcessor.php</div>
+                  <pre class="overflow-x-auto px-4 py-4 font-mono text-[12.5px] leading-relaxed text-ink-100"><code><span class="text-brand-300">namespace</span> App\Leads\Application;
+
+<span class="text-brand-300">final class</span> <span class="text-white">LeadProcessor</span>
+{
+    <span class="text-brand-300">public function</span> <span class="text-emerald-300">__construct</span>(
+        <span class="text-brand-300">private readonly</span> LeadRepository   <span class="text-amber-300">$leads</span>,
+        <span class="text-brand-300">private readonly</span> EventPublisher   <span class="text-amber-300">$bus</span>,
+        <span class="text-brand-300">private readonly</span> ScoringService   <span class="text-amber-300">$scoring</span>,
+    ) {}
+
+    <span class="text-brand-300">public function</span> <span class="text-emerald-300">__invoke</span>(IngestLead <span class="text-amber-300">$cmd</span>): <span class="text-ink-300">void</span>
+    {
+        <span class="text-amber-300">$lead</span>  = Lead::fromCommand(<span class="text-amber-300">$cmd</span>);
+        <span class="text-amber-300">$score</span> = <span class="text-amber-300">$this</span>->scoring-><span class="text-emerald-300">evaluate</span>(<span class="text-amber-300">$lead</span>);
+
+        <span class="text-amber-300">$this</span>->leads-><span class="text-emerald-300">save</span>(<span class="text-amber-300">$lead</span>->withScore(<span class="text-amber-300">$score</span>));
+        <span class="text-amber-300">$this</span>->bus-><span class="text-emerald-300">publish</span>(<span class="text-brand-300">new</span> LeadIngested(<span class="text-amber-300">$lead</span>->id()));
+    }
+}</code></pre>
+                </div>
+
+                <!-- Node.js -->
+                <div data-code-panel="node" hidden>
+                  <div class="border-b border-white/5 bg-white/[0.03] px-4 py-1.5 font-mono text-[11px] text-ink-300">lead-service.js</div>
+                  <pre class="overflow-x-auto px-4 py-4 font-mono text-[12.5px] leading-relaxed text-ink-100"><code><span class="text-brand-300">import</span> { EventBus } <span class="text-brand-300">from</span> <span class="text-emerald-300">'./core/bus.js'</span>;
+<span class="text-brand-300">import</span> { Lead }     <span class="text-brand-300">from</span> <span class="text-emerald-300">'./domain/lead.js'</span>;
+
+<span class="text-brand-300">export class</span> <span class="text-white">LeadService</span> {
+  <span class="text-emerald-300">constructor</span>(leads, scoring, bus) {
+    <span class="text-amber-300">this</span>.leads   = leads;
+    <span class="text-amber-300">this</span>.scoring = scoring;
+    <span class="text-amber-300">this</span>.bus     = bus;
+  }
+
+  <span class="text-brand-300">async</span> <span class="text-emerald-300">ingest</span>(command) {
+    <span class="text-brand-300">const</span> lead  = Lead.<span class="text-emerald-300">fromCommand</span>(command);
+    <span class="text-brand-300">const</span> score = <span class="text-brand-300">await</span> <span class="text-amber-300">this</span>.scoring.<span class="text-emerald-300">evaluate</span>(lead);
+
+    <span class="text-brand-300">await</span> <span class="text-amber-300">this</span>.leads.<span class="text-emerald-300">save</span>(lead.<span class="text-emerald-300">withScore</span>(score));
+    <span class="text-brand-300">await</span> <span class="text-amber-300">this</span>.bus.<span class="text-emerald-300">publish</span>({ type: <span class="text-emerald-300">'lead.ingested'</span>, id: lead.id });
+  }
+}</code></pre>
+                </div>
+
+                <!-- React -->
+                <div data-code-panel="react" hidden>
+                  <div class="border-b border-white/5 bg-white/[0.03] px-4 py-1.5 font-mono text-[11px] text-ink-300">useLeadStatus.ts</div>
+                  <pre class="overflow-x-auto px-4 py-4 font-mono text-[12.5px] leading-relaxed text-ink-100"><code><span class="text-brand-300">import</span> { useEffect, useState } <span class="text-brand-300">from</span> <span class="text-emerald-300">'react'</span>;
+
+<span class="text-brand-300">type</span> <span class="text-white">Status</span> = <span class="text-emerald-300">'pending'</span> | <span class="text-emerald-300">'scored'</span> | <span class="text-emerald-300">'rejected'</span>;
+
+<span class="text-brand-300">export function</span> <span class="text-emerald-300">useLeadStatus</span>(id: <span class="text-ink-300">string</span>) {
+  <span class="text-brand-300">const</span> [status, setStatus] = <span class="text-emerald-300">useState</span>&lt;Status&gt;(<span class="text-emerald-300">'pending'</span>);
+
+  <span class="text-emerald-300">useEffect</span>(() =&gt; {
+    <span class="text-brand-300">const</span> es = <span class="text-brand-300">new</span> EventSource(<span class="text-emerald-300">`/api/leads/${id}/events`</span>);
+
+    es.<span class="text-emerald-300">addEventListener</span>(<span class="text-emerald-300">'scored'</span>,   () =&gt; setStatus(<span class="text-emerald-300">'scored'</span>));
+    es.<span class="text-emerald-300">addEventListener</span>(<span class="text-emerald-300">'rejected'</span>, () =&gt; setStatus(<span class="text-emerald-300">'rejected'</span>));
+
+    <span class="text-brand-300">return</span> () =&gt; es.<span class="text-emerald-300">close</span>();
+  }, [id]);
+
+  <span class="text-brand-300">return</span> status;
+}</code></pre>
+                </div>
+
+                <!-- Java -->
+                <div data-code-panel="java" hidden>
+                  <div class="border-b border-white/5 bg-white/[0.03] px-4 py-1.5 font-mono text-[11px] text-ink-300">LeadProcessor.java</div>
+                  <pre class="overflow-x-auto px-4 py-4 font-mono text-[12.5px] leading-relaxed text-ink-100"><code><span class="text-brand-300">package</span> app.leads.application;
+
+<span class="text-amber-300">@Service</span>
+<span class="text-brand-300">public final class</span> <span class="text-white">LeadProcessor</span> {
+
+  <span class="text-brand-300">private final</span> LeadRepository leads;
+  <span class="text-brand-300">private final</span> EventPublisher bus;
+  <span class="text-brand-300">private final</span> ScoringService scoring;
+
+  <span class="text-brand-300">public</span> <span class="text-emerald-300">LeadProcessor</span>(LeadRepository leads,
+                        EventPublisher bus,
+                        ScoringService scoring) {
+    <span class="text-amber-300">this</span>.leads   = leads;
+    <span class="text-amber-300">this</span>.bus     = bus;
+    <span class="text-amber-300">this</span>.scoring = scoring;
+  }
+
+  <span class="text-brand-300">public void</span> <span class="text-emerald-300">handle</span>(IngestLead cmd) {
+    <span class="text-brand-300">var</span> lead  = Lead.<span class="text-emerald-300">fromCommand</span>(cmd);
+    <span class="text-brand-300">var</span> score = scoring.<span class="text-emerald-300">evaluate</span>(lead);
+
+    leads.<span class="text-emerald-300">save</span>(lead.<span class="text-emerald-300">withScore</span>(score));
+    bus.<span class="text-emerald-300">publish</span>(<span class="text-brand-300">new</span> LeadIngested(lead.<span class="text-emerald-300">id</span>()));
+  }
+}</code></pre>
+                </div>
+              </div>
+
+              <footer class="flex items-center justify-between border-t border-white/5 bg-white/5 px-4 py-2 font-mono text-[11px] text-ink-300">
+                <span>DDD · Hexagonal · CQRS-lite</span>
+                <span id="code-runtime" class="text-brand-300">php 8.3</span>
+              </footer>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <div class="mx-auto max-w-5xl px-4 sm:px-6"><div class="hairline"></div></div>
+
+    <!-- ============================ ABOUT ============================ -->
+    <section id="about" class="mx-auto max-w-5xl px-4 py-10 sm:px-6">
+      <div class="grid gap-6 lg:grid-cols-12">
+        <header class="reveal lg:col-span-4">
+          <p class="font-mono text-[11px] uppercase tracking-widest text-brand-300">01 — About</p>
+          <h2 class="mt-1 text-2xl font-bold text-white sm:text-3xl">A backend engineer who cares about clarity.</h2>
+        </header>
+
+        <div class="reveal lg:col-span-8">
+          <p class="text-sm leading-relaxed text-ink-200 sm:text-base">
+            I'm Dário, a Senior Backend Engineer from the Amazon, now shipping backend systems for
+            <span class="font-semibold text-white">Leadtech</span> in Barcelona. Over the past seven years I've
+            led teams, modernized legacy monoliths and delivered event-driven platforms for companies
+            across Brazil, Spain and Latin America.
+          </p>
+          <p class="mt-3 text-sm leading-relaxed text-ink-200 sm:text-base">
+            My focus is building software that survives real traffic and real teams — clean boundaries,
+            explicit domain models, message-driven integration and observability baked in. I believe
+            simple code wins, tests are a design tool, and the best systems are boring by intent.
+          </p>
+
+          <ul class="mt-4 grid gap-x-6 gap-y-2 sm:grid-cols-2">
+            <li class="flex items-start gap-3 text-sm leading-6 text-ink-200">
+              <span class="mt-[9px] inline-block h-1.5 w-1.5 shrink-0 rounded-full bg-brand-400" aria-hidden="true"></span>
+              <span>Designing systems with <strong class="text-white">DDD &amp; Hexagonal Architecture</strong></span>
+            </li>
+            <li class="flex items-start gap-3 text-sm leading-6 text-ink-200">
+              <span class="mt-[9px] inline-block h-1.5 w-1.5 shrink-0 rounded-full bg-brand-400" aria-hidden="true"></span>
+              <span>Async pipelines with <strong class="text-white">RabbitMQ &amp; Kafka</strong></span>
+            </li>
+            <li class="flex items-start gap-3 text-sm leading-6 text-ink-200">
+              <span class="mt-[9px] inline-block h-1.5 w-1.5 shrink-0 rounded-full bg-brand-400" aria-hidden="true"></span>
+              <span>PostgreSQL modeling, query &amp; transaction design</span>
+            </li>
+            <li class="flex items-start gap-3 text-sm leading-6 text-ink-200">
+              <span class="mt-[9px] inline-block h-1.5 w-1.5 shrink-0 rounded-full bg-brand-400" aria-hidden="true"></span>
+              <span>CI/CD with Jenkins + Docker on AWS &amp; GCP</span>
+            </li>
+            <li class="flex items-start gap-3 text-sm leading-6 text-ink-200">
+              <span class="mt-[9px] inline-block h-1.5 w-1.5 shrink-0 rounded-full bg-brand-400" aria-hidden="true"></span>
+              <span>Leading &amp; mentoring cross-functional teams</span>
+            </li>
+            <li class="flex items-start gap-3 text-sm leading-6 text-ink-200">
+              <span class="mt-[9px] inline-block h-1.5 w-1.5 shrink-0 rounded-full bg-brand-400" aria-hidden="true"></span>
+              <span>Fluent in PT (native) · EN (B2) · ES (A2)</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <div class="mx-auto max-w-5xl px-4 sm:px-6"><div class="hairline"></div></div>
+
+    <!-- ============================ STACK ============================ -->
+    <section id="stack" class="mx-auto max-w-5xl px-4 py-10 sm:px-6">
+      <header class="reveal max-w-2xl">
+        <p class="font-mono text-[11px] uppercase tracking-widest text-brand-300">02 — Stack</p>
+        <h2 class="mt-1 text-2xl font-bold text-white sm:text-3xl">Tools I reach for every day.</h2>
+        <p class="mt-2 text-sm text-ink-300">A pragmatic toolkit built around backend engineering, distributed systems and delivery.</p>
+      </header>
+
+      <div class="mt-6 grid gap-3 md:grid-cols-2 lg:grid-cols-3">
+        <article class="reveal card rounded-xl p-4">
+          <h3 class="font-mono text-[11px] uppercase tracking-widest text-brand-300">Backend</h3>
+          <ul class="mt-2 flex flex-wrap gap-1.5" data-tags>
+            <li>PHP 8</li><li>Symfony</li><li>Laravel</li><li>Lumen</li><li>Node.js</li><li>Java</li><li>Spring</li><li>Doctrine</li><li>REST</li><li>GraphQL</li>
+          </ul>
+        </article>
+
+        <article class="reveal card rounded-xl p-4" style="transition-delay:.06s">
+          <h3 class="font-mono text-[11px] uppercase tracking-widest text-brand-300">Architecture</h3>
+          <ul class="mt-2 flex flex-wrap gap-1.5" data-tags>
+            <li>DDD</li><li>Hexagonal</li><li>Clean Arch</li><li>SOLID</li><li>CQRS-lite</li><li>Event-driven</li><li>Microservices</li>
+          </ul>
+        </article>
+
+        <article class="reveal card rounded-xl p-4" style="transition-delay:.12s">
+          <h3 class="font-mono text-[11px] uppercase tracking-widest text-brand-300">Messaging & Data</h3>
+          <ul class="mt-2 flex flex-wrap gap-1.5" data-tags>
+            <li>RabbitMQ</li><li>Kafka</li><li>PostgreSQL</li><li>MySQL</li><li>Redis</li><li>Elasticsearch</li>
+          </ul>
+        </article>
+
+        <article class="reveal card rounded-xl p-4">
+          <h3 class="font-mono text-[11px] uppercase tracking-widest text-brand-300">Cloud & DevOps</h3>
+          <ul class="mt-2 flex flex-wrap gap-1.5" data-tags>
+            <li>AWS</li><li>GCP</li><li>Docker</li><li>Jenkins</li><li>GitHub Actions</li><li>Linux</li>
+          </ul>
+        </article>
+
+        <article class="reveal card rounded-xl p-4" style="transition-delay:.06s">
+          <h3 class="font-mono text-[11px] uppercase tracking-widest text-brand-300">Frontend</h3>
+          <ul class="mt-2 flex flex-wrap gap-1.5" data-tags>
+            <li>TypeScript</li><li>Vue.js</li><li>React</li><li>Tailwind CSS</li><li>HTML5</li>
+          </ul>
+        </article>
+
+        <article class="reveal card rounded-xl p-4" style="transition-delay:.12s">
+          <h3 class="font-mono text-[11px] uppercase tracking-widest text-brand-300">Currently exploring</h3>
+          <ul class="mt-2 flex flex-wrap gap-1.5" data-tags>
+            <li>Flutter</li><li>Kotlin</li><li>Python</li><li>Go</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <div class="mx-auto max-w-5xl px-4 sm:px-6"><div class="hairline"></div></div>
+
+    <!-- ============================ EXPERIENCE ============================ -->
+    <section id="experience" class="mx-auto max-w-5xl px-4 py-10 sm:px-6">
+      <header class="reveal max-w-2xl">
+        <p class="font-mono text-[11px] uppercase tracking-widest text-brand-300">03 — Experience</p>
+        <h2 class="mt-1 text-2xl font-bold text-white sm:text-3xl">Seven years shipping production software.</h2>
+      </header>
+
+      <ol class="mt-6 relative ml-2 space-y-5 border-l border-dashed border-white/10 pl-8">
+        <li class="reveal node relative">
+          <div class="flex flex-wrap items-center gap-2">
+            <span class="chip">Current</span>
+            <span class="font-mono text-xs text-ink-400">Oct 2025 — Present</span>
+          </div>
+          <h3 class="mt-2 text-lg font-semibold text-white">Senior Backend Engineer · Leadtech</h3>
+          <p class="font-mono text-xs text-ink-400">Barcelona, Spain · Remote</p>
+          <p class="mt-2 text-sm leading-relaxed text-ink-200">
+            Building robust backend services and APIs with PHP + Symfony + Doctrine, backed by
+            message-driven architectures on RabbitMQ and a PostgreSQL core designed for
+            schema clarity, query performance and transactional integrity. Systems shaped
+            around SOLID, DDD and Hexagonal Architecture — maintainable, testable and decoupled.
+          </p>
+        </li>
+
+        <li class="reveal node relative">
+          <span class="font-mono text-xs text-ink-400">Oct 2024 — Oct 2025</span>
+          <h3 class="mt-1.5 text-lg font-semibold text-white">Senior Backend Engineer · Global HITSS Brasil</h3>
+          <p class="font-mono text-xs text-ink-400">Rio de Janeiro, Brazil</p>
+          <p class="mt-2 text-sm leading-relaxed text-ink-200">
+            APIs and backend services in PHP (Symfony, Laravel, Lumen). Built and maintained
+            CI/CD pipelines on Jenkins with Dockerized environments, integrated messaging via
+            RabbitMQ and Kafka, and delivered cloud services on AWS and GCP following
+            SOLID, DDD and Hexagonal principles.
+          </p>
+        </li>
+
+        <li class="reveal node relative">
+          <span class="font-mono text-xs text-ink-400">Oct 2022 — Oct 2024</span>
+          <h3 class="mt-1.5 text-lg font-semibold text-white">Mid-Level Backend Engineer · Westwing Brasil</h3>
+          <p class="font-mono text-xs text-ink-400">São Paulo, Brazil</p>
+          <p class="mt-2 text-sm leading-relaxed text-ink-200">
+            APIs and backend features across Symfony, Laravel and Node.js. Worked on
+            messaging systems (RabbitMQ, Kafka), logs and caching strategies. Applied
+            Clean Architecture and design patterns across legacy and microservices-based
+            systems — daily collaboration with multidisciplinary teams on Scrum & Kanban.
+          </p>
+        </li>
+
+        <li class="reveal node relative">
+          <span class="font-mono text-xs text-ink-400">Apr 2019 — Oct 2022</span>
+          <h3 class="mt-1.5 text-lg font-semibold text-white">Senior Backend Engineer · Vekttor · iComanda</h3>
+          <p class="font-mono text-xs text-ink-400">Manaus, Brazil</p>
+          <p class="mt-2 text-sm leading-relaxed text-ink-200">
+            Led the team in modernizing legacy PHP systems. Built internal tools in Node.js,
+            Vue.js and React, and shipped features like SAT fiscal invoice issuance,
+            a WhatsApp messaging API and a distributed P2P server for offline-capable POS.
+            Owned CI/CD pipelines and drove scalability and performance initiatives.
+          </p>
+        </li>
+      </ol>
+    </section>
+
+    <div class="mx-auto max-w-5xl px-4 sm:px-6"><div class="hairline"></div></div>
+
+    <!-- ============================ PROJECTS ============================ -->
+    <section id="projects" class="mx-auto max-w-5xl px-4 py-10 sm:px-6">
+      <header class="reveal max-w-2xl">
+        <p class="font-mono text-[11px] uppercase tracking-widest text-brand-300">04 — Projects</p>
+        <h2 class="mt-1 text-2xl font-bold text-white sm:text-3xl">Selected work.</h2>
+        <p class="mt-2 text-sm text-ink-300">Representative initiatives — distilled from real-world delivery across my career.</p>
+      </header>
+
+      <div class="mt-8 grid gap-4 md:grid-cols-2">
+        <article class="reveal card group relative rounded-xl p-5">
+          <div class="flex items-start justify-between">
+            <div class="flex items-center gap-3">
+              <span class="grid h-10 w-10 place-items-center rounded-lg bg-brand-500/15 text-brand-300">
+                <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12h3l3-9 6 18 3-9h3"/></svg>
+              </span>
+              <div>
+                <h3 class="text-base font-semibold text-white">Lead Ingestion Platform</h3>
+                <p class="font-mono text-[11px] text-ink-400">Symfony · PostgreSQL · RabbitMQ</p>
+              </div>
+            </div>
+            <span class="chip">Backend</span>
+          </div>
+          <p class="mt-3 text-sm leading-relaxed text-ink-200">
+            Event-driven platform ingesting and scoring millions of daily leads. Domain modeling
+            in DDD, async consumers with RabbitMQ, and Doctrine ORM with optimized query plans
+            — designed for horizontal scaling and clean service boundaries.
+          </p>
+          <ul class="mt-3 flex flex-wrap gap-1.5" data-tags>
+            <li>DDD</li><li>Hexagonal</li><li>Doctrine</li><li>AMQP</li>
+          </ul>
+        </article>
+
+        <article class="reveal card group relative rounded-xl p-5" style="transition-delay:.06s">
+          <div class="flex items-start justify-between">
+            <div class="flex items-center gap-3">
+              <span class="grid h-10 w-10 place-items-center rounded-lg bg-brand-500/15 text-brand-300">
+                <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 10h18M8 4v16"/></svg>
+              </span>
+              <div>
+                <h3 class="text-base font-semibold text-white">Fiscal Invoicing Gateway (SAT)</h3>
+                <p class="font-mono text-[11px] text-ink-400">PHP · Node.js · PostgreSQL</p>
+              </div>
+            </div>
+            <span class="chip">Payments</span>
+          </div>
+          <p class="mt-3 text-sm leading-relaxed text-ink-200">
+            Real-time fiscal invoice issuance integrated with the Brazilian SAT protocol,
+            handling thousands of daily transactions for restaurant chains. Built for
+            reliability under flaky network conditions with idempotent retries and audit trails.
+          </p>
+          <ul class="mt-3 flex flex-wrap gap-1.5" data-tags>
+            <li>SAT</li><li>Idempotency</li><li>Retries</li><li>Audit</li>
+          </ul>
+        </article>
+
+        <article class="reveal card group relative rounded-xl p-5" style="transition-delay:.12s">
+          <div class="flex items-start justify-between">
+            <div class="flex items-center gap-3">
+              <span class="grid h-10 w-10 place-items-center rounded-lg bg-brand-500/15 text-brand-300">
+                <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-8.5 8.5A8.38 8.38 0 0 1 4 11.5 8.5 8.5 0 1 1 21 11.5z"/><path d="M8 12h.01M12 12h.01M16 12h.01"/></svg>
+              </span>
+              <div>
+                <h3 class="text-base font-semibold text-white">WhatsApp Messaging API</h3>
+                <p class="font-mono text-[11px] text-ink-400">Node.js · Redis · Queues</p>
+              </div>
+            </div>
+            <span class="chip">Integrations</span>
+          </div>
+          <p class="mt-3 text-sm leading-relaxed text-ink-200">
+            Unified messaging layer bridging WhatsApp Business API and internal CRM workflows.
+            Throttled outbound pipelines, webhook fan-out and delivery guarantees with
+            queue-based backpressure, logging and observability built in from day one.
+          </p>
+          <ul class="mt-3 flex flex-wrap gap-1.5" data-tags>
+            <li>Webhooks</li><li>Backpressure</li><li>Observability</li>
+          </ul>
+        </article>
+
+        <article class="reveal card group relative rounded-xl p-5" style="transition-delay:.18s">
+          <div class="flex items-start justify-between">
+            <div class="flex items-center gap-3">
+              <span class="grid h-10 w-10 place-items-center rounded-lg bg-brand-500/15 text-brand-300">
+                <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="6" cy="6" r="2"/><circle cx="18" cy="6" r="2"/><circle cx="6" cy="18" r="2"/><circle cx="18" cy="18" r="2"/><path d="M8 6h8M6 8v8M18 8v8M8 18h8"/></svg>
+              </span>
+              <div>
+                <h3 class="text-base font-semibold text-white">Distributed P2P Sync Server</h3>
+                <p class="font-mono text-[11px] text-ink-400">PHP · Sockets · SQLite</p>
+              </div>
+            </div>
+            <span class="chip">Distributed</span>
+          </div>
+          <p class="mt-3 text-sm leading-relaxed text-ink-200">
+            Self-healing synchronization server for POS terminals in offline-capable
+            environments. Conflict-resilient state merging, heartbeat-based peer discovery
+            and automatic reconciliation when connectivity returns — built for the real world.
+          </p>
+          <ul class="mt-3 flex flex-wrap gap-1.5" data-tags>
+            <li>P2P</li><li>Offline-first</li><li>Reconciliation</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <div class="mx-auto max-w-5xl px-4 sm:px-6"><div class="hairline"></div></div>
+
+    <!-- ============================ CONTACT ============================ -->
+    <section id="contact" class="mx-auto max-w-5xl px-4 py-10 sm:px-6">
+      <div class="reveal relative overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-br from-brand-900/60 via-ink-800/60 to-ink-900 p-6 sm:p-8">
+        <div class="absolute -right-24 -top-24 h-72 w-72 rounded-full bg-brand-500/20 blur-3xl"></div>
+        <div class="absolute -bottom-24 -left-24 h-72 w-72 rounded-full bg-brand-700/20 blur-3xl"></div>
+
+        <div class="relative grid gap-6 lg:grid-cols-12">
+          <div class="lg:col-span-7">
+            <p class="font-mono text-[11px] uppercase tracking-widest text-brand-300">05 — Contact</p>
+            <h2 class="mt-1 text-2xl font-bold text-white sm:text-3xl">
+              Have a project in mind?
+              <span class="block gradient-text">Let's build it together.</span>
+            </h2>
+            <p class="mt-3 max-w-xl text-sm text-ink-200 sm:text-base">
+              Open to senior backend and staff-level roles — remote-first, international teams.
+              The best way to reach me is by email.
+            </p>
+
+            <div class="mt-5 flex flex-wrap items-center gap-3">
+              <a href="mailto:dariogabriel2334@gmail.com" class="inline-flex items-center gap-2 rounded-lg bg-brand-600 px-5 py-2.5 text-sm font-semibold text-white shadow-glow transition hover:bg-brand-500">
+                <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16v16H4z"/><path d="M4 7l8 6 8-6"/></svg>
+                dariogabriel2334@gmail.com
+              </a>
+              <button id="copy-email" type="button" data-copy="dariogabriel2334@gmail.com"
+                class="inline-flex items-center gap-2 rounded-lg border border-white/10 bg-white/5 px-4 py-2.5 text-sm font-medium text-ink-100 transition hover:border-brand-400 hover:text-white">
+                <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>
+                <span data-copy-label>Copy email</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="lg:col-span-5">
+            <dl class="space-y-2 text-sm">
+              <div class="flex items-center justify-between rounded-lg border border-white/10 bg-white/5 px-4 py-2.5">
+                <dt class="font-mono text-xs uppercase tracking-wider text-ink-300">WhatsApp</dt>
+                <dd><a class="font-medium text-white transition hover:text-brand-300" href="https://wa.me/5511910921684" target="_blank" rel="noopener">+55 11 91092-1684</a></dd>
+              </div>
+              <div class="flex items-center justify-between rounded-lg border border-white/10 bg-white/5 px-4 py-2.5">
+                <dt class="font-mono text-xs uppercase tracking-wider text-ink-300">FaceTime</dt>
+                <dd class="font-medium text-white">+55 92 98117-4082</dd>
+              </div>
+              <div class="flex items-center justify-between rounded-lg border border-white/10 bg-white/5 px-4 py-2.5">
+                <dt class="font-mono text-xs uppercase tracking-wider text-ink-300">Location</dt>
+                <dd class="font-medium text-white">Manaus — Brazil</dd>
+              </div>
+              <div class="flex items-center justify-between rounded-lg border border-white/10 bg-white/5 px-4 py-2.5">
+                <dt class="font-mono text-xs uppercase tracking-wider text-ink-300">Languages</dt>
+                <dd class="font-medium text-white">PT · EN (B2) · ES (A2)</dd>
+              </div>
+            </dl>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============================ FOOTER ============================ -->
+  <footer class="border-t border-white/5 bg-ink-950/60 py-4">
+    <div class="mx-auto flex max-w-5xl flex-col items-center justify-between gap-2 px-4 text-xs text-ink-400 sm:flex-row sm:px-6">
+      <p>&copy; <span id="year"></span> Dário Gabriel — Crafted with HTML, Tailwind CSS and vanilla JS.</p>
+      <p class="font-mono">from the Amazon to the world</p>
+    </div>
+  </footer>
+
+  <!-- Back to top -->
+  <button id="back-to-top" type="button" aria-label="Back to top"
+    class="fixed bottom-6 right-6 z-40 inline-flex h-11 w-11 translate-y-4 items-center justify-center rounded-full bg-brand-600 text-white opacity-0 shadow-glow transition hover:bg-brand-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-2 focus-visible:ring-offset-ink-900">
+    <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+  </button>
+
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
