@@ -270,14 +270,29 @@
     return SUPPORTED.includes(nav) ? nav : 'en';
   };
 
+  // Map a country code (ISO 3166-1 alpha-2) to a supported UI language.
+  // Used only as a soft override for visitors who haven't picked a language yet.
+  const SPANISH_COUNTRIES = new Set([
+    'ES', 'AR', 'MX', 'CL', 'CO', 'PE', 'VE', 'EC', 'BO',
+    'PY', 'UY', 'DO', 'GT', 'HN', 'NI', 'CR', 'PA', 'CU', 'SV', 'PR',
+  ]);
+
+  const countryToLang = (cc) => {
+    if (!cc) return null;
+    const code = cc.toUpperCase();
+    if (code === 'BR') return 'pt';
+    if (SPANISH_COUNTRIES.has(code)) return 'es';
+    return 'en';
+  };
+
   let currentLang = detectInitialLang();
   let currentPhrases = typewriterPhrases[currentLang];
 
-  const applyLanguage = (lang) => {
+  const applyLanguage = (lang, { persist = true } = {}) => {
     if (!SUPPORTED.includes(lang)) return;
     currentLang = lang;
     currentPhrases = typewriterPhrases[lang];
-    localStorage.setItem(LANG_STORAGE_KEY, lang);
+    if (persist) localStorage.setItem(LANG_STORAGE_KEY, lang);
     document.documentElement.setAttribute('lang', lang);
 
     const dict = translations[lang];
@@ -495,4 +510,20 @@
 
   // ---------- Boot ----------------------------------------------------------
   applyLanguage(currentLang);
+
+  // ---------- Soft IP-based language hint (non-blocking) --------------------
+  // If the visitor hasn't picked a language yet, try a geolocation lookup to
+  // switch into pt/es when the browser language didn't match. Fails silently
+  // on network issues, ad blockers or API quota — the page already rendered.
+  if (!localStorage.getItem(LANG_STORAGE_KEY)) {
+    fetch('https://ipapi.co/json/', { cache: 'force-cache' })
+      .then((r) => (r.ok ? r.json() : null))
+      .then((data) => {
+        const detected = countryToLang(data && data.country_code);
+        if (detected && detected !== currentLang) {
+          applyLanguage(detected, { persist: false });
+        }
+      })
+      .catch(() => { /* noop */ });
+  }
 })();
