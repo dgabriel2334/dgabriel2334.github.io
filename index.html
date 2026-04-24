@@ -161,20 +161,27 @@
       </a>
 
       <ul id="nav-links" class="hidden items-center gap-1 md:flex">
-        <li><a data-nav href="#about"      class="rounded-md px-3 py-2 text-sm text-ink-300 transition hover:text-white">About</a></li>
-        <li><a data-nav href="#stack"      class="rounded-md px-3 py-2 text-sm text-ink-300 transition hover:text-white">Stack</a></li>
-        <li><a data-nav href="#experience" class="rounded-md px-3 py-2 text-sm text-ink-300 transition hover:text-white">Experience</a></li>
-        <li><a data-nav href="#projects"   class="rounded-md px-3 py-2 text-sm text-ink-300 transition hover:text-white">Projects</a></li>
-        <li><a data-nav href="#contact"    class="rounded-md px-3 py-2 text-sm text-ink-300 transition hover:text-white">Contact</a></li>
+        <li><a data-nav data-i18n="nav.about"      href="#about"      class="rounded-md px-3 py-2 text-sm text-ink-300 transition hover:text-white">About</a></li>
+        <li><a data-nav data-i18n="nav.stack"      href="#stack"      class="rounded-md px-3 py-2 text-sm text-ink-300 transition hover:text-white">Stack</a></li>
+        <li><a data-nav data-i18n="nav.experience" href="#experience" class="rounded-md px-3 py-2 text-sm text-ink-300 transition hover:text-white">Experience</a></li>
+        <li><a data-nav data-i18n="nav.projects"   href="#projects"   class="rounded-md px-3 py-2 text-sm text-ink-300 transition hover:text-white">Projects</a></li>
+        <li><a data-nav data-i18n="nav.contact"    href="#contact"    class="rounded-md px-3 py-2 text-sm text-ink-300 transition hover:text-white">Contact</a></li>
       </ul>
 
       <div class="flex items-center gap-2">
+        <!-- Language switcher -->
+        <div role="group" aria-label="Language" class="hidden items-center gap-0.5 rounded-md border border-white/10 bg-white/5 p-0.5 md:inline-flex">
+          <button type="button" data-lang="en" aria-label="English" class="inline-flex h-7 w-7 items-center justify-center rounded text-sm transition hover:bg-white/10" title="English">🇺🇸</button>
+          <button type="button" data-lang="pt" aria-label="Português" class="inline-flex h-7 w-7 items-center justify-center rounded text-sm transition hover:bg-white/10" title="Português">🇧🇷</button>
+          <button type="button" data-lang="es" aria-label="Español" class="inline-flex h-7 w-7 items-center justify-center rounded text-sm transition hover:bg-white/10" title="Español">🇪🇸</button>
+        </div>
+
         <a href="#contact" class="hidden items-center gap-2 rounded-md border border-brand-400/40 bg-brand-500/10 px-3 py-1.5 text-xs font-medium text-brand-200 transition hover:border-brand-400 hover:text-white md:inline-flex">
           <span class="relative flex h-1.5 w-1.5">
             <span class="absolute inline-flex h-full w-full animate-pulse-ring rounded-full bg-brand-400"></span>
             <span class="relative inline-flex h-1.5 w-1.5 rounded-full bg-brand-400"></span>
           </span>
-          Open to work
+          <span data-i18n="nav.openToWork">Open to work</span>
         </a>
 
         <button id="menu-toggle" type="button" aria-controls="mobile-menu" aria-expanded="false" aria-label="Open menu"
@@ -187,12 +194,17 @@
 
     <div id="mobile-menu" hidden class="border-t border-white/5 bg-ink-900/95 backdrop-blur md:hidden">
       <ul class="mx-auto flex max-w-5xl flex-col px-4 py-2 sm:px-6">
-        <li><a href="#about"      class="block rounded-md px-3 py-2 text-ink-200 hover:bg-white/5 hover:text-white">About</a></li>
-        <li><a href="#stack"      class="block rounded-md px-3 py-2 text-ink-200 hover:bg-white/5 hover:text-white">Stack</a></li>
-        <li><a href="#experience" class="block rounded-md px-3 py-2 text-ink-200 hover:bg-white/5 hover:text-white">Experience</a></li>
-        <li><a href="#projects"   class="block rounded-md px-3 py-2 text-ink-200 hover:bg-white/5 hover:text-white">Projects</a></li>
-        <li><a href="#contact"    class="block rounded-md px-3 py-2 text-ink-200 hover:bg-white/5 hover:text-white">Contact</a></li>
+        <li><a data-i18n="nav.about"      href="#about"      class="block rounded-md px-3 py-2 text-ink-200 hover:bg-white/5 hover:text-white">About</a></li>
+        <li><a data-i18n="nav.stack"      href="#stack"      class="block rounded-md px-3 py-2 text-ink-200 hover:bg-white/5 hover:text-white">Stack</a></li>
+        <li><a data-i18n="nav.experience" href="#experience" class="block rounded-md px-3 py-2 text-ink-200 hover:bg-white/5 hover:text-white">Experience</a></li>
+        <li><a data-i18n="nav.projects"   href="#projects"   class="block rounded-md px-3 py-2 text-ink-200 hover:bg-white/5 hover:text-white">Projects</a></li>
+        <li><a data-i18n="nav.contact"    href="#contact"    class="block rounded-md px-3 py-2 text-ink-200 hover:bg-white/5 hover:text-white">Contact</a></li>
       </ul>
+      <div role="group" aria-label="Language" class="mx-auto flex max-w-5xl items-center gap-0.5 border-t border-white/5 px-4 py-2 sm:px-6">
+        <button type="button" data-lang="en" aria-label="English" class="inline-flex h-8 w-8 items-center justify-center rounded text-base hover:bg-white/10">🇺🇸</button>
+        <button type="button" data-lang="pt" aria-label="Português" class="inline-flex h-8 w-8 items-center justify-center rounded text-base hover:bg-white/10">🇧🇷</button>
+        <button type="button" data-lang="es" aria-label="Español" class="inline-flex h-8 w-8 items-center justify-center rounded text-base hover:bg-white/10">🇪🇸</button>
+      </div>
     </div>
   </header>
 
@@ -209,12 +221,12 @@
               <span class="absolute inline-flex h-full w-full animate-pulse-ring rounded-full bg-brand-400"></span>
               <span class="relative inline-flex h-1.5 w-1.5 rounded-full bg-brand-400"></span>
             </span>
-            Currently open to work
+            <span data-i18n="hero.status">Currently open to work</span>
           </p>
 
           <h1 class="mt-4 text-4xl font-extrabold tracking-tight text-white sm:text-5xl lg:text-6xl">
-            Senior Backend Engineer
-            <span class="block gradient-text">building resilient backends.</span>
+            <span data-i18n="hero.title1">Senior Backend Engineer</span>
+            <span class="block gradient-text" data-i18n="hero.title2">building resilient backends.</span>
           </h1>
 
           <p class="mt-4 max-w-xl font-mono text-sm text-ink-300">
@@ -222,14 +234,14 @@
             <span id="typewriter"></span><span class="ml-0.5 inline-block h-4 w-0.5 animate-blink bg-brand-400 align-middle"></span>
           </p>
 
-          <p class="mt-4 max-w-xl text-sm leading-relaxed text-ink-200 sm:text-base">
+          <p class="mt-4 max-w-xl text-sm leading-relaxed text-ink-200 sm:text-base" data-i18n-html="hero.p1">
             I design and ship distributed systems, APIs and event-driven platforms with
             <span class="font-medium text-white">PHP, Symfony and Node.js</span> — grounded in
             <span class="font-medium text-white">DDD, Hexagonal Architecture</span> and the SOLID principles.
             Seven years shipping production software with international teams.
           </p>
 
-          <p class="mt-3 max-w-xl text-sm leading-relaxed text-ink-200 sm:text-base">
+          <p class="mt-3 max-w-xl text-sm leading-relaxed text-ink-200 sm:text-base" data-i18n-html="hero.p2">
             Currently engineering event-driven platforms that move
             <span class="font-semibold text-white">millions of daily transactions</span>
             with predictable latency, clean domain boundaries and zero-downtime deploys.
@@ -237,27 +249,27 @@
 
           <div class="mt-6 flex flex-wrap items-center gap-3">
             <a href="#contact" class="inline-flex items-center gap-2 rounded-lg bg-brand-600 px-5 py-2.5 text-sm font-semibold text-white shadow-glow transition hover:bg-brand-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-2 focus-visible:ring-offset-ink-900">
-              Start a conversation
+              <span data-i18n="hero.cta">Start a conversation</span>
               <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
             </a>
             <a href="Resume EN-US.pdf" download
                class="inline-flex items-center gap-2 rounded-lg border border-white/10 bg-white/5 px-5 py-2.5 text-sm font-semibold text-ink-100 transition hover:border-brand-400 hover:text-white">
               <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 21h16"/></svg>
-              Download resume
+              <span data-i18n="hero.download">Download resume</span>
             </a>
           </div>
 
           <dl class="mt-7 grid max-w-md grid-cols-3 gap-4 border-t border-white/5 pt-4">
             <div>
-              <dt class="font-mono text-[10px] uppercase tracking-widest text-ink-400">Experience</dt>
-              <dd class="mt-0.5 text-xl font-semibold text-white">7+ <span class="text-xs font-medium text-ink-400">yrs</span></dd>
+              <dt class="font-mono text-[10px] uppercase tracking-widest text-ink-400" data-i18n="hero.stats.exp">Experience</dt>
+              <dd class="mt-0.5 text-xl font-semibold text-white">7+ <span class="text-xs font-medium text-ink-400" data-i18n="hero.stats.yrs">yrs</span></dd>
             </div>
             <div>
-              <dt class="font-mono text-[10px] uppercase tracking-widest text-ink-400">Current</dt>
-              <dd class="mt-0.5 text-xl font-semibold text-white">Leadtech</dd>
+              <dt class="font-mono text-[10px] uppercase tracking-widest text-ink-400" data-i18n="hero.stats.current">Current</dt>
+              <dd class="mt-0.5 text-base font-semibold text-white">Leadtech <span class="text-xs font-normal text-ink-400">(via Ciklum)</span></dd>
             </div>
             <div>
-              <dt class="font-mono text-[10px] uppercase tracking-widest text-ink-400">Based in</dt>
+              <dt class="font-mono text-[10px] uppercase tracking-widest text-ink-400" data-i18n="hero.stats.based">Based in</dt>
               <dd class="mt-0.5 text-xl font-semibold text-white">Manaus, BR</dd>
             </div>
           </dl>
@@ -401,18 +413,20 @@
     <section id="about" class="mx-auto max-w-5xl px-4 py-10 sm:px-6">
       <div class="grid gap-6 lg:grid-cols-12">
         <header class="reveal lg:col-span-4">
-          <p class="font-mono text-[11px] uppercase tracking-widest text-brand-300">01 — About</p>
-          <h2 class="mt-1 text-2xl font-bold text-white sm:text-3xl">A backend engineer who cares about clarity.</h2>
+          <p class="font-mono text-[11px] uppercase tracking-widest text-brand-300" data-i18n="about.label">01 — About</p>
+          <h2 class="mt-1 text-2xl font-bold text-white sm:text-3xl" data-i18n="about.title">A backend engineer who cares about clarity.</h2>
         </header>
 
         <div class="reveal lg:col-span-8">
-          <p class="text-sm leading-relaxed text-ink-200 sm:text-base">
+          <p class="text-sm leading-relaxed text-ink-200 sm:text-base" data-i18n-html="about.p1">
             I'm Dário, a Senior Backend Engineer from the Amazon, now shipping backend systems for
-            <span class="font-semibold text-white">Leadtech</span> in Barcelona. Over the past seven years I've
+            <a href="https://leadtech.com" target="_blank" rel="noopener" class="font-semibold text-white underline decoration-brand-400/40 underline-offset-2 transition hover:decoration-brand-400">Leadtech</a>
+            <span class="text-ink-300">(via <a href="https://www.ciklum.com" target="_blank" rel="noopener" class="underline decoration-brand-400/40 underline-offset-2 transition hover:decoration-brand-400">Ciklum</a>)</span>
+            in Barcelona. Over the past seven years I've
             led teams, modernized legacy monoliths and delivered event-driven platforms for companies
             across Brazil, Spain and Latin America.
           </p>
-          <p class="mt-3 text-sm leading-relaxed text-ink-200 sm:text-base">
+          <p class="mt-3 text-sm leading-relaxed text-ink-200 sm:text-base" data-i18n="about.p2">
             My focus is building software that survives real traffic and real teams — clean boundaries,
             explicit domain models, message-driven integration and observability baked in. I believe
             simple code wins, tests are a design tool, and the best systems are boring by intent.
@@ -421,27 +435,27 @@
           <ul class="mt-4 grid gap-x-6 gap-y-2 sm:grid-cols-2">
             <li class="flex items-start gap-3 text-sm leading-6 text-ink-200">
               <span class="mt-[9px] inline-block h-1.5 w-1.5 shrink-0 rounded-full bg-brand-400" aria-hidden="true"></span>
-              <span>Designing systems with <strong class="text-white">DDD &amp; Hexagonal Architecture</strong></span>
+              <span data-i18n-html="about.skill.1">Designing systems with <strong class="text-white">DDD &amp; Hexagonal Architecture</strong></span>
             </li>
             <li class="flex items-start gap-3 text-sm leading-6 text-ink-200">
               <span class="mt-[9px] inline-block h-1.5 w-1.5 shrink-0 rounded-full bg-brand-400" aria-hidden="true"></span>
-              <span>Async pipelines with <strong class="text-white">RabbitMQ &amp; Kafka</strong></span>
+              <span data-i18n-html="about.skill.2">Async pipelines with <strong class="text-white">RabbitMQ &amp; Kafka</strong></span>
             </li>
             <li class="flex items-start gap-3 text-sm leading-6 text-ink-200">
               <span class="mt-[9px] inline-block h-1.5 w-1.5 shrink-0 rounded-full bg-brand-400" aria-hidden="true"></span>
-              <span>PostgreSQL modeling, query &amp; transaction design</span>
+              <span data-i18n="about.skill.3">PostgreSQL modeling, query &amp; transaction design</span>
             </li>
             <li class="flex items-start gap-3 text-sm leading-6 text-ink-200">
               <span class="mt-[9px] inline-block h-1.5 w-1.5 shrink-0 rounded-full bg-brand-400" aria-hidden="true"></span>
-              <span>CI/CD with Jenkins + Docker on AWS &amp; GCP</span>
+              <span data-i18n="about.skill.4">CI/CD with Jenkins + Docker on AWS &amp; GCP</span>
             </li>
             <li class="flex items-start gap-3 text-sm leading-6 text-ink-200">
               <span class="mt-[9px] inline-block h-1.5 w-1.5 shrink-0 rounded-full bg-brand-400" aria-hidden="true"></span>
-              <span>Leading &amp; mentoring cross-functional teams</span>
+              <span data-i18n="about.skill.5">Leading &amp; mentoring cross-functional teams</span>
             </li>
             <li class="flex items-start gap-3 text-sm leading-6 text-ink-200">
               <span class="mt-[9px] inline-block h-1.5 w-1.5 shrink-0 rounded-full bg-brand-400" aria-hidden="true"></span>
-              <span>Fluent in PT (native) · EN (B2) · ES (C1)</span>
+              <span data-i18n="about.skill.6">Fluent in PT (native) · EN (B2) · ES (C1)</span>
             </li>
           </ul>
         </div>
@@ -453,49 +467,49 @@
     <!-- ============================ STACK ============================ -->
     <section id="stack" class="mx-auto max-w-5xl px-4 py-10 sm:px-6">
       <header class="reveal max-w-2xl">
-        <p class="font-mono text-[11px] uppercase tracking-widest text-brand-300">02 — Stack</p>
-        <h2 class="mt-1 text-2xl font-bold text-white sm:text-3xl">Tools I reach for every day.</h2>
-        <p class="mt-2 text-sm text-ink-300">A pragmatic toolkit built around backend engineering, distributed systems and delivery.</p>
+        <p class="font-mono text-[11px] uppercase tracking-widest text-brand-300" data-i18n="stack.label">02 — Stack</p>
+        <h2 class="mt-1 text-2xl font-bold text-white sm:text-3xl" data-i18n="stack.title">Tools I reach for every day.</h2>
+        <p class="mt-2 text-sm text-ink-300" data-i18n="stack.subtitle">A pragmatic toolkit built around backend engineering, distributed systems and delivery.</p>
       </header>
 
       <div class="mt-6 grid gap-3 md:grid-cols-2 lg:grid-cols-3">
         <article class="reveal card rounded-xl p-4">
-          <h3 class="font-mono text-[11px] uppercase tracking-widest text-brand-300">Backend</h3>
+          <h3 class="font-mono text-[11px] uppercase tracking-widest text-brand-300" data-i18n="stack.backend">Backend</h3>
           <ul class="mt-2 flex flex-wrap gap-1.5" data-tags>
             <li>PHP 8</li><li>Symfony</li><li>Laravel</li><li>Lumen</li><li>Node.js</li><li>Java</li><li>Spring</li><li>Doctrine</li><li>REST</li><li>GraphQL</li>
           </ul>
         </article>
 
         <article class="reveal card rounded-xl p-4" style="transition-delay:.06s">
-          <h3 class="font-mono text-[11px] uppercase tracking-widest text-brand-300">Architecture</h3>
+          <h3 class="font-mono text-[11px] uppercase tracking-widest text-brand-300" data-i18n="stack.architecture">Architecture</h3>
           <ul class="mt-2 flex flex-wrap gap-1.5" data-tags>
             <li>DDD</li><li>Hexagonal</li><li>Clean Arch</li><li>SOLID</li><li>CQRS-lite</li><li>Event-driven</li><li>Microservices</li>
           </ul>
         </article>
 
         <article class="reveal card rounded-xl p-4" style="transition-delay:.12s">
-          <h3 class="font-mono text-[11px] uppercase tracking-widest text-brand-300">Messaging & Data</h3>
+          <h3 class="font-mono text-[11px] uppercase tracking-widest text-brand-300" data-i18n="stack.data">Messaging &amp; Data</h3>
           <ul class="mt-2 flex flex-wrap gap-1.5" data-tags>
             <li>RabbitMQ</li><li>Kafka</li><li>PostgreSQL</li><li>MySQL</li><li>Redis</li><li>Elasticsearch</li>
           </ul>
         </article>
 
         <article class="reveal card rounded-xl p-4">
-          <h3 class="font-mono text-[11px] uppercase tracking-widest text-brand-300">Cloud & DevOps</h3>
+          <h3 class="font-mono text-[11px] uppercase tracking-widest text-brand-300" data-i18n="stack.cloud">Cloud &amp; DevOps</h3>
           <ul class="mt-2 flex flex-wrap gap-1.5" data-tags>
             <li>AWS</li><li>GCP</li><li>Docker</li><li>Jenkins</li><li>GitHub Actions</li><li>Linux</li>
           </ul>
         </article>
 
         <article class="reveal card rounded-xl p-4" style="transition-delay:.06s">
-          <h3 class="font-mono text-[11px] uppercase tracking-widest text-brand-300">Frontend</h3>
+          <h3 class="font-mono text-[11px] uppercase tracking-widest text-brand-300" data-i18n="stack.frontend">Frontend</h3>
           <ul class="mt-2 flex flex-wrap gap-1.5" data-tags>
             <li>TypeScript</li><li>Vue.js</li><li>React</li><li>Tailwind CSS</li><li>HTML5</li>
           </ul>
         </article>
 
         <article class="reveal card rounded-xl p-4" style="transition-delay:.12s">
-          <h3 class="font-mono text-[11px] uppercase tracking-widest text-brand-300">Currently exploring</h3>
+          <h3 class="font-mono text-[11px] uppercase tracking-widest text-brand-300" data-i18n="stack.exploring">Currently exploring</h3>
           <ul class="mt-2 flex flex-wrap gap-1.5" data-tags>
             <li>Flutter</li><li>Kotlin</li><li>Python</li><li>Go</li>
           </ul>
@@ -508,19 +522,23 @@
     <!-- ============================ EXPERIENCE ============================ -->
     <section id="experience" class="mx-auto max-w-5xl px-4 py-10 sm:px-6">
       <header class="reveal max-w-2xl">
-        <p class="font-mono text-[11px] uppercase tracking-widest text-brand-300">03 — Experience</p>
-        <h2 class="mt-1 text-2xl font-bold text-white sm:text-3xl">Seven years shipping production software.</h2>
+        <p class="font-mono text-[11px] uppercase tracking-widest text-brand-300" data-i18n="exp.label">03 — Experience</p>
+        <h2 class="mt-1 text-2xl font-bold text-white sm:text-3xl" data-i18n="exp.title">Seven years shipping production software.</h2>
       </header>
 
       <ol class="mt-6 relative ml-2 space-y-5 border-l border-dashed border-white/10 pl-8">
         <li class="reveal node relative">
           <div class="flex flex-wrap items-center gap-2">
-            <span class="chip">Current</span>
+            <span class="chip" data-i18n="exp.current">Current</span>
             <span class="font-mono text-xs text-ink-400">Oct 2025 — Present</span>
           </div>
-          <h3 class="mt-2 text-lg font-semibold text-white">Senior Backend Engineer · Leadtech</h3>
+          <h3 class="mt-2 text-lg font-semibold text-white">
+            <span data-i18n="exp.role.senior">Senior Backend Engineer</span> ·
+            <a href="https://leadtech.com" target="_blank" rel="noopener" class="underline decoration-brand-400/40 underline-offset-2 transition hover:text-brand-300 hover:decoration-brand-400">Leadtech</a>
+            <span class="text-sm font-normal text-ink-300">(via <a href="https://www.ciklum.com" target="_blank" rel="noopener" class="underline decoration-brand-400/40 underline-offset-2 transition hover:text-brand-300 hover:decoration-brand-400">Ciklum</a>)</span>
+          </h3>
           <p class="font-mono text-xs text-ink-400">Barcelona, Spain · Remote</p>
-          <p class="mt-2 text-sm leading-relaxed text-ink-200">
+          <p class="mt-2 text-sm leading-relaxed text-ink-200" data-i18n="exp.1.desc">
             Building robust backend services and APIs with PHP + Symfony + Doctrine, backed by
             message-driven architectures on RabbitMQ and a PostgreSQL core designed for
             schema clarity, query performance and transactional integrity. Systems shaped
@@ -530,9 +548,12 @@
 
         <li class="reveal node relative">
           <span class="font-mono text-xs text-ink-400">Oct 2024 — Oct 2025</span>
-          <h3 class="mt-1.5 text-lg font-semibold text-white">Senior Backend Engineer · Global HITSS Brasil</h3>
+          <h3 class="mt-1.5 text-lg font-semibold text-white">
+            <span data-i18n="exp.role.senior">Senior Backend Engineer</span> ·
+            <a href="https://www.globalhitss.com" target="_blank" rel="noopener" class="underline decoration-brand-400/40 underline-offset-2 transition hover:text-brand-300 hover:decoration-brand-400">Global HITSS Brasil</a>
+          </h3>
           <p class="font-mono text-xs text-ink-400">Rio de Janeiro, Brazil</p>
-          <p class="mt-2 text-sm leading-relaxed text-ink-200">
+          <p class="mt-2 text-sm leading-relaxed text-ink-200" data-i18n="exp.2.desc">
             APIs and backend services in PHP (Symfony, Laravel, Lumen). Built and maintained
             CI/CD pipelines on Jenkins with Dockerized environments, integrated messaging via
             RabbitMQ and Kafka, and delivered cloud services on AWS and GCP following
@@ -542,21 +563,26 @@
 
         <li class="reveal node relative">
           <span class="font-mono text-xs text-ink-400">Oct 2022 — Oct 2024</span>
-          <h3 class="mt-1.5 text-lg font-semibold text-white">Mid-Level Backend Engineer · Westwing Brasil</h3>
+          <h3 class="mt-1.5 text-lg font-semibold text-white">
+            <span data-i18n="exp.role.mid">Mid-Level Backend Engineer</span> ·
+            <a href="https://www.westwing.com.br" target="_blank" rel="noopener" class="underline decoration-brand-400/40 underline-offset-2 transition hover:text-brand-300 hover:decoration-brand-400">Westwing Brasil</a>
+          </h3>
           <p class="font-mono text-xs text-ink-400">São Paulo, Brazil</p>
-          <p class="mt-2 text-sm leading-relaxed text-ink-200">
+          <p class="mt-2 text-sm leading-relaxed text-ink-200" data-i18n="exp.3.desc">
             APIs and backend features across Symfony, Laravel and Node.js. Worked on
             messaging systems (RabbitMQ, Kafka), logs and caching strategies. Applied
             Clean Architecture and design patterns across legacy and microservices-based
-            systems — daily collaboration with multidisciplinary teams on Scrum & Kanban.
+            systems — daily collaboration with multidisciplinary teams on Scrum &amp; Kanban.
           </p>
         </li>
 
         <li class="reveal node relative">
           <span class="font-mono text-xs text-ink-400">Apr 2019 — Oct 2022</span>
-          <h3 class="mt-1.5 text-lg font-semibold text-white">Senior Backend Engineer · Vekttor · iComanda</h3>
+          <h3 class="mt-1.5 text-lg font-semibold text-white">
+            <span data-i18n="exp.role.senior">Senior Backend Engineer</span> · Vekttor · iComanda
+          </h3>
           <p class="font-mono text-xs text-ink-400">Manaus, Brazil</p>
-          <p class="mt-2 text-sm leading-relaxed text-ink-200">
+          <p class="mt-2 text-sm leading-relaxed text-ink-200" data-i18n="exp.4.desc">
             Led the team in modernizing legacy PHP systems. Built internal tools in Node.js,
             Vue.js and React, and shipped features like SAT fiscal invoice issuance,
             a WhatsApp messaging API and a distributed P2P server for offline-capable POS.
@@ -571,9 +597,9 @@
     <!-- ============================ PROJECTS ============================ -->
     <section id="projects" class="mx-auto max-w-5xl px-4 py-10 sm:px-6">
       <header class="reveal max-w-2xl">
-        <p class="font-mono text-[11px] uppercase tracking-widest text-brand-300">04 — Projects</p>
-        <h2 class="mt-1 text-2xl font-bold text-white sm:text-3xl">Selected work.</h2>
-        <p class="mt-2 text-sm text-ink-300">Representative initiatives — distilled from real-world delivery across my career.</p>
+        <p class="font-mono text-[11px] uppercase tracking-widest text-brand-300" data-i18n="proj.label">04 — Projects</p>
+        <h2 class="mt-1 text-2xl font-bold text-white sm:text-3xl" data-i18n="proj.title">Selected work.</h2>
+        <p class="mt-2 text-sm text-ink-300" data-i18n="proj.subtitle">Representative initiatives — distilled from real-world delivery across my career.</p>
       </header>
 
       <div class="mt-8 grid gap-4 md:grid-cols-2">
@@ -590,7 +616,7 @@
             </div>
             <span class="chip">Backend</span>
           </div>
-          <p class="mt-3 text-sm leading-relaxed text-ink-200">
+          <p class="mt-3 text-sm leading-relaxed text-ink-200" data-i18n="proj.1.desc">
             Event-driven platform ingesting and scoring millions of daily leads. Domain modeling
             in DDD, async consumers with RabbitMQ, and Doctrine ORM with optimized query plans
             — designed for horizontal scaling and clean service boundaries.
@@ -613,7 +639,7 @@
             </div>
             <span class="chip">Payments</span>
           </div>
-          <p class="mt-3 text-sm leading-relaxed text-ink-200">
+          <p class="mt-3 text-sm leading-relaxed text-ink-200" data-i18n="proj.2.desc">
             Real-time fiscal invoice issuance integrated with the Brazilian SAT protocol,
             handling thousands of daily transactions for restaurant chains. Built for
             reliability under flaky network conditions with idempotent retries and audit trails.
@@ -636,7 +662,7 @@
             </div>
             <span class="chip">Integrations</span>
           </div>
-          <p class="mt-3 text-sm leading-relaxed text-ink-200">
+          <p class="mt-3 text-sm leading-relaxed text-ink-200" data-i18n="proj.3.desc">
             Unified messaging layer bridging WhatsApp Business API and internal CRM workflows.
             Throttled outbound pipelines, webhook fan-out and delivery guarantees with
             queue-based backpressure, logging and observability built in from day one.
@@ -659,7 +685,7 @@
             </div>
             <span class="chip">Distributed</span>
           </div>
-          <p class="mt-3 text-sm leading-relaxed text-ink-200">
+          <p class="mt-3 text-sm leading-relaxed text-ink-200" data-i18n="proj.4.desc">
             Self-healing synchronization server for POS terminals in offline-capable
             environments. Conflict-resilient state merging, heartbeat-based peer discovery
             and automatic reconciliation when connectivity returns — built for the real world.
@@ -681,12 +707,12 @@
 
         <div class="relative grid gap-6 lg:grid-cols-12">
           <div class="lg:col-span-7">
-            <p class="font-mono text-[11px] uppercase tracking-widest text-brand-300">05 — Contact</p>
+            <p class="font-mono text-[11px] uppercase tracking-widest text-brand-300" data-i18n="contact.label">05 — Contact</p>
             <h2 class="mt-1 text-2xl font-bold text-white sm:text-3xl">
-              Have a project in mind?
-              <span class="block gradient-text">Let's build it together.</span>
+              <span data-i18n="contact.title1">Have a project in mind?</span>
+              <span class="block gradient-text" data-i18n="contact.title2">Let's build it together.</span>
             </h2>
-            <p class="mt-3 max-w-xl text-sm text-ink-200 sm:text-base">
+            <p class="mt-3 max-w-xl text-sm text-ink-200 sm:text-base" data-i18n="contact.body">
               Open to senior backend and staff-level roles — remote-first, international teams.
               The best way to reach me is by email.
             </p>
@@ -699,7 +725,7 @@
               <button id="copy-email" type="button" data-copy="dariogabriel2334@gmail.com"
                 class="inline-flex items-center gap-2 rounded-lg border border-white/10 bg-white/5 px-4 py-2.5 text-sm font-medium text-ink-100 transition hover:border-brand-400 hover:text-white">
                 <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>
-                <span data-copy-label>Copy email</span>
+                <span data-copy-label data-i18n="contact.copy">Copy email</span>
               </button>
             </div>
           </div>
@@ -715,11 +741,11 @@
                 <dd class="font-medium text-white">+55 92 98117-4082</dd>
               </div>
               <div class="flex items-center justify-between rounded-lg border border-white/10 bg-white/5 px-4 py-2.5">
-                <dt class="font-mono text-xs uppercase tracking-wider text-ink-300">Location</dt>
-                <dd class="font-medium text-white">Manaus — Brazil</dd>
+                <dt class="font-mono text-xs uppercase tracking-wider text-ink-300" data-i18n="contact.location">Location</dt>
+                <dd class="font-medium text-white" data-i18n="contact.location.value">Manaus — Brazil</dd>
               </div>
               <div class="flex items-center justify-between rounded-lg border border-white/10 bg-white/5 px-4 py-2.5">
-                <dt class="font-mono text-xs uppercase tracking-wider text-ink-300">Languages</dt>
+                <dt class="font-mono text-xs uppercase tracking-wider text-ink-300" data-i18n="contact.languages">Languages</dt>
                 <dd class="font-medium text-white">PT · EN (B2) · ES (C1)</dd>
               </div>
             </dl>
@@ -732,8 +758,8 @@
   <!-- ============================ FOOTER ============================ -->
   <footer class="border-t border-white/5 bg-ink-950/60 py-4">
     <div class="mx-auto flex max-w-5xl flex-col items-center justify-between gap-2 px-4 text-xs text-ink-400 sm:flex-row sm:px-6">
-      <p>&copy; <span id="year"></span> Dário Gabriel — Crafted with HTML, Tailwind CSS and vanilla JS.</p>
-      <p class="font-mono">from the Amazon to the world</p>
+      <p>&copy; <span id="year"></span> Dário Gabriel — <span data-i18n="footer.crafted">Crafted with HTML, Tailwind CSS and vanilla JS.</span></p>
+      <p class="font-mono" data-i18n="footer.tagline">from the Amazon to the world</p>
     </div>
   </footer>
 
