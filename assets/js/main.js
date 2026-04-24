@@ -32,13 +32,13 @@
 
       'about.label': '01 — About',
       'about.title': 'A backend engineer who cares about clarity.',
-      'about.p1': 'I\'m Dário, a Senior Backend Engineer from the Amazon, now shipping backend systems for <a href="https://leadtech.com" target="_blank" rel="noopener" class="font-semibold text-white underline decoration-brand-400/40 underline-offset-2 transition hover:decoration-brand-400">Leadtech</a> <span class="text-ink-300">(via <a href="https://www.ciklum.com" target="_blank" rel="noopener" class="underline decoration-brand-400/40 underline-offset-2 transition hover:decoration-brand-400">Ciklum</a>)</span> in Barcelona. Over the past seven years I\'ve led teams, modernized legacy monoliths and delivered event-driven platforms for companies across Brazil, Spain and Latin America.',
+      'about.p1': 'I\'m Dário, a Senior Backend Engineer from the Amazon, now shipping backend systems for <a href="https://leadtech.com" target="_blank" rel="noopener" class="font-semibold text-white underline decoration-brand-400/40 underline-offset-2 transition hover:decoration-brand-400">Leadtech</a> <span class="text-ink-300">(via <a href="https://www.ciklum.com" target="_blank" rel="noopener" class="underline decoration-brand-400/40 underline-offset-2 transition hover:decoration-brand-400">Ciklum</a>)</span> in Barcelona. Over the past seven years I\'ve worked alongside cross-functional teams, modernized legacy monoliths and delivered event-driven platforms for companies across Brazil, Spain and Latin America.',
       'about.p2': 'My focus is building software that survives real traffic and real teams — clean boundaries, explicit domain models, message-driven integration and observability baked in. I believe simple code wins, tests are a design tool, and the best systems are boring by intent.',
       'about.skill.1': 'Designing systems with <strong class="text-white">DDD &amp; Hexagonal Architecture</strong>',
       'about.skill.2': 'Async pipelines with <strong class="text-white">RabbitMQ &amp; Kafka</strong>',
       'about.skill.3': 'PostgreSQL modeling, query & transaction design',
       'about.skill.4': 'CI/CD with Jenkins + Docker on AWS & GCP',
-      'about.skill.5': 'Leading & mentoring cross-functional teams',
+      'about.skill.5': 'Working with & mentoring within cross-functional teams',
       'about.skill.6': 'Fluent in PT (native) · EN (B2) · ES (C1)',
 
       'stack.label': '02 — Stack',
@@ -54,12 +54,17 @@
       'exp.label': '03 — Experience',
       'exp.title': 'Seven years shipping production software.',
       'exp.current': 'Current',
+      'exp.present': 'Present',
       'exp.role.senior': 'Senior Backend Engineer',
       'exp.role.mid': 'Mid-Level Backend Engineer',
+      'exp.1.location': 'Barcelona, Spain · Remote',
+      'exp.2.location': 'Rio de Janeiro, Brazil',
+      'exp.3.location': 'São Paulo, Brazil',
+      'exp.4.location': 'Manaus, Brazil',
       'exp.1.desc': 'Building robust backend services and APIs with PHP + Symfony + Doctrine, backed by message-driven architectures on RabbitMQ and a PostgreSQL core designed for schema clarity, query performance and transactional integrity. Systems shaped around SOLID, DDD and Hexagonal Architecture — maintainable, testable and decoupled.',
       'exp.2.desc': 'APIs and backend services in PHP (Symfony, Laravel, Lumen). Built and maintained CI/CD pipelines on Jenkins with Dockerized environments, integrated messaging via RabbitMQ and Kafka, and delivered cloud services on AWS and GCP following SOLID, DDD and Hexagonal principles.',
       'exp.3.desc': 'APIs and backend features across Symfony, Laravel and Node.js. Worked on messaging systems (RabbitMQ, Kafka), logs and caching strategies. Applied Clean Architecture and design patterns across legacy and microservices-based systems — daily collaboration with multidisciplinary teams on Scrum & Kanban.',
-      'exp.4.desc': 'Led the team in modernizing legacy PHP systems. Built internal tools in Node.js, Vue.js and React, and shipped features like SAT fiscal invoice issuance, a WhatsApp messaging API and a distributed P2P server for offline-capable POS. Owned CI/CD pipelines and drove scalability and performance initiatives.',
+      'exp.4.desc': 'Worked with the team on modernizing legacy PHP systems. Built internal tools in Node.js, Vue.js and React, and shipped features like SAT fiscal invoice issuance, a WhatsApp messaging API and a distributed P2P server for offline-capable POS. Contributed to CI/CD pipelines and scalability & performance initiatives.',
 
       'proj.label': '04 — Projects',
       'proj.title': 'Selected work.',
@@ -105,13 +110,13 @@
 
       'about.label': '01 — Sobre',
       'about.title': 'Um engenheiro backend que preza por clareza.',
-      'about.p1': 'Sou Dário, Engenheiro Backend Sênior da Amazônia, atualmente entregando sistemas backend para a <a href="https://leadtech.com" target="_blank" rel="noopener" class="font-semibold text-white underline decoration-brand-400/40 underline-offset-2 transition hover:decoration-brand-400">Leadtech</a> <span class="text-ink-300">(via <a href="https://www.ciklum.com" target="_blank" rel="noopener" class="underline decoration-brand-400/40 underline-offset-2 transition hover:decoration-brand-400">Ciklum</a>)</span> em Barcelona. Nos últimos sete anos liderei times, modernizei monólitos legados e entreguei plataformas orientadas a eventos para empresas no Brasil, Espanha e América Latina.',
+      'about.p1': 'Sou Dário, Engenheiro Backend Sênior da Amazônia, atualmente entregando sistemas backend para a <a href="https://leadtech.com" target="_blank" rel="noopener" class="font-semibold text-white underline decoration-brand-400/40 underline-offset-2 transition hover:decoration-brand-400">Leadtech</a> <span class="text-ink-300">(via <a href="https://www.ciklum.com" target="_blank" rel="noopener" class="underline decoration-brand-400/40 underline-offset-2 transition hover:decoration-brand-400">Ciklum</a>)</span> em Barcelona. Nos últimos sete anos atuei em times multidisciplinares, modernizei monólitos legados e entreguei plataformas orientadas a eventos para empresas no Brasil, Espanha e América Latina.',
       'about.p2': 'Meu foco é construir software que sobrevive ao tráfego real e aos times reais — fronteiras claras, modelos de domínio explícitos, integração orientada a mensagens e observabilidade desde o dia zero. Código simples vence, testes são ferramenta de design e os melhores sistemas são entediantes por design.',
       'about.skill.1': 'Desenho de sistemas com <strong class="text-white">DDD &amp; Arquitetura Hexagonal</strong>',
       'about.skill.2': 'Pipelines assíncronos com <strong class="text-white">RabbitMQ &amp; Kafka</strong>',
       'about.skill.3': 'Modelagem PostgreSQL, queries e transações',
       'about.skill.4': 'CI/CD com Jenkins + Docker na AWS & GCP',
-      'about.skill.5': 'Liderança e mentoria de times multidisciplinares',
+      'about.skill.5': 'Atuação e mentoria em times multidisciplinares',
       'about.skill.6': 'Fluente em PT (nativo) · EN (B2) · ES (C1)',
 
       'stack.label': '02 — Stack',
@@ -127,12 +132,17 @@
       'exp.label': '03 — Experiência',
       'exp.title': 'Sete anos entregando software em produção.',
       'exp.current': 'Atual',
+      'exp.present': 'Presente',
       'exp.role.senior': 'Engenheiro Backend Sênior',
       'exp.role.mid': 'Engenheiro Backend Pleno',
+      'exp.1.location': 'Barcelona, Espanha · Remoto',
+      'exp.2.location': 'Rio de Janeiro, Brasil',
+      'exp.3.location': 'São Paulo, Brasil',
+      'exp.4.location': 'Manaus, Brasil',
       'exp.1.desc': 'Construindo serviços backend e APIs robustas com PHP + Symfony + Doctrine, apoiadas por arquiteturas orientadas a mensagens no RabbitMQ e um core PostgreSQL desenhado para clareza de schema, performance de queries e integridade transacional. Sistemas pautados por SOLID, DDD e Arquitetura Hexagonal — manuteníveis, testáveis e desacoplados.',
       'exp.2.desc': 'APIs e serviços backend em PHP (Symfony, Laravel, Lumen). Construí e mantive pipelines CI/CD no Jenkins com ambientes Dockerizados, integrei mensageria via RabbitMQ e Kafka, e entreguei serviços cloud na AWS e GCP seguindo princípios SOLID, DDD e Hexagonal.',
       'exp.3.desc': 'APIs e features backend em Symfony, Laravel e Node.js. Atuei em sistemas de mensageria (RabbitMQ, Kafka), logs e estratégias de cache. Apliquei Clean Architecture e design patterns em sistemas legados e baseados em microsserviços — colaboração diária com times multidisciplinares em Scrum & Kanban.',
-      'exp.4.desc': 'Liderei o time na modernização de sistemas PHP legados. Construí ferramentas internas em Node.js, Vue.js e React, e entreguei features como emissão de notas fiscais SAT, API de mensageria WhatsApp e um servidor P2P distribuído para PDVs offline-first. Responsável pelos pipelines CI/CD e iniciativas de escalabilidade e performance.',
+      'exp.4.desc': 'Atuei com o time na modernização de sistemas PHP legados. Construí ferramentas internas em Node.js, Vue.js e React, e entreguei features como emissão de notas fiscais SAT, API de mensageria WhatsApp e um servidor P2P distribuído para PDVs offline-first. Contribuí com os pipelines CI/CD e iniciativas de escalabilidade e performance.',
 
       'proj.label': '04 — Projetos',
       'proj.title': 'Trabalhos selecionados.',
@@ -178,13 +188,13 @@
 
       'about.label': '01 — Sobre mí',
       'about.title': 'Un ingeniero backend que cuida la claridad.',
-      'about.p1': 'Soy Dário, Ingeniero Backend Senior de la Amazonía, actualmente entregando sistemas backend para <a href="https://leadtech.com" target="_blank" rel="noopener" class="font-semibold text-white underline decoration-brand-400/40 underline-offset-2 transition hover:decoration-brand-400">Leadtech</a> <span class="text-ink-300">(vía <a href="https://www.ciklum.com" target="_blank" rel="noopener" class="underline decoration-brand-400/40 underline-offset-2 transition hover:decoration-brand-400">Ciklum</a>)</span> en Barcelona. En los últimos siete años he liderado equipos, modernizado monolitos legados y entregado plataformas orientadas a eventos para empresas en Brasil, España y Latinoamérica.',
+      'about.p1': 'Soy Dário, Ingeniero Backend Senior de la Amazonía, actualmente entregando sistemas backend para <a href="https://leadtech.com" target="_blank" rel="noopener" class="font-semibold text-white underline decoration-brand-400/40 underline-offset-2 transition hover:decoration-brand-400">Leadtech</a> <span class="text-ink-300">(vía <a href="https://www.ciklum.com" target="_blank" rel="noopener" class="underline decoration-brand-400/40 underline-offset-2 transition hover:decoration-brand-400">Ciklum</a>)</span> en Barcelona. En los últimos siete años he trabajado junto a equipos multidisciplinarios, modernizado monolitos legados y entregado plataformas orientadas a eventos para empresas en Brasil, España y Latinoamérica.',
       'about.p2': 'Mi enfoque es construir software que sobreviva al tráfico real y a los equipos reales — fronteras claras, modelos de dominio explícitos, integración por mensajes y observabilidad desde el inicio. El código simple gana, las pruebas son herramienta de diseño y los mejores sistemas son aburridos por diseño.',
       'about.skill.1': 'Diseño de sistemas con <strong class="text-white">DDD y Arquitectura Hexagonal</strong>',
       'about.skill.2': 'Pipelines asíncronos con <strong class="text-white">RabbitMQ y Kafka</strong>',
       'about.skill.3': 'Modelado PostgreSQL, consultas y transacciones',
       'about.skill.4': 'CI/CD con Jenkins + Docker en AWS y GCP',
-      'about.skill.5': 'Liderazgo y mentoring de equipos multidisciplinarios',
+      'about.skill.5': 'Colaboración y mentoring en equipos multidisciplinarios',
       'about.skill.6': 'Fluidez en PT (nativo) · EN (B2) · ES (C1)',
 
       'stack.label': '02 — Stack',
@@ -200,12 +210,17 @@
       'exp.label': '03 — Experiencia',
       'exp.title': 'Siete años entregando software en producción.',
       'exp.current': 'Actual',
+      'exp.present': 'Presente',
       'exp.role.senior': 'Ingeniero Backend Senior',
       'exp.role.mid': 'Ingeniero Backend Semi Senior',
+      'exp.1.location': 'Barcelona, España · Remoto',
+      'exp.2.location': 'Río de Janeiro, Brasil',
+      'exp.3.location': 'São Paulo, Brasil',
+      'exp.4.location': 'Manaus, Brasil',
       'exp.1.desc': 'Construyendo servicios backend y APIs robustas con PHP + Symfony + Doctrine, respaldados por arquitecturas orientadas a mensajes sobre RabbitMQ y un núcleo PostgreSQL diseñado para claridad de esquema, rendimiento de consultas e integridad transaccional. Sistemas guiados por SOLID, DDD y Arquitectura Hexagonal — mantenibles, testeables y desacoplados.',
       'exp.2.desc': 'APIs y servicios backend en PHP (Symfony, Laravel, Lumen). Construí y mantuve pipelines CI/CD en Jenkins con entornos Dockerizados, integré mensajería vía RabbitMQ y Kafka, y entregué servicios cloud en AWS y GCP siguiendo principios SOLID, DDD y Hexagonal.',
       'exp.3.desc': 'APIs y funcionalidades backend en Symfony, Laravel y Node.js. Trabajé en sistemas de mensajería (RabbitMQ, Kafka), logs y estrategias de caché. Apliqué Clean Architecture y patrones de diseño en sistemas legados y basados en microservicios — colaboración diaria con equipos multidisciplinarios en Scrum y Kanban.',
-      'exp.4.desc': 'Lideré al equipo en la modernización de sistemas PHP legados. Construí herramientas internas en Node.js, Vue.js y React, y entregué funcionalidades como emisión de facturas fiscales SAT, una API de mensajería de WhatsApp y un servidor P2P distribuido para POS offline-first. Responsable de los pipelines CI/CD e iniciativas de escalabilidad y rendimiento.',
+      'exp.4.desc': 'Participé con el equipo en la modernización de sistemas PHP legados. Construí herramientas internas en Node.js, Vue.js y React, y entregué funcionalidades como emisión de facturas fiscales SAT, una API de mensajería de WhatsApp y un servidor P2P distribuido para POS offline-first. Contribuí con los pipelines CI/CD e iniciativas de escalabilidad y rendimiento.',
 
       'proj.label': '04 — Proyectos',
       'proj.title': 'Trabajos seleccionados.',
@@ -263,11 +278,18 @@
     pt: 'Resume PT-BR.pdf',
   };
 
+  // Detection order:
+  //   1) explicit choice saved in localStorage (highest priority — user decided)
+  //   2) navigator.language — the device/browser setting is the user's own
+  //      preference; we respect it without a network call
+  //   3) fallback to 'en' for now, IP geolocation may refine it later
+  //      (only when nav.language wasn't one we support)
   const detectInitialLang = () => {
     const stored = localStorage.getItem(LANG_STORAGE_KEY);
-    if (stored && SUPPORTED.includes(stored)) return stored;
+    if (stored && SUPPORTED.includes(stored)) return { lang: stored, browserMatched: true };
     const nav = (navigator.language || 'en').slice(0, 2).toLowerCase();
-    return SUPPORTED.includes(nav) ? nav : 'en';
+    if (SUPPORTED.includes(nav)) return { lang: nav, browserMatched: true };
+    return { lang: 'en', browserMatched: false };
   };
 
   // Map a country code (ISO 3166-1 alpha-2) to a supported UI language.
@@ -285,7 +307,8 @@
     return 'en';
   };
 
-  let currentLang = detectInitialLang();
+  const { lang: initialLang, browserMatched } = detectInitialLang();
+  let currentLang = initialLang;
   let currentPhrases = typewriterPhrases[currentLang];
 
   const applyLanguage = (lang, { persist = true } = {}) => {
@@ -512,10 +535,11 @@
   applyLanguage(currentLang);
 
   // ---------- Soft IP-based language hint (non-blocking) --------------------
-  // If the visitor hasn't picked a language yet, try a geolocation lookup to
-  // switch into pt/es when the browser language didn't match. Fails silently
-  // on network issues, ad blockers or API quota — the page already rendered.
-  if (!localStorage.getItem(LANG_STORAGE_KEY)) {
+  // Only fires when the browser language didn't match any of our supported
+  // locales — the device/browser setting always wins over geolocation because
+  // it reflects what the user explicitly chose for their system.
+  // Fails silently on network issues, ad blockers or API quota.
+  if (!browserMatched && !localStorage.getItem(LANG_STORAGE_KEY)) {
     fetch('https://ipapi.co/json/', { cache: 'force-cache' })
       .then((r) => (r.ok ? r.json() : null))
       .then((data) => {
