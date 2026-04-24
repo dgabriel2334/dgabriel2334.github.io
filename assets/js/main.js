@@ -415,10 +415,13 @@
   const runtimeEl   = document.getElementById('code-runtime');
 
   const runtimeByTab = {
-    php:   'php 8.3',
-    node:  'node 20',
-    react: 'react 18 · ts',
-    java:  'java 21 · spring',
+    php:    'php 8.3 · symfony',
+    node:   'nest 10 · node 20',
+    react:  'react 18 · ts',
+    java:   'quarkus 3 · java 21',
+    sql:    'postgres 16',
+    docker: 'docker · multi-stage',
+    k8s:    'kubernetes 1.30',
   };
 
   codeTabs.forEach((tab) => {

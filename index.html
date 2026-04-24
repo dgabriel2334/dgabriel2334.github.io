@@ -287,15 +287,18 @@
                   <span class="h-2.5 w-2.5 rounded-full bg-amber-400/80"></span>
                   <span class="h-2.5 w-2.5 rounded-full bg-emerald-400/80"></span>
                 </div>
-                <div role="tablist" aria-label="Code language" class="flex items-center gap-0.5 font-mono text-[11px]">
-                  <button role="tab" aria-selected="true"  data-code-tab="php"   class="rounded px-2 py-1 text-white bg-white/10 transition">PHP</button>
-                  <button role="tab" aria-selected="false" data-code-tab="node"  class="rounded px-2 py-1 text-ink-300 transition hover:bg-white/5 hover:text-white">Node</button>
-                  <button role="tab" aria-selected="false" data-code-tab="react" class="rounded px-2 py-1 text-ink-300 transition hover:bg-white/5 hover:text-white">React</button>
-                  <button role="tab" aria-selected="false" data-code-tab="java"  class="rounded px-2 py-1 text-ink-300 transition hover:bg-white/5 hover:text-white">Java</button>
+                <div role="tablist" aria-label="Code language" class="flex flex-wrap items-center justify-end gap-0.5 font-mono text-[11px]">
+                  <button role="tab" aria-selected="true"  data-code-tab="php"    class="rounded px-2 py-1 text-white bg-white/10 transition">PHP</button>
+                  <button role="tab" aria-selected="false" data-code-tab="node"   class="rounded px-2 py-1 text-ink-300 transition hover:bg-white/5 hover:text-white">Nest</button>
+                  <button role="tab" aria-selected="false" data-code-tab="react"  class="rounded px-2 py-1 text-ink-300 transition hover:bg-white/5 hover:text-white">React</button>
+                  <button role="tab" aria-selected="false" data-code-tab="java"   class="rounded px-2 py-1 text-ink-300 transition hover:bg-white/5 hover:text-white">Quarkus</button>
+                  <button role="tab" aria-selected="false" data-code-tab="sql"    class="rounded px-2 py-1 text-ink-300 transition hover:bg-white/5 hover:text-white">SQL</button>
+                  <button role="tab" aria-selected="false" data-code-tab="docker" class="rounded px-2 py-1 text-ink-300 transition hover:bg-white/5 hover:text-white">Docker</button>
+                  <button role="tab" aria-selected="false" data-code-tab="k8s"    class="rounded px-2 py-1 text-ink-300 transition hover:bg-white/5 hover:text-white">K8s</button>
                 </div>
               </header>
 
-              <div class="relative min-h-[18rem]">
+              <div class="relative min-h-[20rem]">
                 <!-- PHP -->
                 <div data-code-panel="php">
                   <div class="border-b border-white/5 bg-white/[0.03] px-4 py-1.5 font-mono text-[11px] text-ink-300">LeadProcessor.php</div>
@@ -320,86 +323,161 @@
 }</code></pre>
                 </div>
 
-                <!-- Node.js -->
+                <!-- NestJS -->
                 <div data-code-panel="node" hidden>
-                  <div class="border-b border-white/5 bg-white/[0.03] px-4 py-1.5 font-mono text-[11px] text-ink-300">lead-service.js</div>
-                  <pre class="overflow-x-auto px-4 py-4 font-mono text-[12.5px] leading-relaxed text-ink-100"><code><span class="text-brand-300">import</span> { EventBus } <span class="text-brand-300">from</span> <span class="text-emerald-300">'./core/bus.js'</span>;
-<span class="text-brand-300">import</span> { Lead }     <span class="text-brand-300">from</span> <span class="text-emerald-300">'./domain/lead.js'</span>;
+                  <div class="border-b border-white/5 bg-white/[0.03] px-4 py-1.5 font-mono text-[11px] text-ink-300">leads.controller.ts</div>
+                  <pre class="overflow-x-auto px-4 py-4 font-mono text-[12.5px] leading-relaxed text-ink-100"><code><span class="text-brand-300">import</span> { Body, Controller, Post, UseGuards } <span class="text-brand-300">from</span> <span class="text-emerald-300">'@nestjs/common'</span>;
+<span class="text-brand-300">import</span> { ApiTags } <span class="text-brand-300">from</span> <span class="text-emerald-300">'@nestjs/swagger'</span>;
+<span class="text-brand-300">import</span> { JwtGuard } <span class="text-brand-300">from</span> <span class="text-emerald-300">'./auth/jwt.guard'</span>;
+<span class="text-brand-300">import</span> { LeadsService } <span class="text-brand-300">from</span> <span class="text-emerald-300">'./leads.service'</span>;
+<span class="text-brand-300">import</span> { IngestLeadDto } <span class="text-brand-300">from</span> <span class="text-emerald-300">'./dto/ingest-lead.dto'</span>;
 
-<span class="text-brand-300">export class</span> <span class="text-white">LeadService</span> {
-  <span class="text-emerald-300">constructor</span>(leads, scoring, bus) {
-    <span class="text-amber-300">this</span>.leads   = leads;
-    <span class="text-amber-300">this</span>.scoring = scoring;
-    <span class="text-amber-300">this</span>.bus     = bus;
-  }
+<span class="text-amber-300">@ApiTags</span>(<span class="text-emerald-300">'leads'</span>)
+<span class="text-amber-300">@UseGuards</span>(JwtGuard)
+<span class="text-amber-300">@Controller</span>(<span class="text-emerald-300">'leads'</span>)
+<span class="text-brand-300">export class</span> <span class="text-white">LeadsController</span> {
+  <span class="text-brand-300">constructor</span>(<span class="text-brand-300">private readonly</span> leads: LeadsService) {}
 
-  <span class="text-brand-300">async</span> <span class="text-emerald-300">ingest</span>(command) {
-    <span class="text-brand-300">const</span> lead  = Lead.<span class="text-emerald-300">fromCommand</span>(command);
-    <span class="text-brand-300">const</span> score = <span class="text-brand-300">await</span> <span class="text-amber-300">this</span>.scoring.<span class="text-emerald-300">evaluate</span>(lead);
-
-    <span class="text-brand-300">await</span> <span class="text-amber-300">this</span>.leads.<span class="text-emerald-300">save</span>(lead.<span class="text-emerald-300">withScore</span>(score));
-    <span class="text-brand-300">await</span> <span class="text-amber-300">this</span>.bus.<span class="text-emerald-300">publish</span>({ type: <span class="text-emerald-300">'lead.ingested'</span>, id: lead.id });
+  <span class="text-amber-300">@Post</span>()
+  <span class="text-brand-300">async</span> <span class="text-emerald-300">ingest</span>(<span class="text-amber-300">@Body</span>() dto: IngestLeadDto) {
+    <span class="text-brand-300">const</span> lead = <span class="text-brand-300">await</span> <span class="text-amber-300">this</span>.leads.<span class="text-emerald-300">ingest</span>(dto);
+    <span class="text-brand-300">return</span> { id: lead.id, score: lead.score };
   }
 }</code></pre>
                 </div>
 
-                <!-- React -->
+                <!-- React page -->
                 <div data-code-panel="react" hidden>
-                  <div class="border-b border-white/5 bg-white/[0.03] px-4 py-1.5 font-mono text-[11px] text-ink-300">useLeadStatus.ts</div>
-                  <pre class="overflow-x-auto px-4 py-4 font-mono text-[12.5px] leading-relaxed text-ink-100"><code><span class="text-brand-300">import</span> { useEffect, useState } <span class="text-brand-300">from</span> <span class="text-emerald-300">'react'</span>;
+                  <div class="border-b border-white/5 bg-white/[0.03] px-4 py-1.5 font-mono text-[11px] text-ink-300">LeadsPage.tsx</div>
+                  <pre class="overflow-x-auto px-4 py-4 font-mono text-[12.5px] leading-relaxed text-ink-100"><code><span class="text-brand-300">import</span> { useQuery } <span class="text-brand-300">from</span> <span class="text-emerald-300">'@tanstack/react-query'</span>;
+<span class="text-brand-300">import</span> { LeadsTable, EmptyState, Spinner } <span class="text-brand-300">from</span> <span class="text-emerald-300">'@/components'</span>;
+<span class="text-brand-300">import</span> { fetchLeads } <span class="text-brand-300">from</span> <span class="text-emerald-300">'@/api/leads'</span>;
 
-<span class="text-brand-300">type</span> <span class="text-white">Status</span> = <span class="text-emerald-300">'pending'</span> | <span class="text-emerald-300">'scored'</span> | <span class="text-emerald-300">'rejected'</span>;
+<span class="text-brand-300">export default function</span> <span class="text-emerald-300">LeadsPage</span>() {
+  <span class="text-brand-300">const</span> { data, isLoading, error } = <span class="text-emerald-300">useQuery</span>({
+    queryKey: [<span class="text-emerald-300">'leads'</span>],
+    queryFn:  fetchLeads,
+    staleTime: 30_000,
+  });
 
-<span class="text-brand-300">export function</span> <span class="text-emerald-300">useLeadStatus</span>(id: <span class="text-ink-300">string</span>) {
-  <span class="text-brand-300">const</span> [status, setStatus] = <span class="text-emerald-300">useState</span>&lt;Status&gt;(<span class="text-emerald-300">'pending'</span>);
+  <span class="text-brand-300">if</span> (isLoading) <span class="text-brand-300">return</span> &lt;Spinner /&gt;;
+  <span class="text-brand-300">if</span> (error)     <span class="text-brand-300">return</span> &lt;EmptyState title=<span class="text-emerald-300">"Failed to load"</span> /&gt;;
 
-  <span class="text-emerald-300">useEffect</span>(() =&gt; {
-    <span class="text-brand-300">const</span> es = <span class="text-brand-300">new</span> EventSource(<span class="text-emerald-300">`/api/leads/${id}/events`</span>);
-
-    es.<span class="text-emerald-300">addEventListener</span>(<span class="text-emerald-300">'scored'</span>,   () =&gt; setStatus(<span class="text-emerald-300">'scored'</span>));
-    es.<span class="text-emerald-300">addEventListener</span>(<span class="text-emerald-300">'rejected'</span>, () =&gt; setStatus(<span class="text-emerald-300">'rejected'</span>));
-
-    <span class="text-brand-300">return</span> () =&gt; es.<span class="text-emerald-300">close</span>();
-  }, [id]);
-
-  <span class="text-brand-300">return</span> status;
+  <span class="text-brand-300">return</span> (
+    &lt;<span class="text-white">section</span> className=<span class="text-emerald-300">"p-6"</span>&gt;
+      &lt;<span class="text-white">h1</span> className=<span class="text-emerald-300">"text-2xl font-bold"</span>&gt;Leads&lt;/<span class="text-white">h1</span>&gt;
+      &lt;<span class="text-white">p</span> className=<span class="text-emerald-300">"mt-1 text-slate-400"</span>&gt;{data.length} total&lt;/<span class="text-white">p</span>&gt;
+      &lt;<span class="text-white">LeadsTable</span> rows={data} /&gt;
+    &lt;/<span class="text-white">section</span>&gt;
+  );
 }</code></pre>
                 </div>
 
-                <!-- Java -->
+                <!-- Quarkus -->
                 <div data-code-panel="java" hidden>
-                  <div class="border-b border-white/5 bg-white/[0.03] px-4 py-1.5 font-mono text-[11px] text-ink-300">LeadProcessor.java</div>
-                  <pre class="overflow-x-auto px-4 py-4 font-mono text-[12.5px] leading-relaxed text-ink-100"><code><span class="text-brand-300">package</span> app.leads.application;
+                  <div class="border-b border-white/5 bg-white/[0.03] px-4 py-1.5 font-mono text-[11px] text-ink-300">LeadResource.java</div>
+                  <pre class="overflow-x-auto px-4 py-4 font-mono text-[12.5px] leading-relaxed text-ink-100"><code><span class="text-brand-300">package</span> app.leads;
 
-<span class="text-amber-300">@Service</span>
-<span class="text-brand-300">public final class</span> <span class="text-white">LeadProcessor</span> {
+<span class="text-brand-300">import</span> jakarta.ws.rs.*;
+<span class="text-brand-300">import</span> jakarta.ws.rs.core.MediaType;
+<span class="text-brand-300">import</span> io.smallrye.mutiny.Uni;
 
-  <span class="text-brand-300">private final</span> LeadRepository leads;
-  <span class="text-brand-300">private final</span> EventPublisher bus;
-  <span class="text-brand-300">private final</span> ScoringService scoring;
+<span class="text-amber-300">@Path</span>(<span class="text-emerald-300">"/leads"</span>)
+<span class="text-amber-300">@Produces</span>(MediaType.APPLICATION_JSON)
+<span class="text-amber-300">@Consumes</span>(MediaType.APPLICATION_JSON)
+<span class="text-brand-300">public class</span> <span class="text-white">LeadResource</span> {
 
-  <span class="text-brand-300">public</span> <span class="text-emerald-300">LeadProcessor</span>(LeadRepository leads,
-                        EventPublisher bus,
-                        ScoringService scoring) {
-    <span class="text-amber-300">this</span>.leads   = leads;
-    <span class="text-amber-300">this</span>.bus     = bus;
-    <span class="text-amber-300">this</span>.scoring = scoring;
-  }
+  <span class="text-amber-300">@Inject</span> LeadService leads;
 
-  <span class="text-brand-300">public void</span> <span class="text-emerald-300">handle</span>(IngestLead cmd) {
-    <span class="text-brand-300">var</span> lead  = Lead.<span class="text-emerald-300">fromCommand</span>(cmd);
-    <span class="text-brand-300">var</span> score = scoring.<span class="text-emerald-300">evaluate</span>(lead);
-
-    leads.<span class="text-emerald-300">save</span>(lead.<span class="text-emerald-300">withScore</span>(score));
-    bus.<span class="text-emerald-300">publish</span>(<span class="text-brand-300">new</span> LeadIngested(lead.<span class="text-emerald-300">id</span>()));
+  <span class="text-amber-300">@POST</span>
+  <span class="text-brand-300">public</span> Uni&lt;LeadView&gt; <span class="text-emerald-300">ingest</span>(IngestLead cmd) {
+    <span class="text-brand-300">return</span> leads.<span class="text-emerald-300">ingest</span>(cmd)
+        .<span class="text-emerald-300">map</span>(LeadView::<span class="text-emerald-300">from</span>);
   }
 }</code></pre>
+                </div>
+
+                <!-- SQL -->
+                <div data-code-panel="sql" hidden>
+                  <div class="border-b border-white/5 bg-white/[0.03] px-4 py-1.5 font-mono text-[11px] text-ink-300">leads_revenue_by_cohort.sql</div>
+                  <pre class="overflow-x-auto px-4 py-4 font-mono text-[12.5px] leading-relaxed text-ink-100"><code><span class="text-brand-300">WITH</span> cohorts <span class="text-brand-300">AS</span> (
+  <span class="text-brand-300">SELECT</span> id,
+         <span class="text-emerald-300">date_trunc</span>(<span class="text-emerald-300">'month'</span>, created_at) <span class="text-brand-300">AS</span> cohort
+  <span class="text-brand-300">FROM</span>   leads
+  <span class="text-brand-300">WHERE</span>  status = <span class="text-emerald-300">'converted'</span>
+)
+<span class="text-brand-300">SELECT</span> c.cohort,
+       <span class="text-emerald-300">COUNT</span>(<span class="text-brand-300">DISTINCT</span> c.id)                      <span class="text-brand-300">AS</span> customers,
+       <span class="text-emerald-300">SUM</span>(s.amount)                                 <span class="text-brand-300">AS</span> mrr,
+       <span class="text-emerald-300">ROUND</span>(<span class="text-emerald-300">AVG</span>(s.amount)::numeric, <span class="text-amber-300">2</span>)          <span class="text-brand-300">AS</span> arpu,
+       <span class="text-emerald-300">RANK</span>() <span class="text-brand-300">OVER</span> (<span class="text-brand-300">ORDER BY</span> <span class="text-emerald-300">SUM</span>(s.amount) <span class="text-brand-300">DESC</span>) <span class="text-brand-300">AS</span> rnk
+<span class="text-brand-300">FROM</span>      cohorts       c
+<span class="text-brand-300">JOIN</span>      subscriptions s <span class="text-brand-300">ON</span> s.lead_id = c.id
+<span class="text-brand-300">WHERE</span>     s.active
+<span class="text-brand-300">GROUP BY</span>  c.cohort
+<span class="text-brand-300">HAVING</span>    <span class="text-emerald-300">COUNT</span>(<span class="text-brand-300">DISTINCT</span> c.id) &gt; <span class="text-amber-300">50</span>
+<span class="text-brand-300">ORDER BY</span>  c.cohort <span class="text-brand-300">DESC</span>
+<span class="text-brand-300">LIMIT</span>     <span class="text-amber-300">24</span>;</code></pre>
+                </div>
+
+                <!-- Docker -->
+                <div data-code-panel="docker" hidden>
+                  <div class="border-b border-white/5 bg-white/[0.03] px-4 py-1.5 font-mono text-[11px] text-ink-300">Dockerfile</div>
+                  <pre class="overflow-x-auto px-4 py-4 font-mono text-[12.5px] leading-relaxed text-ink-100"><code><span class="text-brand-300">FROM</span> composer:<span class="text-amber-300">2</span> <span class="text-brand-300">AS</span> deps
+<span class="text-brand-300">WORKDIR</span> /app
+<span class="text-brand-300">COPY</span> composer.*  ./
+<span class="text-brand-300">RUN</span>  composer install --no-dev --no-scripts --prefer-dist
+
+<span class="text-brand-300">FROM</span> php:<span class="text-amber-300">8.3</span>-fpm-alpine <span class="text-brand-300">AS</span> runtime
+<span class="text-brand-300">WORKDIR</span> /app
+
+<span class="text-brand-300">RUN</span>  apk add --no-cache icu-dev postgresql-dev \
+  &amp;&amp; docker-php-ext-install opcache intl pdo_pgsql
+
+<span class="text-brand-300">COPY</span> --from=deps /app/vendor ./vendor
+<span class="text-brand-300">COPY</span> . .
+
+<span class="text-brand-300">ENV</span> APP_ENV=prod PHP_OPCACHE_VALIDATE_TIMESTAMPS=<span class="text-amber-300">0</span>
+<span class="text-brand-300">USER</span> www-data
+
+<span class="text-brand-300">HEALTHCHECK</span> --interval=30s --timeout=3s \
+  <span class="text-brand-300">CMD</span> curl -fsS http://localhost:<span class="text-amber-300">9000</span>/health || <span class="text-brand-300">exit</span> <span class="text-amber-300">1</span>
+
+<span class="text-brand-300">EXPOSE</span> <span class="text-amber-300">9000</span>
+<span class="text-brand-300">CMD</span> [<span class="text-emerald-300">"php-fpm"</span>, <span class="text-emerald-300">"-F"</span>]</code></pre>
+                </div>
+
+                <!-- K8s -->
+                <div data-code-panel="k8s" hidden>
+                  <div class="border-b border-white/5 bg-white/[0.03] px-4 py-1.5 font-mono text-[11px] text-ink-300">leads-api.deployment.yaml</div>
+                  <pre class="overflow-x-auto px-4 py-4 font-mono text-[12.5px] leading-relaxed text-ink-100"><code><span class="text-brand-300">apiVersion</span>: apps/v1
+<span class="text-brand-300">kind</span>: Deployment
+<span class="text-brand-300">metadata</span>:
+  <span class="text-brand-300">name</span>: leads-api
+  <span class="text-brand-300">labels</span>: { app: leads-api, tier: backend }
+<span class="text-brand-300">spec</span>:
+  <span class="text-brand-300">replicas</span>: <span class="text-amber-300">3</span>
+  <span class="text-brand-300">selector</span>: { matchLabels: { app: leads-api } }
+  <span class="text-brand-300">strategy</span>: { type: RollingUpdate, rollingUpdate: { maxSurge: <span class="text-amber-300">1</span>, maxUnavailable: <span class="text-amber-300">0</span> } }
+  <span class="text-brand-300">template</span>:
+    <span class="text-brand-300">metadata</span>: { labels: { app: leads-api } }
+    <span class="text-brand-300">spec</span>:
+      <span class="text-brand-300">containers</span>:
+        - <span class="text-brand-300">name</span>: api
+          <span class="text-brand-300">image</span>: ghcr.io/dg/leads-api:<span class="text-emerald-300">1.8.0</span>
+          <span class="text-brand-300">ports</span>: [{ containerPort: <span class="text-amber-300">9000</span> }]
+          <span class="text-brand-300">envFrom</span>: [{ secretRef: { name: leads-secrets } }]
+          <span class="text-brand-300">resources</span>:
+            <span class="text-brand-300">requests</span>: { cpu: <span class="text-emerald-300">"100m"</span>, memory: <span class="text-emerald-300">"256Mi"</span> }
+            <span class="text-brand-300">limits</span>:   { cpu: <span class="text-emerald-300">"500m"</span>, memory: <span class="text-emerald-300">"512Mi"</span> }
+          <span class="text-brand-300">readinessProbe</span>: { httpGet: { path: /health, port: <span class="text-amber-300">9000</span> }, periodSeconds: <span class="text-amber-300">5</span> }
+          <span class="text-brand-300">livenessProbe</span>:  { httpGet: { path: /alive,  port: <span class="text-amber-300">9000</span> }, periodSeconds: <span class="text-amber-300">15</span> }</code></pre>
                 </div>
               </div>
 
               <footer class="flex items-center justify-between border-t border-white/5 bg-white/5 px-4 py-2 font-mono text-[11px] text-ink-300">
                 <span>DDD · Hexagonal · CQRS-lite</span>
-                <span id="code-runtime" class="text-brand-300">php 8.3</span>
+                <span id="code-runtime" class="text-brand-300">php 8.3 · symfony</span>
               </footer>
             </div>
           </div>
