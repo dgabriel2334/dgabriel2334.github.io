@@ -257,6 +257,12 @@
   const LANG_STORAGE_KEY = 'dg-lang';
   const SUPPORTED = ['en', 'pt', 'es'];
 
+  const resumeByLang = {
+    en: 'Resume EN-US.pdf',
+    es: 'Resume ES-ES.pdf',
+    pt: 'Resume PT-BR.pdf',
+  };
+
   const detectInitialLang = () => {
     const stored = localStorage.getItem(LANG_STORAGE_KEY);
     if (stored && SUPPORTED.includes(stored)) return stored;
@@ -283,6 +289,12 @@
       const key = el.getAttribute('data-i18n-html');
       if (dict[key] !== undefined) el.innerHTML = dict[key];
     });
+
+    // Point the "Download resume" button at the localized PDF
+    const resumeLink = document.getElementById('resume-download');
+    if (resumeLink && resumeByLang[lang]) {
+      resumeLink.setAttribute('href', resumeByLang[lang]);
+    }
 
     // Reset the typewriter mid-cycle so the new phrase set kicks in cleanly
     resetTypewriter();
