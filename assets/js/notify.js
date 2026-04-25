@@ -125,12 +125,12 @@
 
   const network = () => {
     const c = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
-    if (!c) return '';
+    if (!c) return 'unavailable (Safari/Firefox)';
     const parts = [];
     if (c.effectiveType) parts.push(c.effectiveType);
     if (c.downlink)      parts.push(`${c.downlink} Mb/s`);
     if (c.saveData)      parts.push('save-data');
-    return parts.join(' · ');
+    return parts.join(' · ') || 'unknown';
   };
 
   const viewport = () => `${window.innerWidth}×${window.innerHeight}@${window.devicePixelRatio || 1}x`;
@@ -229,26 +229,37 @@
     );
   };
 
-  const cachedGeo = sessionStorage.getItem('dg-notify-geo');
+  // Two providers in case the first is blocked, rate-limited or down.
+  // Cache key bumped to v2 so old cached entries (without ip/org) are refetched.
+  const fetchPrimary = () =>
+    fetch('https://ipapi.co/json/', { cache: 'force-cache' })
+      .then((r) => (r.ok ? r.json() : null))
+      .then((d) => (d && d.ip ? {
+        country: d.country_name, region: d.region, city: d.city,
+        code: d.country_code, ip: d.ip, org: d.org,
+      } : null));
+
+  const fetchFallback = () =>
+    fetch('https://ipwho.is/', { cache: 'force-cache' })
+      .then((r) => (r.ok ? r.json() : null))
+      .then((d) => (d && d.ip ? {
+        country: d.country, region: d.region, city: d.city,
+        code: d.country_code, ip: d.ip,
+        org: (d.connection && (d.connection.org || d.connection.isp)) || '',
+      } : null));
+
+  const cachedGeo = sessionStorage.getItem('dg-notify-geo-v2');
   if (cachedGeo) {
     try { fireOpen(JSON.parse(cachedGeo)); }
     catch { fireOpen(null); }
   } else {
-    fetch('https://ipapi.co/json/', { cache: 'force-cache' })
-      .then((r) => (r.ok ? r.json() : null))
-      .then((data) => {
-        const geo = data ? {
-          country: data.country_name,
-          region:  data.region,
-          city:    data.city,
-          code:    data.country_code,
-          ip:      data.ip,
-          org:     data.org,
-        } : null;
-        if (geo) sessionStorage.setItem('dg-notify-geo', JSON.stringify(geo));
+    fetchPrimary()
+      .catch(() => null)
+      .then((geo) => geo || fetchFallback().catch(() => null))
+      .then((geo) => {
+        if (geo) sessionStorage.setItem('dg-notify-geo-v2', JSON.stringify(geo));
         fireOpen(geo);
-      })
-      .catch(() => fireOpen(null));
+      });
   }
 
   // ============================================================
