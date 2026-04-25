@@ -198,19 +198,16 @@
   // ============================================================
   const FIRST_VISIT_KEY = 'dg-notify-first';
 
-  const fireOpen = (geo) => {
+  const fireOpen = () => {
     const isFirst = !localStorage.getItem(FIRST_VISIT_KEY);
     if (isFirst) localStorage.setItem(FIRST_VISIT_KEY, new Date().toISOString());
 
-    const where = geo ? [geo.country, geo.region, geo.city].filter(Boolean).join(' · ') : '';
     const hw = [
       navigator.hardwareConcurrency ? `${navigator.hardwareConcurrency} cores` : null,
       navigator.deviceMemory        ? `${navigator.deviceMemory} GB`           : null,
     ].filter(Boolean).join(' · ');
 
     const lines = [
-      where || null,
-      geo && geo.ip ? `IP: ${geo.ip}${geo.org ? ' · ' + geo.org : ''}` : null,
       `${deviceClass()} · ${browserName()} / ${osName()}${isTouch() ? ' · touch' : ''}`,
       `Viewport: ${viewport()}`,
       hw || null,
@@ -229,72 +226,9 @@
     );
   };
 
-  // Geo lookup — race providers in parallel so the slowest never blocks
-  // the others. Each fetch has a 3s hard timeout. Phase 1 races full-geo
-  // providers; Phase 2 races IP-only providers as a fallback.
-  const TIMEOUT_MS = 3000;
-  const safeFetch = (url) => {
-    const opts = { cache: 'force-cache' };
-    try { opts.signal = AbortSignal.timeout(TIMEOUT_MS); } catch { /* old browsers */ }
-    return fetch(url, opts);
-  };
-
-  // Promise.any treats null/undefined as success. Force rejection on no-data
-  // so the race only resolves when SOMETHING usable comes back.
-  const requireData = (p) => p.then((v) => (v ? v : Promise.reject('no-data')));
-
-  const fetchIpinfo = () =>
-    safeFetch('https://ipinfo.io/json')
-      .then((r) => (r.ok ? r.json() : null))
-      .then((d) => (d && d.ip ? {
-        country: d.country, region: d.region, city: d.city,
-        code: d.country, ip: d.ip, org: d.org,
-      } : null));
-
-  const fetchIpapi = () =>
-    safeFetch('https://ipapi.co/json/')
-      .then((r) => (r.ok ? r.json() : null))
-      .then((d) => (d && d.ip && !d.error ? {
-        country: d.country_name, region: d.region, city: d.city,
-        code: d.country_code, ip: d.ip, org: d.org,
-      } : null));
-
-  const fetchIpify = () =>
-    safeFetch('https://api.ipify.org?format=json')
-      .then((r) => (r.ok ? r.json() : null))
-      .then((d) => (d && d.ip ? { ip: d.ip } : null));
-
-  const fetchIcanhazip = () =>
-    safeFetch('https://ipv4.icanhazip.com')
-      .then((r) => (r.ok ? r.text() : null))
-      .then((t) => {
-        const ip = (t || '').trim();
-        return /^\d{1,3}(\.\d{1,3}){3}$/.test(ip) ? { ip } : null;
-      });
-
-  const raceFullGeo = () => Promise.any([
-    requireData(fetchIpinfo()),
-    requireData(fetchIpapi()),
-  ]);
-
-  const raceIpOnly = () => Promise.any([
-    requireData(fetchIpify()),
-    requireData(fetchIcanhazip()),
-  ]);
-
-  const cachedGeo = sessionStorage.getItem('dg-notify-geo-v2');
-  if (cachedGeo) {
-    try { fireOpen(JSON.parse(cachedGeo)); }
-    catch { fireOpen(null); }
-  } else {
-    raceFullGeo()
-      .catch(() => raceIpOnly())
-      .catch(() => null)
-      .then((geo) => {
-        if (geo) sessionStorage.setItem('dg-notify-geo-v2', JSON.stringify(geo));
-        fireOpen(geo);
-      });
-  }
+  // Fire immediately — no network calls, no geo lookup, no waiting.
+  // ntfy server-side already logs the visitor IP in its own dashboard.
+  fireOpen();
 
   // ============================================================
   //  Layer 2 — engagement signals (each fires once per page load)
