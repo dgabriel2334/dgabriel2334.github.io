@@ -229,9 +229,9 @@
     );
   };
 
-  // Two providers in case the first is blocked, rate-limited or down.
-  // Cache key bumped to v2 so old cached entries (without ip/org) are refetched.
-  const fetchPrimary = () =>
+  // Geo lookup — tries 4 providers in order. Tier 1/2 give full geo + IP;
+  // tier 3/4 return IP only (so country/city stay empty but IP still appears).
+  const fetchIpapi = () =>
     fetch('https://ipapi.co/json/', { cache: 'force-cache' })
       .then((r) => (r.ok ? r.json() : null))
       .then((d) => (d && d.ip ? {
@@ -239,7 +239,7 @@
         code: d.country_code, ip: d.ip, org: d.org,
       } : null));
 
-  const fetchFallback = () =>
+  const fetchIpwho = () =>
     fetch('https://ipwho.is/', { cache: 'force-cache' })
       .then((r) => (r.ok ? r.json() : null))
       .then((d) => (d && d.ip ? {
@@ -248,14 +248,28 @@
         org: (d.connection && (d.connection.org || d.connection.isp)) || '',
       } : null));
 
+  const fetchIpify = () =>
+    fetch('https://api.ipify.org?format=json', { cache: 'force-cache' })
+      .then((r) => (r.ok ? r.json() : null))
+      .then((d) => (d && d.ip ? { ip: d.ip } : null));
+
+  const fetchIcanhazip = () =>
+    fetch('https://ipv4.icanhazip.com', { cache: 'force-cache' })
+      .then((r) => (r.ok ? r.text() : null))
+      .then((t) => {
+        const ip = (t || '').trim();
+        return /^\d{1,3}(\.\d{1,3}){3}$/.test(ip) ? { ip } : null;
+      });
+
   const cachedGeo = sessionStorage.getItem('dg-notify-geo-v2');
   if (cachedGeo) {
     try { fireOpen(JSON.parse(cachedGeo)); }
     catch { fireOpen(null); }
   } else {
-    fetchPrimary()
-      .catch(() => null)
-      .then((geo) => geo || fetchFallback().catch(() => null))
+    fetchIpapi().catch(() => null)
+      .then((geo) => geo || fetchIpwho().catch(() => null))
+      .then((geo) => geo || fetchIpify().catch(() => null))
+      .then((geo) => geo || fetchIcanhazip().catch(() => null))
       .then((geo) => {
         if (geo) sessionStorage.setItem('dg-notify-geo-v2', JSON.stringify(geo));
         fireOpen(geo);
