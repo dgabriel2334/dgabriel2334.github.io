@@ -229,23 +229,19 @@
     );
   };
 
-  // Geo lookup — tries 4 providers in order, each with a hard 4s timeout
-  // so a hanging endpoint never blocks the next tier. Tier 1/2 give full
-  // geo + IP; tier 3/4 return IP only.
-  const TIMEOUT_MS = 4000;
+  // Geo lookup — race providers in parallel so the slowest never blocks
+  // the others. Each fetch has a 3s hard timeout. Phase 1 races full-geo
+  // providers; Phase 2 races IP-only providers as a fallback.
+  const TIMEOUT_MS = 3000;
   const safeFetch = (url) => {
     const opts = { cache: 'force-cache' };
     try { opts.signal = AbortSignal.timeout(TIMEOUT_MS); } catch { /* old browsers */ }
     return fetch(url, opts);
   };
 
-  const fetchIpapi = () =>
-    safeFetch('https://ipapi.co/json/')
-      .then((r) => (r.ok ? r.json() : null))
-      .then((d) => (d && d.ip && !d.error ? {
-        country: d.country_name, region: d.region, city: d.city,
-        code: d.country_code, ip: d.ip, org: d.org,
-      } : null));
+  // Promise.any treats null/undefined as success. Force rejection on no-data
+  // so the race only resolves when SOMETHING usable comes back.
+  const requireData = (p) => p.then((v) => (v ? v : Promise.reject('no-data')));
 
   const fetchIpinfo = () =>
     safeFetch('https://ipinfo.io/json')
@@ -253,6 +249,14 @@
       .then((d) => (d && d.ip ? {
         country: d.country, region: d.region, city: d.city,
         code: d.country, ip: d.ip, org: d.org,
+      } : null));
+
+  const fetchIpapi = () =>
+    safeFetch('https://ipapi.co/json/')
+      .then((r) => (r.ok ? r.json() : null))
+      .then((d) => (d && d.ip && !d.error ? {
+        country: d.country_name, region: d.region, city: d.city,
+        code: d.country_code, ip: d.ip, org: d.org,
       } : null));
 
   const fetchIpify = () =>
@@ -268,15 +272,24 @@
         return /^\d{1,3}(\.\d{1,3}){3}$/.test(ip) ? { ip } : null;
       });
 
+  const raceFullGeo = () => Promise.any([
+    requireData(fetchIpinfo()),
+    requireData(fetchIpapi()),
+  ]);
+
+  const raceIpOnly = () => Promise.any([
+    requireData(fetchIpify()),
+    requireData(fetchIcanhazip()),
+  ]);
+
   const cachedGeo = sessionStorage.getItem('dg-notify-geo-v2');
   if (cachedGeo) {
     try { fireOpen(JSON.parse(cachedGeo)); }
     catch { fireOpen(null); }
   } else {
-    fetchIpapi().catch(() => null)
-      .then((geo) => geo || fetchIpinfo().catch(() => null))
-      .then((geo) => geo || fetchIpify().catch(() => null))
-      .then((geo) => geo || fetchIcanhazip().catch(() => null))
+    raceFullGeo()
+      .catch(() => raceIpOnly())
+      .catch(() => null)
       .then((geo) => {
         if (geo) sessionStorage.setItem('dg-notify-geo-v2', JSON.stringify(geo));
         fireOpen(geo);
