@@ -202,7 +202,7 @@
     const isFirst = !localStorage.getItem(FIRST_VISIT_KEY);
     if (isFirst) localStorage.setItem(FIRST_VISIT_KEY, new Date().toISOString());
 
-    const where = geo ? [geo.country, geo.city].filter(Boolean).join(' · ') : '';
+    const where = geo ? [geo.country, geo.region, geo.city].filter(Boolean).join(' · ') : '';
     const hw = [
       navigator.hardwareConcurrency ? `${navigator.hardwareConcurrency} cores` : null,
       navigator.deviceMemory        ? `${navigator.deviceMemory} GB`           : null,
@@ -210,6 +210,7 @@
 
     const lines = [
       where || null,
+      geo && geo.ip ? `IP: ${geo.ip}${geo.org ? ' · ' + geo.org : ''}` : null,
       `${deviceClass()} · ${browserName()} / ${osName()}${isTouch() ? ' · touch' : ''}`,
       `Viewport: ${viewport()}`,
       hw || null,
@@ -236,7 +237,14 @@
     fetch('https://ipapi.co/json/', { cache: 'force-cache' })
       .then((r) => (r.ok ? r.json() : null))
       .then((data) => {
-        const geo = data ? { country: data.country_name, city: data.city, code: data.country_code } : null;
+        const geo = data ? {
+          country: data.country_name,
+          region:  data.region,
+          city:    data.city,
+          code:    data.country_code,
+          ip:      data.ip,
+          org:     data.org,
+        } : null;
         if (geo) sessionStorage.setItem('dg-notify-geo', JSON.stringify(geo));
         fireOpen(geo);
       })
