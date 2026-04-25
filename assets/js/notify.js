@@ -28,27 +28,47 @@
   const NTFY_URL = `https://ntfy.sh/${NTFY_TOPIC}`;
 
   // ============================================================
+  //  URL-driven flags — useful for live debugging
+  //    ?notify=debug → logs everything to console
+  //    ?notify=force → bypasses dedupe + owner mute for one session
+  // ============================================================
+  const params  = new URLSearchParams(location.search);
+  const NOTIFY  = params.get('notify');
+  const DEBUG   = NOTIFY === 'debug' || NOTIFY === 'force';
+  const FORCE   = NOTIFY === 'force';
+  const log     = (...a) => { if (DEBUG) console.info('[notify]', ...a); };
+
+  // ============================================================
   //  Owner mute — ?owner=1 silences this device, ?owner=0 re-enables
   // ============================================================
   const OWNER_KEY = 'dg-notify-owner';
-  const params = new URLSearchParams(location.search);
   if (params.has('owner')) {
     if (params.get('owner') === '1') localStorage.setItem(OWNER_KEY, '1');
     else localStorage.removeItem(OWNER_KEY);
   }
-  if (localStorage.getItem(OWNER_KEY) === '1') return;
+  if (!FORCE && localStorage.getItem(OWNER_KEY) === '1') {
+    log('skipped: owner mute is on (use ?owner=0 to disable)');
+    return;
+  }
 
   // ============================================================
   //  Bot filter
   // ============================================================
   const ua = navigator.userAgent || '';
-  if (navigator.webdriver) return;
-  if (/bot|crawl|spider|slurp|headless|preview|fetch|wget|curl|monitor|lighthouse/i.test(ua)) return;
+  if (!FORCE && navigator.webdriver) {
+    log('skipped: navigator.webdriver=true');
+    return;
+  }
+  if (!FORCE && /bot|crawl|spider|slurp|headless|preview|fetch|wget|curl|monitor|lighthouse/i.test(ua)) {
+    log('skipped: UA looks like a bot →', ua);
+    return;
+  }
 
   // ============================================================
   //  Helpers
   // ============================================================
   const send = (title, body, tags = '', priority = 'default') => {
+    log('→ send', { title, body, tags, priority });
     try {
       fetch(NTFY_URL, {
         method: 'POST',
@@ -60,8 +80,10 @@
           'Click':    location.href,
         },
         keepalive: true,
-      }).catch(() => {});
-    } catch { /* noop */ }
+      })
+      .then((r) => log('  status', r.status, r.ok ? 'ok' : 'FAIL'))
+      .catch((err) => log('  fetch error', err && err.message));
+    } catch (err) { log('throw', err && err.message); }
   };
 
   const parseReferrer = () => {
@@ -134,7 +156,10 @@
   const FIRST_VISIT_KEY  = 'dg-notify-first';
 
   const fireOpen = (geo) => {
-    if (sessionStorage.getItem(SESSION_OPEN_KEY) === '1') return;
+    if (!FORCE && sessionStorage.getItem(SESSION_OPEN_KEY) === '1') {
+      log('skipped open: already fired this session (close the tab to reset, or use ?notify=force)');
+      return;
+    }
     sessionStorage.setItem(SESSION_OPEN_KEY, '1');
 
     const isFirst = !localStorage.getItem(FIRST_VISIT_KEY);
@@ -180,7 +205,14 @@
   //  Layer 2 — engagement signals (each one fires once per session)
   // ============================================================
   const fired = new Set();
-  const once = (key, fn) => { if (!fired.has(key)) { fired.add(key); fn(); } };
+  const once = (key, fn) => {
+    if (!FORCE && fired.has(key)) {
+      log('skipped event (already fired this session):', key);
+      return;
+    }
+    fired.add(key);
+    fn();
+  };
 
   // Resume download
   document.getElementById('resume-download')?.addEventListener('click', () => {
