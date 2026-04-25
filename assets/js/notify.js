@@ -229,31 +229,39 @@
     );
   };
 
-  // Geo lookup — tries 4 providers in order. Tier 1/2 give full geo + IP;
-  // tier 3/4 return IP only (so country/city stay empty but IP still appears).
+  // Geo lookup — tries 4 providers in order, each with a hard 4s timeout
+  // so a hanging endpoint never blocks the next tier. Tier 1/2 give full
+  // geo + IP; tier 3/4 return IP only.
+  const TIMEOUT_MS = 4000;
+  const safeFetch = (url) => {
+    const opts = { cache: 'force-cache' };
+    try { opts.signal = AbortSignal.timeout(TIMEOUT_MS); } catch { /* old browsers */ }
+    return fetch(url, opts);
+  };
+
   const fetchIpapi = () =>
-    fetch('https://ipapi.co/json/', { cache: 'force-cache' })
+    safeFetch('https://ipapi.co/json/')
       .then((r) => (r.ok ? r.json() : null))
-      .then((d) => (d && d.ip ? {
+      .then((d) => (d && d.ip && !d.error ? {
         country: d.country_name, region: d.region, city: d.city,
         code: d.country_code, ip: d.ip, org: d.org,
       } : null));
 
-  const fetchFreeIpApi = () =>
-    fetch('https://freeipapi.com/api/json', { cache: 'force-cache' })
+  const fetchIpinfo = () =>
+    safeFetch('https://ipinfo.io/json')
       .then((r) => (r.ok ? r.json() : null))
-      .then((d) => (d && d.ipAddress ? {
-        country: d.countryName, region: d.regionName, city: d.cityName,
-        code: d.countryCode, ip: d.ipAddress, org: '',
+      .then((d) => (d && d.ip ? {
+        country: d.country, region: d.region, city: d.city,
+        code: d.country, ip: d.ip, org: d.org,
       } : null));
 
   const fetchIpify = () =>
-    fetch('https://api.ipify.org?format=json', { cache: 'force-cache' })
+    safeFetch('https://api.ipify.org?format=json')
       .then((r) => (r.ok ? r.json() : null))
       .then((d) => (d && d.ip ? { ip: d.ip } : null));
 
   const fetchIcanhazip = () =>
-    fetch('https://ipv4.icanhazip.com', { cache: 'force-cache' })
+    safeFetch('https://ipv4.icanhazip.com')
       .then((r) => (r.ok ? r.text() : null))
       .then((t) => {
         const ip = (t || '').trim();
@@ -266,7 +274,7 @@
     catch { fireOpen(null); }
   } else {
     fetchIpapi().catch(() => null)
-      .then((geo) => geo || fetchFreeIpApi().catch(() => null))
+      .then((geo) => geo || fetchIpinfo().catch(() => null))
       .then((geo) => geo || fetchIpify().catch(() => null))
       .then((geo) => geo || fetchIcanhazip().catch(() => null))
       .then((geo) => {
