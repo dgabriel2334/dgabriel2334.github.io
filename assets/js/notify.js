@@ -6,14 +6,15 @@
  * Privacy posture:
  *   - No personal data is collected; only coarse browser/device info,
  *     referrer source, browser language and (optional) IP-derived country
- *   - Reuses the same ipapi.co lookup the i18n hint uses, so no extra
- *     fetch beyond what already happens for language detection
+ *   - Reuses the same ipapi.co lookup the i18n hint uses
  *   - The owner can mute themselves with `?owner=1` (un-mute with `?owner=0`)
  *
- * Anti-spam:
+ * Behavior:
+ *   - "Open" notification fires on every page load (no per-session debounce)
+ *   - Each engagement signal in Layer 2 fires once per page load
+ *     (the `fired` Set is recreated on every script run, so reloading the
+ *     tab automatically resets it)
  *   - Skips known bots (UA + navigator.webdriver)
- *   - Open notification fires once per session
- *   - Each engagement signal fires once per session
  *   - Falls silent on any network error
  */
 (() => {
@@ -28,47 +29,27 @@
   const NTFY_URL = `https://ntfy.sh/${NTFY_TOPIC}`;
 
   // ============================================================
-  //  URL-driven flags — useful for live debugging
-  //    ?notify=debug → logs everything to console
-  //    ?notify=force → bypasses dedupe + owner mute for one session
-  // ============================================================
-  const params  = new URLSearchParams(location.search);
-  const NOTIFY  = params.get('notify');
-  const DEBUG   = NOTIFY === 'debug' || NOTIFY === 'force';
-  const FORCE   = NOTIFY === 'force';
-  const log     = (...a) => { if (DEBUG) console.info('[notify]', ...a); };
-
-  // ============================================================
   //  Owner mute — ?owner=1 silences this device, ?owner=0 re-enables
   // ============================================================
   const OWNER_KEY = 'dg-notify-owner';
+  const params = new URLSearchParams(location.search);
   if (params.has('owner')) {
     if (params.get('owner') === '1') localStorage.setItem(OWNER_KEY, '1');
     else localStorage.removeItem(OWNER_KEY);
   }
-  if (!FORCE && localStorage.getItem(OWNER_KEY) === '1') {
-    log('skipped: owner mute is on (use ?owner=0 to disable)');
-    return;
-  }
+  if (localStorage.getItem(OWNER_KEY) === '1') return;
 
   // ============================================================
   //  Bot filter
   // ============================================================
   const ua = navigator.userAgent || '';
-  if (!FORCE && navigator.webdriver) {
-    log('skipped: navigator.webdriver=true');
-    return;
-  }
-  if (!FORCE && /bot|crawl|spider|slurp|headless|preview|fetch|wget|curl|monitor|lighthouse/i.test(ua)) {
-    log('skipped: UA looks like a bot →', ua);
-    return;
-  }
+  if (navigator.webdriver) return;
+  if (/bot|crawl|spider|slurp|headless|preview|fetch|wget|curl|monitor|lighthouse/i.test(ua)) return;
 
   // ============================================================
   //  Helpers
   // ============================================================
   const send = (title, body, tags = '', priority = 'default') => {
-    log('→ send', { title, body, tags, priority });
     try {
       fetch(NTFY_URL, {
         method: 'POST',
@@ -80,10 +61,8 @@
           'Click':    location.href,
         },
         keepalive: true,
-      })
-      .then((r) => log('  status', r.status, r.ok ? 'ok' : 'FAIL'))
-      .catch((err) => log('  fetch error', err && err.message));
-    } catch (err) { log('throw', err && err.message); }
+      }).catch(() => {});
+    } catch { /* noop */ }
   };
 
   const parseReferrer = () => {
@@ -127,20 +106,20 @@
   };
 
   const browserName = () => {
-    if (/Edg\//.test(ua))     return 'Edge';
+    if (/Edg\//.test(ua))       return 'Edge';
     if (/OPR\/|Opera/.test(ua)) return 'Opera';
-    if (/Chrome\//.test(ua))  return 'Chrome';
-    if (/Firefox\//.test(ua)) return 'Firefox';
-    if (/Safari\//.test(ua))  return 'Safari';
+    if (/Chrome\//.test(ua))    return 'Chrome';
+    if (/Firefox\//.test(ua))   return 'Firefox';
+    if (/Safari\//.test(ua))    return 'Safari';
     return 'Browser';
   };
 
   const osName = () => {
-    if (/Windows/i.test(ua))           return 'Windows';
+    if (/Windows/i.test(ua))            return 'Windows';
     if (/Mac OS X|Macintosh/i.test(ua)) return 'macOS';
     if (/iPhone|iPad|iPod/i.test(ua))   return 'iOS';
-    if (/Android/i.test(ua))           return 'Android';
-    if (/Linux/i.test(ua))             return 'Linux';
+    if (/Android/i.test(ua))            return 'Android';
+    if (/Linux/i.test(ua))              return 'Linux';
     return 'OS';
   };
 
@@ -150,18 +129,11 @@
   };
 
   // ============================================================
-  //  Layer 1 — open notification (once per session)
+  //  Layer 1 — open notification (every page load)
   // ============================================================
-  const SESSION_OPEN_KEY = 'dg-notify-open';
-  const FIRST_VISIT_KEY  = 'dg-notify-first';
+  const FIRST_VISIT_KEY = 'dg-notify-first';
 
   const fireOpen = (geo) => {
-    if (!FORCE && sessionStorage.getItem(SESSION_OPEN_KEY) === '1') {
-      log('skipped open: already fired this session (close the tab to reset, or use ?notify=force)');
-      return;
-    }
-    sessionStorage.setItem(SESSION_OPEN_KEY, '1');
-
     const isFirst = !localStorage.getItem(FIRST_VISIT_KEY);
     if (isFirst) localStorage.setItem(FIRST_VISIT_KEY, new Date().toISOString());
 
@@ -202,14 +174,11 @@
   }
 
   // ============================================================
-  //  Layer 2 — engagement signals (each one fires once per session)
+  //  Layer 2 — engagement signals (each one fires once per page load)
   // ============================================================
   const fired = new Set();
   const once = (key, fn) => {
-    if (!FORCE && fired.has(key)) {
-      log('skipped event (already fired this session):', key);
-      return;
-    }
+    if (fired.has(key)) return;
     fired.add(key);
     fn();
   };
