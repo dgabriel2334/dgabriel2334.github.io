@@ -239,13 +239,12 @@
         code: d.country_code, ip: d.ip, org: d.org,
       } : null));
 
-  const fetchIpwho = () =>
-    fetch('https://ipwho.is/', { cache: 'force-cache' })
+  const fetchFreeIpApi = () =>
+    fetch('https://freeipapi.com/api/json', { cache: 'force-cache' })
       .then((r) => (r.ok ? r.json() : null))
-      .then((d) => (d && d.ip ? {
-        country: d.country, region: d.region, city: d.city,
-        code: d.country_code, ip: d.ip,
-        org: (d.connection && (d.connection.org || d.connection.isp)) || '',
+      .then((d) => (d && d.ipAddress ? {
+        country: d.countryName, region: d.regionName, city: d.cityName,
+        code: d.countryCode, ip: d.ipAddress, org: '',
       } : null));
 
   const fetchIpify = () =>
@@ -267,7 +266,7 @@
     catch { fireOpen(null); }
   } else {
     fetchIpapi().catch(() => null)
-      .then((geo) => geo || fetchIpwho().catch(() => null))
+      .then((geo) => geo || fetchFreeIpApi().catch(() => null))
       .then((geo) => geo || fetchIpify().catch(() => null))
       .then((geo) => geo || fetchIcanhazip().catch(() => null))
       .then((geo) => {
