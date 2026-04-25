@@ -22,7 +22,7 @@
   // ============================================================
   //  CONFIG — drop your ntfy.sh topic here
   // ============================================================
-  const NTFY_TOPIC = 'REPLACE_WITH_YOUR_TOPIC';
+  const NTFY_TOPIC = 'dgabriel-portfolio-x9k2qf3p';
 
   if (!NTFY_TOPIC || NTFY_TOPIC === 'REPLACE_WITH_YOUR_TOPIC') return;
   const NTFY_URL = `https://ntfy.sh/${NTFY_TOPIC}`;
