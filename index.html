@@ -4,7 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="theme-color" content="#0b1220" />
-  <meta name="description" content="Dário Gabriel — Senior Backend Engineer. Backend, distributed systems, DDD and cloud-native services with PHP, Symfony and Node.js." />
+  <meta name="description" content="Dário Gabriel — Senior Backend Engineer. 8+ years shipping payments, distributed systems and government-scale backends with PHP, Node.js and Java." />
+  <link rel="icon" type="image/jpeg" href="profile.jpg" />
+  <link rel="apple-touch-icon" href="profile.jpg" />
   <meta name="author" content="Dário Gabriel" />
 
   <meta property="og:title" content="Dário Gabriel — Senior Backend Engineer" />
@@ -257,7 +259,7 @@
               <span data-i18n="hero.cta">Start a conversation</span>
               <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
             </a>
-            <a id="resume-download" href="Resume EN-US.pdf" download
+            <a id="resume-download" href="dario-gabriel-resume-en.pdf" download
                class="inline-flex items-center gap-2 rounded-lg border border-white/10 bg-white/5 px-5 py-2.5 text-sm font-semibold text-ink-100 transition hover:border-brand-400 hover:text-white">
               <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 21h16"/></svg>
               <span data-i18n="hero.download">Download resume</span>
@@ -267,7 +269,7 @@
           <dl class="mt-7 grid max-w-md grid-cols-3 gap-4 border-t border-white/5 pt-4">
             <div>
               <dt class="font-mono text-[10px] uppercase tracking-widest text-ink-400" data-i18n="hero.stats.exp">Experience</dt>
-              <dd class="mt-0.5 text-xl font-semibold text-white">7+ <span class="text-xs font-medium text-ink-400" data-i18n="hero.stats.yrs">yrs</span></dd>
+              <dd class="mt-0.5 text-xl font-semibold text-white">8+ <span class="text-xs font-medium text-ink-400" data-i18n="hero.stats.yrs">yrs</span></dd>
             </div>
             <div>
               <dt class="font-mono text-[10px] uppercase tracking-widest text-ink-400" data-i18n="hero.stats.current">Current</dt>
@@ -301,6 +303,7 @@
                   <button role="tab" aria-selected="false" data-code-tab="sql"    class="shrink-0 rounded px-2 py-1 text-ink-300 transition hover:bg-white/5 hover:text-white">SQL</button>
                   <button role="tab" aria-selected="false" data-code-tab="docker" class="shrink-0 rounded px-2 py-1 text-ink-300 transition hover:bg-white/5 hover:text-white">Docker</button>
                   <button role="tab" aria-selected="false" data-code-tab="k8s"    class="shrink-0 rounded px-2 py-1 text-ink-300 transition hover:bg-white/5 hover:text-white">K8s</button>
+                  <button role="tab" aria-selected="false" data-code-tab="gitlab" class="shrink-0 rounded px-2 py-1 text-ink-300 transition hover:bg-white/5 hover:text-white">GitLab CI</button>
                 </div>
               </header>
 
@@ -479,6 +482,40 @@
           <span class="text-brand-300">readinessProbe</span>: { httpGet: { path: /health, port: <span class="text-amber-300">9000</span> }, periodSeconds: <span class="text-amber-300">5</span> }
           <span class="text-brand-300">livenessProbe</span>:  { httpGet: { path: /alive,  port: <span class="text-amber-300">9000</span> }, periodSeconds: <span class="text-amber-300">15</span> }</code></pre>
                 </div>
+
+                <!-- GitLab CI -->
+                <div data-code-panel="gitlab" hidden>
+                  <div class="border-b border-white/5 bg-white/[0.03] px-4 py-1.5 font-mono text-[11px] text-ink-300">.gitlab-ci.yml</div>
+                  <pre class="overflow-x-auto px-4 py-4 font-mono text-[12.5px] leading-relaxed text-ink-100"><code><span class="text-brand-300">stages</span>: [test, build, deploy]
+
+<span class="text-brand-300">variables</span>:
+  <span class="text-brand-300">IMAGE</span>: <span class="text-emerald-300">$CI_REGISTRY_IMAGE:$CI_COMMIT_SHORT_SHA</span>
+
+<span class="text-amber-300">test</span>:
+  <span class="text-brand-300">stage</span>: test
+  <span class="text-brand-300">image</span>: node:<span class="text-amber-300">20</span>-alpine
+  <span class="text-brand-300">script</span>:
+    - npm ci --prefer-offline
+    - npm run lint &amp;&amp; npm test -- --coverage
+
+<span class="text-amber-300">build</span>:
+  <span class="text-brand-300">stage</span>: build
+  <span class="text-brand-300">image</span>: docker:<span class="text-amber-300">25</span>
+  <span class="text-brand-300">services</span>: [docker:dind]
+  <span class="text-brand-300">script</span>:
+    - docker build -t <span class="text-emerald-300">$IMAGE</span> .
+    - docker push <span class="text-emerald-300">$IMAGE</span>
+
+<span class="text-amber-300">deploy:eks</span>:
+  <span class="text-brand-300">stage</span>: deploy
+  <span class="text-brand-300">image</span>: bitnami/kubectl:latest
+  <span class="text-brand-300">environment</span>: production
+  <span class="text-brand-300">only</span>: [main]
+  <span class="text-brand-300">script</span>:
+    - aws eks update-kubeconfig --name leads-prod --region us-east-1
+    - kubectl set image deploy/leads-api api=<span class="text-emerald-300">$IMAGE</span>
+    - kubectl rollout status deploy/leads-api --timeout=<span class="text-amber-300">5m</span></code></pre>
+                </div>
               </div>
 
               <footer class="flex items-center justify-between border-t border-white/5 bg-white/5 px-4 py-2 font-mono text-[11px] text-ink-300">
@@ -508,17 +545,19 @@
 
         <div class="reveal lg:col-span-8">
           <p class="text-sm leading-relaxed text-ink-200 sm:text-base" data-i18n-html="about.p1">
-            I'm Dário, a Senior Backend Engineer from the Amazon, now shipping backend systems for
+            I'm Dário, a Senior Backend Engineer from the Amazon, currently completing a contract with
             <a href="https://leadtech.com" target="_blank" rel="noopener" class="font-semibold text-white underline decoration-brand-400/40 underline-offset-2 transition hover:decoration-brand-400">Leadtech</a>
             <span class="text-ink-300">(via <a href="https://www.ciklum.com" target="_blank" rel="noopener" class="underline decoration-brand-400/40 underline-offset-2 transition hover:decoration-brand-400">Ciklum</a>)</span>
-            in Barcelona. Over the past seven years I've
-            led teams, modernized legacy monoliths and delivered event-driven platforms for companies
-            across Brazil, Spain and Latin America.
+            in Barcelona, ending May 2026 — open to my next senior backend role.
+            Over the past <strong class="text-white">eight years</strong> I've worked alongside cross-functional teams across
+            <strong class="text-white">PHP, Node.js and Java</strong>, modernized legacy monoliths and shipped
+            event-driven, government-scale systems for companies in Brazil, Spain and Latin America.
           </p>
           <p class="mt-3 text-sm leading-relaxed text-ink-200 sm:text-base" data-i18n="about.p2">
             My focus is building software that survives real traffic and real teams — clean boundaries,
-            explicit domain models, message-driven integration and observability baked in. I believe
-            simple code wins, tests are a design tool, and the best systems are boring by intent.
+            explicit domain models, message-driven integration and observability baked in. Whether shipping
+            payments at fintech scale or government-grade public services, I believe simple code wins,
+            tests are a design tool, and the best systems are boring by intent.
           </p>
 
           <ul class="mt-4 grid gap-x-6 gap-y-2 sm:grid-cols-2">
@@ -565,7 +604,7 @@
         <article class="reveal card rounded-xl p-4">
           <h3 class="font-mono text-[11px] uppercase tracking-widest text-brand-300" data-i18n="stack.backend">Backend</h3>
           <ul class="mt-2 flex flex-wrap gap-1.5" data-tags>
-            <li>PHP 8</li><li>Symfony</li><li>Laravel</li><li>Lumen</li><li>Node.js</li><li>Java</li><li>Spring</li><li>Doctrine</li><li>REST</li><li>GraphQL</li>
+            <li>PHP 8</li><li>Symfony</li><li>Laravel</li><li>Node.js</li><li>NestJS</li><li>TypeScript</li><li>Java</li><li>Spring</li><li>Quarkus</li><li>Doctrine</li><li>REST</li><li>GraphQL</li>
           </ul>
         </article>
 
@@ -579,28 +618,28 @@
         <article class="reveal card rounded-xl p-4" style="transition-delay:.12s">
           <h3 class="font-mono text-[11px] uppercase tracking-widest text-brand-300" data-i18n="stack.data">Messaging &amp; Data</h3>
           <ul class="mt-2 flex flex-wrap gap-1.5" data-tags>
-            <li>RabbitMQ</li><li>Kafka</li><li>PostgreSQL</li><li>MySQL</li><li>Redis</li><li>Elasticsearch</li>
+            <li>RabbitMQ</li><li>Kafka</li><li>PostgreSQL</li><li>Oracle</li><li>MySQL</li><li>Redis</li><li>Elasticsearch</li><li>MinIO</li>
           </ul>
         </article>
 
         <article class="reveal card rounded-xl p-4">
           <h3 class="font-mono text-[11px] uppercase tracking-widest text-brand-300" data-i18n="stack.cloud">Cloud &amp; DevOps</h3>
           <ul class="mt-2 flex flex-wrap gap-1.5" data-tags>
-            <li>AWS</li><li>GCP</li><li>Docker</li><li>Jenkins</li><li>GitHub Actions</li><li>Linux</li>
+            <li>AWS · EKS · RDS · ECR</li><li>GCP</li><li>Kubernetes</li><li>Docker</li><li>Jenkins</li><li>GitLab CI</li><li>GitHub Actions</li><li>Linux</li>
           </ul>
         </article>
 
         <article class="reveal card rounded-xl p-4" style="transition-delay:.06s">
           <h3 class="font-mono text-[11px] uppercase tracking-widest text-brand-300" data-i18n="stack.frontend">Frontend</h3>
           <ul class="mt-2 flex flex-wrap gap-1.5" data-tags>
-            <li>TypeScript</li><li>Vue.js</li><li>React</li><li>Tailwind CSS</li><li>HTML5</li>
+            <li>TypeScript</li><li>Vue.js</li><li>React</li><li>Next.js</li><li>Tailwind CSS</li><li>HTML5</li>
           </ul>
         </article>
 
         <article class="reveal card rounded-xl p-4" style="transition-delay:.12s">
-          <h3 class="font-mono text-[11px] uppercase tracking-widest text-brand-300" data-i18n="stack.exploring">Currently exploring</h3>
+          <h3 class="font-mono text-[11px] uppercase tracking-widest text-brand-300" data-i18n="stack.exploring">Recent focus</h3>
           <ul class="mt-2 flex flex-wrap gap-1.5" data-tags>
-            <li>Flutter</li><li>Kotlin</li><li>Python</li><li>Go</li>
+            <li>Java &amp; Spring (gov-tech)</li><li>AWS EKS · Cloud-native</li><li>Event sourcing</li><li>NestJS at scale</li>
           </ul>
         </article>
       </div>
@@ -619,7 +658,7 @@
         <li class="reveal node relative">
           <div class="flex flex-wrap items-center gap-2">
             <span class="chip" data-i18n="exp.current">Current</span>
-            <span class="font-mono text-xs text-ink-400">2025 — <span data-i18n="exp.present">Present</span></span>
+            <span class="font-mono text-xs text-ink-400">Sep 2025 — May 2026</span>
           </div>
           <h3 class="mt-2 text-lg font-semibold text-white">
             <span data-i18n="exp.role.senior">Senior Backend Engineer</span> ·
@@ -628,45 +667,49 @@
           </h3>
           <p class="font-mono text-xs text-ink-400" data-i18n="exp.1.location">Barcelona, Spain · Remote</p>
           <p class="mt-2 text-sm leading-relaxed text-ink-200" data-i18n="exp.1.desc">
-            Building robust backend services and APIs with PHP + Symfony + Doctrine, backed by
-            message-driven architectures on RabbitMQ and a PostgreSQL core designed for
-            schema clarity, query performance and transactional integrity. Systems shaped
-            around SOLID, DDD and Hexagonal Architecture — maintainable, testable and decoupled.
+            Designing and owning APIs for payments, subscriptions, e-signatures and AI-driven
+            document workflows on PHP 8 + Symfony + Doctrine + GraphQL/REST + PostgreSQL +
+            RabbitMQ. Architecture grounded in DDD, Hexagonal and SOLID — explicit aggregates,
+            idempotent transactions and clean bounded contexts that scale with new markets.
           </p>
         </li>
 
         <li class="reveal node relative">
-          <span class="font-mono text-xs text-ink-400">2024 — 2025</span>
+          <span class="font-mono text-xs text-ink-400">Oct 2023 — 2025</span>
           <h3 class="mt-1.5 text-lg font-semibold text-white">
             <span data-i18n="exp.role.senior">Senior Backend Engineer</span> ·
             <a href="https://www.globalhitss.com" target="_blank" rel="noopener" class="underline decoration-brand-400/40 underline-offset-2 transition hover:text-brand-300 hover:decoration-brand-400">Global HITSS Brasil</a>
           </h3>
           <p class="font-mono text-xs text-ink-400" data-i18n="exp.2.location">Rio de Janeiro, Brazil</p>
           <p class="mt-2 text-sm leading-relaxed text-ink-200" data-i18n="exp.2.desc">
-            APIs and backend services in PHP (Symfony, Laravel, Lumen). Built and maintained
-            CI/CD pipelines on Jenkins with Dockerized environments, integrated messaging via
-            RabbitMQ and Kafka, and delivered cloud services on AWS and GCP following
-            SOLID, DDD and Hexagonal principles.
+            Multi-stack senior on Brazilian government platforms across multiple ministries
+            (Agriculture, Fisheries). Delivered services in PHP/Symfony, Node.js/NestJS/TypeScript
+            and Java/Spring Boot/Quarkus/JPA, with Next.js + React frontends. Engineered a complex
+            federal payment system integration estimated at 4 months and delivered in significantly
+            reduced timeframe. Operated PostgreSQL, Oracle, Redis (caching) and Elasticsearch
+            (log analysis) on AWS and GCP, with RabbitMQ + Kafka messaging and Jenkins + Docker CI/CD.
           </p>
         </li>
 
         <li class="reveal node relative">
-          <span class="font-mono text-xs text-ink-400">2022 — 2024</span>
+          <span class="font-mono text-xs text-ink-400">Oct 2020 — Sep 2023</span>
           <h3 class="mt-1.5 text-lg font-semibold text-white">
             <span data-i18n="exp.role.senior">Senior Backend Engineer</span> ·
             <a href="https://www.westwing.com.br" target="_blank" rel="noopener" class="underline decoration-brand-400/40 underline-offset-2 transition hover:text-brand-300 hover:decoration-brand-400">Westwing Brasil</a>
           </h3>
           <p class="font-mono text-xs text-ink-400" data-i18n="exp.3.location">São Paulo, Brazil</p>
           <p class="mt-2 text-sm leading-relaxed text-ink-200" data-i18n="exp.3.desc">
-            APIs and backend features across Symfony, Laravel and Node.js. Worked on
-            messaging systems (RabbitMQ, Kafka), logs and caching strategies. Applied
-            Clean Architecture and design patterns across legacy and microservices-based
-            systems — daily collaboration with multidisciplinary teams on Scrum &amp; Kanban.
+            Backend on a high-traffic e-commerce platform — millions of monthly sessions.
+            Shipped checkout, order and inventory features across Symfony, Laravel and Node.js,
+            with Vue.js frontends. Built financial systems for supplier payments, settlements
+            and dividend processing, integrated with Adyen, PIX and Salesforce. Optimized
+            production via Redis caching strategies and Elasticsearch log analysis across
+            production and staging environments.
           </p>
         </li>
 
         <li class="reveal node relative">
-          <span class="font-mono text-xs text-ink-400">2019 — 2022</span>
+          <span class="font-mono text-xs text-ink-400">Jun 2017 — Sep 2020</span>
           <h3 class="mt-1.5 text-lg font-semibold text-white">
             <span data-i18n="exp.role.senior">Senior Backend Engineer</span> · Vekttor · iComanda
           </h3>
@@ -696,26 +739,49 @@
           <div class="flex items-start justify-between">
             <div class="flex items-center gap-3">
               <span class="grid h-10 w-10 place-items-center rounded-lg bg-brand-500/15 text-brand-300">
-                <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12h3l3-9 6 18 3-9h3"/></svg>
+                <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2l8 4v6c0 5-3.5 9-8 10-4.5-1-8-5-8-10V6l8-4z"/></svg>
               </span>
               <div>
-                <h3 class="text-base font-semibold text-white">Lead Ingestion Platform</h3>
-                <p class="font-mono text-[11px] text-ink-400">Symfony · PostgreSQL · RabbitMQ</p>
+                <h3 class="text-base font-semibold text-white">Federal Treasury Payment Integration</h3>
+                <p class="font-mono text-[11px] text-ink-400">Java · Spring Boot · PostgreSQL · Oracle</p>
               </div>
             </div>
-            <span class="chip">Backend</span>
+            <span class="chip">Payments</span>
           </div>
           <p class="mt-3 text-sm leading-relaxed text-ink-200" data-i18n="proj.1.desc">
-            Event-driven platform ingesting and scoring millions of daily leads. Domain modeling
-            in DDD, async consumers with RabbitMQ, and Doctrine ORM with optimized query plans
-            — designed for horizontal scaling and clean service boundaries.
+            Complex federal payment system integration estimated at 4 months and delivered in a
+            significantly reduced timeframe. Required precise transactional integrity, idempotent
+            processing and full audit trails to meet public-sector compliance under high concurrency.
           </p>
           <ul class="mt-3 flex flex-wrap gap-1.5" data-tags>
-            <li>DDD</li><li>Hexagonal</li><li>Doctrine</li><li>AMQP</li>
+            <li>Java</li><li>Spring</li><li>Idempotency</li><li>Audit</li><li>Gov-scale</li>
           </ul>
         </article>
 
         <article class="reveal card group relative rounded-xl p-5" style="transition-delay:.06s">
+          <div class="flex items-start justify-between">
+            <div class="flex items-center gap-3">
+              <span class="grid h-10 w-10 place-items-center rounded-lg bg-brand-500/15 text-brand-300">
+                <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 18a4 4 0 0 0 0-8 6 6 0 0 0-11.5-1A4.5 4.5 0 0 0 6 18z"/></svg>
+              </span>
+              <div>
+                <h3 class="text-base font-semibold text-white">Cloud-Native SaaS Platform</h3>
+                <p class="font-mono text-[11px] text-ink-400">NestJS · TypeORM · React · AWS EKS</p>
+              </div>
+            </div>
+            <span class="chip">Platform</span>
+          </div>
+          <p class="mt-3 text-sm leading-relaxed text-ink-200" data-i18n="proj.2.desc">
+            Side-project SaaS platform built end-to-end with NestJS + TypeORM on PostgreSQL,
+            Redis caching and MinIO storage on the backend, React frontend, deployed to
+            AWS EKS / RDS / ECR with GitLab CI pipelines and infrastructure as code.
+          </p>
+          <ul class="mt-3 flex flex-wrap gap-1.5" data-tags>
+            <li>NestJS</li><li>TypeORM</li><li>EKS</li><li>GitLab CI</li><li>MinIO</li>
+          </ul>
+        </article>
+
+        <article class="reveal card group relative rounded-xl p-5" style="transition-delay:.12s">
           <div class="flex items-start justify-between">
             <div class="flex items-center gap-3">
               <span class="grid h-10 w-10 place-items-center rounded-lg bg-brand-500/15 text-brand-300">
@@ -728,7 +794,7 @@
             </div>
             <span class="chip">Payments</span>
           </div>
-          <p class="mt-3 text-sm leading-relaxed text-ink-200" data-i18n="proj.2.desc">
+          <p class="mt-3 text-sm leading-relaxed text-ink-200" data-i18n="proj.3.desc">
             Real-time fiscal invoice issuance integrated with the Brazilian SAT protocol,
             handling thousands of daily transactions for restaurant chains. Built for
             reliability under flaky network conditions with idempotent retries and audit trails.
@@ -738,7 +804,30 @@
           </ul>
         </article>
 
-        <article class="reveal card group relative rounded-xl p-5" style="transition-delay:.12s">
+        <article class="reveal card group relative rounded-xl p-5" style="transition-delay:.18s">
+          <div class="flex items-start justify-between">
+            <div class="flex items-center gap-3">
+              <span class="grid h-10 w-10 place-items-center rounded-lg bg-brand-500/15 text-brand-300">
+                <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9l9-6 9 6v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></svg>
+              </span>
+              <div>
+                <h3 class="text-base font-semibold text-white">Agricultural Marketplace Platform</h3>
+                <p class="font-mono text-[11px] text-ink-400">NestJS · Next.js · PostgreSQL · Redis</p>
+              </div>
+            </div>
+            <span class="chip">Marketplace</span>
+          </div>
+          <p class="mt-3 text-sm leading-relaxed text-ink-200" data-i18n="proj.4.desc">
+            Multi-tenant marketplace platform for the Brazilian Ministry of Agriculture.
+            NestJS backend services, Next.js storefront and Redis caching for fast catalog
+            browsing — designed to onboard suppliers and surface public procurement at national scale.
+          </p>
+          <ul class="mt-3 flex flex-wrap gap-1.5" data-tags>
+            <li>Multi-tenant</li><li>NestJS</li><li>Next.js</li><li>Redis</li>
+          </ul>
+        </article>
+
+        <article class="reveal card group relative rounded-xl p-5">
           <div class="flex items-start justify-between">
             <div class="flex items-center gap-3">
               <span class="grid h-10 w-10 place-items-center rounded-lg bg-brand-500/15 text-brand-300">
@@ -751,7 +840,7 @@
             </div>
             <span class="chip">Integrations</span>
           </div>
-          <p class="mt-3 text-sm leading-relaxed text-ink-200" data-i18n="proj.3.desc">
+          <p class="mt-3 text-sm leading-relaxed text-ink-200" data-i18n="proj.5.desc">
             Unified messaging layer bridging WhatsApp Business API and internal CRM workflows.
             Throttled outbound pipelines, webhook fan-out and delivery guarantees with
             queue-based backpressure, logging and observability built in from day one.
@@ -761,7 +850,7 @@
           </ul>
         </article>
 
-        <article class="reveal card group relative rounded-xl p-5" style="transition-delay:.18s">
+        <article class="reveal card group relative rounded-xl p-5" style="transition-delay:.06s">
           <div class="flex items-start justify-between">
             <div class="flex items-center gap-3">
               <span class="grid h-10 w-10 place-items-center rounded-lg bg-brand-500/15 text-brand-300">
@@ -774,7 +863,7 @@
             </div>
             <span class="chip">Distributed</span>
           </div>
-          <p class="mt-3 text-sm leading-relaxed text-ink-200" data-i18n="proj.4.desc">
+          <p class="mt-3 text-sm leading-relaxed text-ink-200" data-i18n="proj.6.desc">
             Self-healing synchronization server for POS terminals in offline-capable
             environments. Conflict-resilient state merging, heartbeat-based peer discovery
             and automatic reconciliation when connectivity returns — built for the real world.
