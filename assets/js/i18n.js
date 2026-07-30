@@ -80,6 +80,7 @@ export const translations = {
     'contact.languages': 'Languages',
 
     'footer.crafted': 'Crafted with HTML, Tailwind CSS and vanilla JS.',
+    'footer.source': 'View source',
     'footer.tagline': 'from the Amazon to the world',
   },
 
@@ -162,6 +163,7 @@ export const translations = {
     'contact.languages': 'Idiomas',
 
     'footer.crafted': 'Feito com HTML, Tailwind CSS e JS puro.',
+    'footer.source': 'Ver código-fonte',
     'footer.tagline': 'da Amazônia para o mundo',
   },
 
@@ -244,6 +246,7 @@ export const translations = {
     'contact.languages': 'Idiomas',
 
     'footer.crafted': 'Hecho con HTML, Tailwind CSS y JS puro.',
+    'footer.source': 'Ver código fuente',
     'footer.tagline': 'de la Amazonía al mundo',
   },
 };
