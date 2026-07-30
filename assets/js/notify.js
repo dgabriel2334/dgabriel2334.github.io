@@ -1,25 +1,18 @@
 /**
  * Portfolio visit notifier — pings ntfy.sh so the owner gets a push
- * notification on their phone whenever someone opens the site, triggers
- * a high-intent action, or finishes a session.
- *
- * Three layers:
- *   1) Open  — fires immediately, every page load
- *   2) Engagement — fires per high-intent click/scroll (deduped per load)
- *   3) Session summary — fires on pagehide with aggregated metrics
- *
- * Privacy posture:
- *   - No PII collected; only browser/device/network signals visible to any site
- *   - Uses ipapi.co for country/city (cached in sessionStorage)
- *   - Owner can mute themselves via ?owner=1 (un-mute with ?owner=0)
+ * notification whenever someone opens the site, triggers a high-intent
+ * action, or finishes a session. No PII collected. Owner can mute
+ * themselves via ?owner=1 (un-mute with ?owner=0).
  */
+import { getGeo } from './geo.js';
+
 (() => {
   'use strict';
 
   // ============================================================
   //  CONFIG
   // ============================================================
-  const NTFY_TOPIC = 'dgabriel-portfolio-x9k2qf3p';
+  const NTFY_TOPIC = 'dgabriel-portfolio-0b289c9f71';
   if (!NTFY_TOPIC || NTFY_TOPIC === 'REPLACE_WITH_YOUR_TOPIC') return;
   const NTFY_URL = `https://ntfy.sh/${NTFY_TOPIC}`;
 
@@ -173,7 +166,6 @@
   window.addEventListener('blur',  accumulateActive);
   window.addEventListener('focus', () => { session.activeStart = performance.now(); });
 
-  // Scroll depth
   const updateScroll = () => {
     const h = document.documentElement;
     const total = h.scrollHeight - window.innerHeight;
@@ -183,7 +175,6 @@
   };
   window.addEventListener('scroll', updateScroll, { passive: true });
 
-  // Sections viewed
   if ('IntersectionObserver' in window) {
     const sectionIO = new IntersectionObserver((entries) => {
       entries.forEach((e) => {
@@ -197,8 +188,14 @@
   //  Layer 1 — open notification (every page load)
   // ============================================================
   const FIRST_VISIT_KEY = 'dg-notify-first';
+  const OPEN_FIRED_KEY = 'dg-notify-open-fired-v1';
 
   const fireOpen = (geo) => {
+    // One-shot per tab session: reloading the same tab won't re-fire the
+    // push, but a genuinely new tab/session (sessionStorage is per-tab) will.
+    if (sessionStorage.getItem(OPEN_FIRED_KEY)) return;
+    sessionStorage.setItem(OPEN_FIRED_KEY, '1');
+
     const isFirst = !localStorage.getItem(FIRST_VISIT_KEY);
     if (isFirst) localStorage.setItem(FIRST_VISIT_KEY, new Date().toISOString());
 
@@ -229,72 +226,7 @@
     );
   };
 
-  // Geo lookup — race providers in parallel so the slowest never blocks
-  // the others. Each fetch has a 3s hard timeout. Phase 1 races full-geo
-  // providers; Phase 2 races IP-only providers as a fallback.
-  const TIMEOUT_MS = 3000;
-  const safeFetch = (url) => {
-    const opts = { cache: 'force-cache' };
-    try { opts.signal = AbortSignal.timeout(TIMEOUT_MS); } catch { /* old browsers */ }
-    return fetch(url, opts);
-  };
-
-  // Promise.any treats null/undefined as success. Force rejection on no-data
-  // so the race only resolves when SOMETHING usable comes back.
-  const requireData = (p) => p.then((v) => (v ? v : Promise.reject('no-data')));
-
-  const fetchIpinfo = () =>
-    safeFetch('https://ipinfo.io/json')
-      .then((r) => (r.ok ? r.json() : null))
-      .then((d) => (d && d.ip ? {
-        country: d.country, region: d.region, city: d.city,
-        code: d.country, ip: d.ip, org: d.org,
-      } : null));
-
-  const fetchIpapi = () =>
-    safeFetch('https://ipapi.co/json/')
-      .then((r) => (r.ok ? r.json() : null))
-      .then((d) => (d && d.ip && !d.error ? {
-        country: d.country_name, region: d.region, city: d.city,
-        code: d.country_code, ip: d.ip, org: d.org,
-      } : null));
-
-  const fetchIpify = () =>
-    safeFetch('https://api.ipify.org?format=json')
-      .then((r) => (r.ok ? r.json() : null))
-      .then((d) => (d && d.ip ? { ip: d.ip } : null));
-
-  const fetchIcanhazip = () =>
-    safeFetch('https://ipv4.icanhazip.com')
-      .then((r) => (r.ok ? r.text() : null))
-      .then((t) => {
-        const ip = (t || '').trim();
-        return /^\d{1,3}(\.\d{1,3}){3}$/.test(ip) ? { ip } : null;
-      });
-
-  const raceFullGeo = () => Promise.any([
-    requireData(fetchIpinfo()),
-    requireData(fetchIpapi()),
-  ]);
-
-  const raceIpOnly = () => Promise.any([
-    requireData(fetchIpify()),
-    requireData(fetchIcanhazip()),
-  ]);
-
-  const cachedGeo = sessionStorage.getItem('dg-notify-geo-v2');
-  if (cachedGeo) {
-    try { fireOpen(JSON.parse(cachedGeo)); }
-    catch { fireOpen(null); }
-  } else {
-    raceFullGeo()
-      .catch(() => raceIpOnly())
-      .catch(() => null)
-      .then((geo) => {
-        if (geo) sessionStorage.setItem('dg-notify-geo-v2', JSON.stringify(geo));
-        fireOpen(geo);
-      });
-  }
+  getGeo().then(fireOpen);
 
   // ============================================================
   //  Layer 2 — engagement signals (each fires once per page load)

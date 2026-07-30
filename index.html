@@ -4,20 +4,44 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="theme-color" content="#0b1220" />
-  <meta name="description" content="Dário Gabriel — Senior Backend Engineer. 8+ years shipping payments, distributed systems and government-scale backends with PHP, Node.js and Java." />
+  <meta name="description" content="Dário Gabriel — Senior Backend Engineer. 9+ years shipping payments, distributed systems and government-scale backends with PHP, Node.js, Java and Go." />
   <link rel="icon" type="image/jpeg" href="profile.jpg" />
   <link rel="apple-touch-icon" href="profile.jpg" />
+  <link rel="canonical" href="https://dgabriel2334.github.io/" />
+  <meta name="robots" content="index, follow" />
   <meta name="author" content="Dário Gabriel" />
 
   <meta property="og:title" content="Dário Gabriel — Senior Backend Engineer" />
   <meta property="og:type" content="website" />
   <meta property="og:description" content="Backend, distributed systems and cloud-native services." />
+  <meta property="og:image" content="https://dgabriel2334.github.io/profile.jpg" />
+  <meta property="og:url" content="https://dgabriel2334.github.io/" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:locale:alternate" content="pt_BR" />
+  <meta property="og:locale:alternate" content="es_ES" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Dário Gabriel — Senior Backend Engineer" />
+  <meta name="twitter:description" content="Backend, distributed systems and cloud-native services." />
+  <meta name="twitter:image" content="https://dgabriel2334.github.io/profile.jpg" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Dário Gabriel",
+    "jobTitle": "Senior Backend Engineer",
+    "worksFor": { "@type": "Organization", "name": "HITSS Brasil" },
+    "url": "https://dgabriel2334.github.io/",
+    "sameAs": ["https://github.com/dgabriel2334"]
+  }
+  </script>
 
   <title>Dário Gabriel — Senior Backend Engineer</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;4Coloca00;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
 
   <!-- Tailwind via CDN with project-scoped config (brand palette + motion) -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -79,75 +103,8 @@
     };
   </script>
 
-  <!-- Minimal project-level CSS: surface treatments the utility layer doesn't give for free -->
-  <style>
-    html { font-family: 'Inter', system-ui, sans-serif; }
-
-    /* Accent gradient used sparingly on a few heading fragments */
-    .gradient-text {
-      background-image: linear-gradient(100deg, #8ec7ff 0%, #2f83f4 50%, #154fae 100%);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-    }
-
-    /* Atmospheric background: radial brand glow + subtle grid on dark ink */
-    .atmosphere {
-      background:
-        radial-gradient(60rem 40rem at 80% -10%, rgba(47,131,244,.18), transparent 60%),
-        radial-gradient(50rem 30rem at 10% 10%, rgba(20,68,140,.25), transparent 60%),
-        linear-gradient(to right, rgba(148,163,184,.06) 1px, transparent 1px) 0 0 / 36px 36px,
-        linear-gradient(to bottom, rgba(148,163,184,.06) 1px, transparent 1px) 0 0 / 36px 36px;
-    }
-
-    /* Hairline dividers that adapt to the dark surface */
-    .hairline {
-      background: linear-gradient(to right, transparent, rgba(148,163,184,.25), transparent);
-      height: 1px;
-    }
-
-    /* Scroll-reveal primitives consumed by IntersectionObserver in main.js */
-    .reveal { opacity: 0; transform: translateY(18px); transition: opacity .7s cubic-bezier(.2,.7,.2,1), transform .7s cubic-bezier(.2,.7,.2,1); }
-    .reveal.is-visible { opacity: 1; transform: none; }
-
-    /* Timeline connector + node — centered on the ol's left border (pl-8 offset) */
-    .node { position: relative; }
-    .node::before {
-      content: '';
-      position: absolute;
-      left: calc(-2rem - 0.5rem - 0.5px); /* pl-8 + half dot + half border */
-      top: 0.5rem;
-      width: 1rem; height: 1rem;
-      border-radius: 9999px;
-      background: #0b1220;
-      border: 2px solid #2f83f4;
-      box-shadow: 0 0 0 4px rgba(47,131,244,.15);
-    }
-
-    /* Card hover lift + glow */
-    .card {
-      background: linear-gradient(180deg, rgba(30,41,59,.5) 0%, rgba(15,23,42,.5) 100%);
-      border: 1px solid rgba(148,163,184,.12);
-      transition: transform .3s ease, border-color .3s ease, box-shadow .3s ease;
-    }
-    .card:hover { transform: translateY(-3px); border-color: rgba(47,131,244,.45); box-shadow: 0 24px 48px -24px rgba(47,131,244,.35); }
-
-    /* Tag chips (used by stack + project badges) */
-    .chip {
-      display: inline-flex; align-items: center;
-      padding: 0.25rem 0.625rem;
-      border-radius: 9999px;
-      font-size: 0.72rem;
-      font-family: 'JetBrains Mono', ui-monospace, monospace;
-      background: rgba(47,131,244,.08);
-      border: 1px solid rgba(47,131,244,.25);
-      color: #8ec7ff;
-    }
-
-    /* Hide scrollbar on the horizontally-scrollable code tab strip */
-    .no-scrollbar::-webkit-scrollbar { display: none; }
-    .no-scrollbar { scrollbar-width: none; -ms-overflow-style: none; }
-  </style>
+  <!-- Project-level CSS: surface treatments the utility layer doesn't give for free -->
+  <link rel="stylesheet" href="assets/css/style.css" />
 </head>
 
 <body class="bg-ink-900 text-ink-100 antialiased selection:bg-brand-500/30 selection:text-brand-100">
@@ -159,7 +116,7 @@
 
   <!-- ============================ NAV ============================ -->
   <header class="fixed inset-x-0 top-0 z-40 border-b border-white/5 bg-ink-900/70 backdrop-blur-xl">
-    <nav aria-label="Primary" class="mx-auto flex max-w-5xl items-center justify-between px-4 py-3 sm:px-6">
+    <nav aria-label="Primary" class="mx-auto flex max-w-6xl items-center justify-between px-4 py-3 sm:px-6">
       <a href="#home" class="group inline-flex items-center gap-2">
         <img src="profile.jpg" alt="Dário Gabriel" width="32" height="32"
              class="h-8 w-8 rounded-full object-cover ring-1 ring-white/10 transition group-hover:ring-brand-400/60" />
@@ -200,14 +157,14 @@
     </nav>
 
     <div id="mobile-menu" hidden class="border-t border-white/5 bg-ink-900/95 backdrop-blur md:hidden">
-      <ul class="mx-auto flex max-w-5xl flex-col px-4 py-2 sm:px-6">
+      <ul class="mx-auto flex max-w-6xl flex-col px-4 py-2 sm:px-6">
         <li><a data-i18n="nav.about"      href="#about"      class="block rounded-md px-3 py-2 text-ink-200 hover:bg-white/5 hover:text-white">About</a></li>
         <li><a data-i18n="nav.stack"      href="#stack"      class="block rounded-md px-3 py-2 text-ink-200 hover:bg-white/5 hover:text-white">Stack</a></li>
         <li><a data-i18n="nav.experience" href="#experience" class="block rounded-md px-3 py-2 text-ink-200 hover:bg-white/5 hover:text-white">Experience</a></li>
         <li><a data-i18n="nav.projects"   href="#projects"   class="block rounded-md px-3 py-2 text-ink-200 hover:bg-white/5 hover:text-white">Projects</a></li>
         <li><a data-i18n="nav.contact"    href="#contact"    class="block rounded-md px-3 py-2 text-ink-200 hover:bg-white/5 hover:text-white">Contact</a></li>
       </ul>
-      <div role="group" aria-label="Language" class="mx-auto flex max-w-5xl items-center gap-0.5 border-t border-white/5 px-4 py-2 sm:px-6">
+      <div role="group" aria-label="Language" class="mx-auto flex max-w-6xl items-center gap-0.5 border-t border-white/5 px-4 py-2 sm:px-6">
         <button type="button" data-lang="en" aria-label="English" class="inline-flex h-8 w-8 items-center justify-center rounded text-base hover:bg-white/10">🇺🇸</button>
         <button type="button" data-lang="es" aria-label="Español" class="inline-flex h-8 w-8 items-center justify-center rounded text-base hover:bg-white/10">🇪🇸</button>
         <button type="button" data-lang="pt" aria-label="Português" class="inline-flex h-8 w-8 items-center justify-center rounded text-base hover:bg-white/10">🇧🇷</button>
@@ -221,8 +178,8 @@
     <section id="home" class="relative overflow-hidden">
       <div class="atmosphere absolute inset-0 -z-10"></div>
 
-      <div class="mx-auto grid max-w-5xl grid-cols-1 items-center gap-8 px-4 pb-10 pt-20 sm:px-6 lg:grid-cols-12 lg:gap-8 lg:pb-14 lg:pt-24">
-        <div class="lg:col-span-7">
+      <div class="mx-auto grid max-w-6xl grid-cols-1 items-center gap-8 px-4 pb-10 pt-20 sm:px-6 lg:grid-cols-12 lg:gap-8 lg:pb-14 lg:pt-24">
+        <div class="lg:col-span-6">
           <p class="inline-flex items-center gap-2 rounded-full border border-brand-400/30 bg-brand-500/10 px-3 py-1 font-mono text-[11px] uppercase tracking-widest text-brand-200">
             <span class="relative flex h-1.5 w-1.5">
               <span class="absolute inline-flex h-full w-full animate-pulse-ring rounded-full bg-brand-400"></span>
@@ -245,7 +202,7 @@
             I design and ship distributed systems, APIs and event-driven platforms with
             <span class="font-medium text-white">PHP, Symfony and Node.js</span> — grounded in
             <span class="font-medium text-white">DDD, Hexagonal Architecture</span> and the SOLID principles.
-            Seven years shipping production software with international teams.
+            9+ years shipping production software with international teams.
           </p>
 
           <p class="mt-3 max-w-xl text-sm leading-relaxed text-ink-200 sm:text-base" data-i18n-html="hero.p2">
@@ -269,11 +226,11 @@
           <dl class="mt-7 grid max-w-md grid-cols-3 gap-4 border-t border-white/5 pt-4">
             <div>
               <dt class="font-mono text-[10px] uppercase tracking-widest text-ink-400" data-i18n="hero.stats.exp">Experience</dt>
-              <dd class="mt-0.5 text-xl font-semibold text-white">8+ <span class="text-xs font-medium text-ink-400" data-i18n="hero.stats.yrs">yrs</span></dd>
+              <dd class="mt-0.5 text-xl font-semibold text-white">9+ <span class="text-xs font-medium text-ink-400" data-i18n="hero.stats.yrs">yrs</span></dd>
             </div>
             <div>
               <dt class="font-mono text-[10px] uppercase tracking-widest text-ink-400" data-i18n="hero.stats.current">Current</dt>
-              <dd class="mt-0.5 text-base font-semibold text-white">Leadtech <span class="text-xs font-normal text-ink-400">(via Ciklum)</span></dd>
+              <dd class="mt-0.5 text-base font-semibold text-white">HITSS Brasil <span class="text-xs font-normal text-ink-400">(Brasília)</span></dd>
             </div>
             <div>
               <dt class="font-mono text-[10px] uppercase tracking-widest text-ink-400" data-i18n="hero.stats.based">Based in</dt>
@@ -283,34 +240,51 @@
         </div>
 
         <!-- Hero code card: visual anchor emphasising backend/architecture focus -->
-        <aside class="lg:col-span-5">
+        <aside class="lg:col-span-6">
           <div class="relative">
             <div class="absolute -inset-3 rounded-2xl bg-gradient-to-br from-brand-400/30 via-brand-600/10 to-transparent blur-2xl"></div>
 
             <div class="relative overflow-hidden rounded-xl border border-white/10 bg-ink-950/70 shadow-card backdrop-blur">
-              <header class="border-b border-white/5 bg-white/5">
+              <div class="border-b border-white/5 bg-white/5">
                 <div class="flex items-center gap-1.5 px-3 pt-2">
                   <span class="h-2.5 w-2.5 rounded-full bg-rose-400/80"></span>
                   <span class="h-2.5 w-2.5 rounded-full bg-amber-400/80"></span>
                   <span class="h-2.5 w-2.5 rounded-full bg-emerald-400/80"></span>
                 </div>
+                <div role="tablist" aria-label="Category"
+                     class="no-scrollbar flex w-full items-center gap-1 overflow-x-auto whitespace-nowrap px-3 pt-1.5 font-mono text-[11px] uppercase tracking-widest">
+                  <button role="tab" aria-selected="true"  data-code-category="backend"  class="shrink-0 rounded px-2 py-1 text-brand-300 bg-brand-500/10 transition">Backend</button>
+                  <button role="tab" aria-selected="false" data-code-category="frontend" class="shrink-0 rounded px-2 py-1 text-ink-400 transition hover:bg-white/5 hover:text-white">Frontend</button>
+                  <button role="tab" aria-selected="false" data-code-category="ops"      class="shrink-0 rounded px-2 py-1 text-ink-400 transition hover:bg-white/5 hover:text-white">Ops</button>
+                </div>
+
                 <div role="tablist" aria-label="Code language"
                      class="no-scrollbar flex w-full items-center gap-0.5 overflow-x-auto whitespace-nowrap px-3 pb-2 pt-1.5 font-mono text-[11px]">
-                  <button role="tab" aria-selected="true"  data-code-tab="php"    class="shrink-0 rounded px-2 py-1 text-white bg-white/10 transition">PHP</button>
-                  <button role="tab" aria-selected="false" data-code-tab="node"   class="shrink-0 rounded px-2 py-1 text-ink-300 transition hover:bg-white/5 hover:text-white">Nest</button>
-                  <button role="tab" aria-selected="false" data-code-tab="react"  class="shrink-0 rounded px-2 py-1 text-ink-300 transition hover:bg-white/5 hover:text-white">React</button>
-                  <button role="tab" aria-selected="false" data-code-tab="java"   class="shrink-0 rounded px-2 py-1 text-ink-300 transition hover:bg-white/5 hover:text-white">Quarkus</button>
-                  <button role="tab" aria-selected="false" data-code-tab="sql"    class="shrink-0 rounded px-2 py-1 text-ink-300 transition hover:bg-white/5 hover:text-white">SQL</button>
-                  <button role="tab" aria-selected="false" data-code-tab="docker" class="shrink-0 rounded px-2 py-1 text-ink-300 transition hover:bg-white/5 hover:text-white">Docker</button>
-                  <button role="tab" aria-selected="false" data-code-tab="k8s"    class="shrink-0 rounded px-2 py-1 text-ink-300 transition hover:bg-white/5 hover:text-white">K8s</button>
-                  <button role="tab" aria-selected="false" data-code-tab="gitlab" class="shrink-0 rounded px-2 py-1 text-ink-300 transition hover:bg-white/5 hover:text-white">GitLab CI</button>
+                  <button role="tab" aria-selected="true"  data-code-tab="php"    data-category="backend"  class="shrink-0 rounded px-2 py-1 text-white bg-white/10 transition">PHP</button>
+                  <button role="tab" aria-selected="false" data-code-tab="node"   data-category="backend"  class="shrink-0 rounded px-2 py-1 text-ink-300 transition hover:bg-white/5 hover:text-white">Node</button>
+                  <button role="tab" aria-selected="false" data-code-tab="java"   data-category="backend"  class="shrink-0 rounded px-2 py-1 text-ink-300 transition hover:bg-white/5 hover:text-white">Java</button>
+                  <button role="tab" aria-selected="false" data-code-tab="go"     data-category="backend"  class="shrink-0 rounded px-2 py-1 text-ink-300 transition hover:bg-white/5 hover:text-white">Go</button>
+                  <button role="tab" aria-selected="false" data-code-tab="sql"    data-category="backend"  class="shrink-0 rounded px-2 py-1 text-ink-300 transition hover:bg-white/5 hover:text-white">SQL</button>
+                  <button role="tab" aria-selected="false" data-code-tab="react"  data-category="frontend" class="shrink-0 rounded px-2 py-1 text-ink-300 transition hover:bg-white/5 hover:text-white">React</button>
+                  <button role="tab" aria-selected="false" data-code-tab="vue"     data-category="frontend" class="shrink-0 rounded px-2 py-1 text-ink-300 transition hover:bg-white/5 hover:text-white">Vue3</button>
+                  <button role="tab" aria-selected="false" data-code-tab="angular" data-category="frontend" class="shrink-0 rounded px-2 py-1 text-ink-300 transition hover:bg-white/5 hover:text-white">Angular</button>
+                  <button role="tab" aria-selected="false" data-code-tab="docker" data-category="ops"      class="shrink-0 rounded px-2 py-1 text-ink-300 transition hover:bg-white/5 hover:text-white">Docker</button>
+                  <button role="tab" aria-selected="false" data-code-tab="k8s"    data-category="ops"      class="shrink-0 rounded px-2 py-1 text-ink-300 transition hover:bg-white/5 hover:text-white">K8s</button>
+                  <button role="tab" aria-selected="false" data-code-tab="gitlab" data-category="ops"      class="shrink-0 rounded px-2 py-1 text-ink-300 transition hover:bg-white/5 hover:text-white">GitLab CI</button>
                 </div>
-              </header>
+              </div>
 
-              <div class="relative min-h-[20rem]">
+              <div class="relative h-[32rem] overflow-y-auto">
                 <!-- PHP -->
                 <div data-code-panel="php">
-                  <div class="border-b border-white/5 bg-white/[0.03] px-4 py-1.5 font-mono text-[11px] text-ink-300">LeadProcessor.php</div>
+                  <div role="tablist" aria-label="PHP framework"
+                       class="no-scrollbar flex w-full items-center gap-0.5 overflow-x-auto whitespace-nowrap border-b border-white/5 bg-white/[0.03] px-3 py-1.5 font-mono text-[11px]">
+                    <button role="tab" aria-selected="true"  data-php-file="symfony" class="shrink-0 rounded px-2 py-0.5 text-white bg-white/10 transition">SymfonyLeadProcessor.php</button>
+                    <button role="tab" aria-selected="false" data-php-file="laravel" class="shrink-0 rounded px-2 py-0.5 text-ink-300 transition hover:bg-white/5 hover:text-white">LaravelLeadProcessor.php</button>
+                    <button role="tab" aria-selected="false" data-php-file="yii"     class="shrink-0 rounded px-2 py-0.5 text-ink-300 transition hover:bg-white/5 hover:text-white">YiiLeadProcessor.php</button>
+                  </div>
+
+                  <div data-php-file-panel="symfony">
                   <pre class="overflow-x-auto px-4 py-4 font-mono text-[12.5px] leading-relaxed text-ink-100"><code><span class="text-brand-300">namespace</span> App\Leads\Application;
 
 <span class="text-brand-300">final class</span> <span class="text-white">LeadProcessor</span>
@@ -330,11 +304,76 @@
         <span class="text-amber-300">$this</span>->bus-><span class="text-emerald-300">publish</span>(<span class="text-brand-300">new</span> LeadIngested(<span class="text-amber-300">$lead</span>->id()));
     }
 }</code></pre>
+                  </div>
+
+                  <div data-php-file-panel="laravel" hidden>
+                  <pre class="overflow-x-auto px-4 py-4 font-mono text-[12.5px] leading-relaxed text-ink-100"><code><span class="text-brand-300">namespace</span> App\Http\Controllers;
+
+<span class="text-brand-300">use</span> App\Models\Lead;
+<span class="text-brand-300">use</span> App\Services\ScoringService;
+<span class="text-brand-300">use</span> App\Events\LeadIngested;
+<span class="text-brand-300">use</span> Illuminate\Http\Request;
+
+<span class="text-brand-300">class</span> <span class="text-white">LeadController</span> <span class="text-brand-300">extends</span> Controller
+{
+    <span class="text-brand-300">public function</span> <span class="text-emerald-300">__construct</span>(
+        <span class="text-brand-300">private readonly</span> ScoringService <span class="text-amber-300">$scoring</span>,
+    ) {}
+
+    <span class="text-brand-300">public function</span> <span class="text-emerald-300">ingest</span>(Request <span class="text-amber-300">$request</span>)
+    {
+        <span class="text-amber-300">$lead</span>  = Lead::<span class="text-emerald-300">create</span>(<span class="text-amber-300">$request</span>->validated());
+        <span class="text-amber-300">$score</span> = <span class="text-amber-300">$this</span>->scoring-><span class="text-emerald-300">evaluate</span>(<span class="text-amber-300">$lead</span>);
+
+        <span class="text-amber-300">$lead</span>-><span class="text-emerald-300">update</span>([<span class="text-emerald-300">'score'</span> => <span class="text-amber-300">$score</span>]);
+        <span class="text-emerald-300">event</span>(<span class="text-brand-300">new</span> LeadIngested(<span class="text-amber-300">$lead</span>->id));
+
+        <span class="text-brand-300">return</span> <span class="text-emerald-300">response</span>()-><span class="text-emerald-300">json</span>([<span class="text-emerald-300">'id'</span> => <span class="text-amber-300">$lead</span>->id, <span class="text-emerald-300">'score'</span> => <span class="text-amber-300">$score</span>]);
+    }
+}</code></pre>
+                  </div>
+
+                  <div data-php-file-panel="yii" hidden>
+                  <pre class="overflow-x-auto px-4 py-4 font-mono text-[12.5px] leading-relaxed text-ink-100"><code><span class="text-brand-300">namespace</span> app\controllers;
+
+<span class="text-brand-300">use</span> Yii;
+<span class="text-brand-300">use</span> app\models\Lead;
+<span class="text-brand-300">use</span> app\services\ScoringService;
+<span class="text-brand-300">use</span> yii\web\Controller;
+<span class="text-brand-300">use</span> yii\web\Response;
+
+<span class="text-brand-300">class</span> <span class="text-white">LeadController</span> <span class="text-brand-300">extends</span> Controller
+{
+    <span class="text-brand-300">public function</span> <span class="text-emerald-300">actionIngest</span>()
+    {
+        Yii::<span class="text-amber-300">$app</span>->response->format = Response::FORMAT_JSON;
+
+        <span class="text-amber-300">$lead</span> = <span class="text-brand-300">new</span> Lead();
+        <span class="text-amber-300">$lead</span>-><span class="text-emerald-300">load</span>(Yii::<span class="text-amber-300">$app</span>->request->post(), <span class="text-emerald-300">''</span>);
+        <span class="text-amber-300">$lead</span>-><span class="text-emerald-300">save</span>();
+
+        <span class="text-amber-300">$scoring</span> = <span class="text-brand-300">new</span> ScoringService();
+        <span class="text-amber-300">$score</span>   = <span class="text-amber-300">$scoring</span>-><span class="text-emerald-300">evaluate</span>(<span class="text-amber-300">$lead</span>);
+
+        <span class="text-amber-300">$lead</span>->score = <span class="text-amber-300">$score</span>;
+        <span class="text-amber-300">$lead</span>-><span class="text-emerald-300">save</span>();
+
+        <span class="text-brand-300">return</span> [<span class="text-emerald-300">'id'</span> => <span class="text-amber-300">$lead</span>->id, <span class="text-emerald-300">'score'</span> => <span class="text-amber-300">$score</span>];
+    }
+}</code></pre>
+                  </div>
                 </div>
 
                 <!-- NestJS -->
                 <div data-code-panel="node" hidden>
-                  <div class="border-b border-white/5 bg-white/[0.03] px-4 py-1.5 font-mono text-[11px] text-ink-300">leads.controller.ts</div>
+                  <div role="tablist" aria-label="Node framework"
+                       class="no-scrollbar flex w-full items-center gap-0.5 overflow-x-auto whitespace-nowrap border-b border-white/5 bg-white/[0.03] px-3 py-1.5 font-mono text-[11px]">
+                    <button role="tab" aria-selected="true"  data-node-file="nest"    class="shrink-0 rounded px-2 py-0.5 text-white bg-white/10 transition">NestLeadsController.ts</button>
+                    <button role="tab" aria-selected="false" data-node-file="express" class="shrink-0 rounded px-2 py-0.5 text-ink-300 transition hover:bg-white/5 hover:text-white">ExpressLeadsRouter.ts</button>
+                    <button role="tab" aria-selected="false" data-node-file="fastify" class="shrink-0 rounded px-2 py-0.5 text-ink-300 transition hover:bg-white/5 hover:text-white">FastifyLeadsRoute.ts</button>
+                  </div>
+
+                  <div data-node-file-panel="nest">
                   <pre class="overflow-x-auto px-4 py-4 font-mono text-[12.5px] leading-relaxed text-ink-100"><code><span class="text-brand-300">import</span> { Body, Controller, Post, UseGuards } <span class="text-brand-300">from</span> <span class="text-emerald-300">'@nestjs/common'</span>;
 <span class="text-brand-300">import</span> { ApiTags } <span class="text-brand-300">from</span> <span class="text-emerald-300">'@nestjs/swagger'</span>;
 <span class="text-brand-300">import</span> { JwtGuard } <span class="text-brand-300">from</span> <span class="text-emerald-300">'./auth/jwt.guard'</span>;
@@ -353,11 +392,47 @@
     <span class="text-brand-300">return</span> { id: lead.id, score: lead.score };
   }
 }</code></pre>
+                  </div>
+
+                  <div data-node-file-panel="express" hidden>
+                  <pre class="overflow-x-auto px-4 py-4 font-mono text-[12.5px] leading-relaxed text-ink-100"><code><span class="text-brand-300">import</span> { Router } <span class="text-brand-300">from</span> <span class="text-emerald-300">'express'</span>;
+<span class="text-brand-300">import</span> { LeadsService } <span class="text-brand-300">from</span> <span class="text-emerald-300">'./leads.service'</span>;
+
+<span class="text-brand-300">const</span> router = <span class="text-emerald-300">Router</span>();
+<span class="text-brand-300">const</span> leads  = <span class="text-brand-300">new</span> LeadsService();
+
+router.<span class="text-emerald-300">post</span>(<span class="text-emerald-300">'/leads'</span>, <span class="text-brand-300">async</span> (req, res) => {
+  <span class="text-brand-300">const</span> lead = <span class="text-brand-300">await</span> leads.<span class="text-emerald-300">ingest</span>(req.body);
+  res.<span class="text-emerald-300">json</span>({ id: lead.id, score: lead.score });
+});
+
+<span class="text-brand-300">export default</span> router;</code></pre>
+                  </div>
+
+                  <div data-node-file-panel="fastify" hidden>
+                  <pre class="overflow-x-auto px-4 py-4 font-mono text-[12.5px] leading-relaxed text-ink-100"><code><span class="text-brand-300">import</span> <span class="text-white">type</span> { FastifyInstance } <span class="text-brand-300">from</span> <span class="text-emerald-300">'fastify'</span>;
+<span class="text-brand-300">import</span> { LeadsService } <span class="text-brand-300">from</span> <span class="text-emerald-300">'./leads.service'</span>;
+
+<span class="text-brand-300">export async function</span> <span class="text-emerald-300">leadsRoutes</span>(app: FastifyInstance) {
+  <span class="text-brand-300">const</span> leads = <span class="text-brand-300">new</span> LeadsService();
+
+  app.<span class="text-emerald-300">post</span>(<span class="text-emerald-300">'/leads'</span>, <span class="text-brand-300">async</span> (request, reply) => {
+    <span class="text-brand-300">const</span> lead = <span class="text-brand-300">await</span> leads.<span class="text-emerald-300">ingest</span>(request.body <span class="text-brand-300">as</span> IngestLead);
+    <span class="text-brand-300">return</span> reply.<span class="text-emerald-300">send</span>({ id: lead.id, score: lead.score });
+  });
+}</code></pre>
+                  </div>
                 </div>
 
                 <!-- React page -->
                 <div data-code-panel="react" hidden>
-                  <div class="border-b border-white/5 bg-white/[0.03] px-4 py-1.5 font-mono text-[11px] text-ink-300">LeadsPage.tsx</div>
+                  <div role="tablist" aria-label="React framework"
+                       class="no-scrollbar flex w-full items-center gap-0.5 overflow-x-auto whitespace-nowrap border-b border-white/5 bg-white/[0.03] px-3 py-1.5 font-mono text-[11px]">
+                    <button role="tab" aria-selected="true"  data-react-file="react" class="shrink-0 rounded px-2 py-0.5 text-white bg-white/10 transition">ReactLeadsPage.tsx</button>
+                    <button role="tab" aria-selected="false" data-react-file="next"  class="shrink-0 rounded px-2 py-0.5 text-ink-300 transition hover:bg-white/5 hover:text-white">NextLeadsPage.tsx</button>
+                  </div>
+
+                  <div data-react-file-panel="react">
                   <pre class="overflow-x-auto px-4 py-4 font-mono text-[12.5px] leading-relaxed text-ink-100"><code><span class="text-brand-300">import</span> { useQuery } <span class="text-brand-300">from</span> <span class="text-emerald-300">'@tanstack/react-query'</span>;
 <span class="text-brand-300">import</span> { LeadsTable, EmptyState, Spinner } <span class="text-brand-300">from</span> <span class="text-emerald-300">'@/components'</span>;
 <span class="text-brand-300">import</span> { fetchLeads } <span class="text-brand-300">from</span> <span class="text-emerald-300">'@/api/leads'</span>;
@@ -380,11 +455,114 @@
     &lt;/<span class="text-white">section</span>&gt;
   );
 }</code></pre>
+                  </div>
+
+                  <div data-react-file-panel="next" hidden>
+                  <pre class="overflow-x-auto px-4 py-4 font-mono text-[12.5px] leading-relaxed text-ink-100"><code><span class="text-brand-300">import</span> { LeadsTable } <span class="text-brand-300">from</span> <span class="text-emerald-300">'@/components'</span>;
+<span class="text-brand-300">import</span> { getLeads } <span class="text-brand-300">from</span> <span class="text-emerald-300">'@/lib/leads'</span>;
+
+<span class="text-brand-300">export const</span> revalidate = <span class="text-amber-300">60</span>;
+
+<span class="text-brand-300">export default async function</span> <span class="text-emerald-300">LeadsPage</span>() {
+  <span class="text-brand-300">const</span> leads = <span class="text-brand-300">await</span> <span class="text-emerald-300">getLeads</span>();
+
+  <span class="text-brand-300">return</span> (
+    &lt;<span class="text-white">section</span> className=<span class="text-emerald-300">"p-6"</span>&gt;
+      &lt;<span class="text-white">h1</span> className=<span class="text-emerald-300">"text-2xl font-bold"</span>&gt;Leads&lt;/<span class="text-white">h1</span>&gt;
+      &lt;<span class="text-white">p</span> className=<span class="text-emerald-300">"mt-1 text-slate-400"</span>&gt;{leads.length} total&lt;/<span class="text-white">p</span>&gt;
+      &lt;<span class="text-white">LeadsTable</span> rows={leads} /&gt;
+    &lt;/<span class="text-white">section</span>&gt;
+  );
+}</code></pre>
+                  </div>
                 </div>
 
-                <!-- Quarkus -->
+                <!-- Vue3 -->
+                <div data-code-panel="vue" hidden>
+                  <div class="border-b border-white/5 bg-white/[0.03] px-4 py-1.5 font-mono text-[11px] text-ink-300">LeadsPage.vue</div>
+                  <pre class="overflow-x-auto px-4 py-4 font-mono text-[12.5px] leading-relaxed text-ink-100"><code><span class="text-brand-300">&lt;script setup lang=</span><span class="text-emerald-300">"ts"</span><span class="text-brand-300">&gt;</span>
+<span class="text-brand-300">import</span> { ref, onMounted } <span class="text-brand-300">from</span> <span class="text-emerald-300">'vue'</span>;
+<span class="text-brand-300">import</span> { fetchLeads } <span class="text-brand-300">from</span> <span class="text-emerald-300">'@/api/leads'</span>;
+<span class="text-brand-300">import</span> LeadsTable <span class="text-brand-300">from</span> <span class="text-emerald-300">'@/components/LeadsTable.vue'</span>;
+
+<span class="text-brand-300">const</span> leads   = <span class="text-emerald-300">ref</span>([]);
+<span class="text-brand-300">const</span> loading = <span class="text-emerald-300">ref</span>(<span class="text-brand-300">true</span>);
+
+<span class="text-emerald-300">onMounted</span>(<span class="text-brand-300">async</span> () =&gt; {
+  leads.value   = <span class="text-brand-300">await</span> <span class="text-emerald-300">fetchLeads</span>();
+  loading.value = <span class="text-brand-300">false</span>;
+});
+<span class="text-brand-300">&lt;/script&gt;</span>
+
+<span class="text-brand-300">&lt;template&gt;</span>
+  &lt;<span class="text-white">section</span> class=<span class="text-emerald-300">"p-6"</span>&gt;
+    &lt;<span class="text-white">h1</span> class=<span class="text-emerald-300">"text-2xl font-bold"</span>&gt;Leads&lt;/<span class="text-white">h1</span>&gt;
+    &lt;<span class="text-white">p</span> class=<span class="text-emerald-300">"mt-1 text-slate-400"</span>&gt;{{ leads.length }} total&lt;/<span class="text-white">p</span>&gt;
+    &lt;<span class="text-white">LeadsTable</span> :rows=<span class="text-emerald-300">"leads"</span> v-if=<span class="text-emerald-300">"!loading"</span> /&gt;
+  &lt;/<span class="text-white">section</span>&gt;
+<span class="text-brand-300">&lt;/template&gt;</span></code></pre>
+                </div>
+
+                <!-- Angular -->
+                <div data-code-panel="angular" hidden>
+                  <div class="border-b border-white/5 bg-white/[0.03] px-4 py-1.5 font-mono text-[11px] text-ink-300">leads-page.component.ts</div>
+                  <pre class="overflow-x-auto px-4 py-4 font-mono text-[12.5px] leading-relaxed text-ink-100"><code><span class="text-brand-300">import</span> { Component, inject, signal, OnInit } <span class="text-brand-300">from</span> <span class="text-emerald-300">'@angular/core'</span>;
+<span class="text-brand-300">import</span> { LeadsTableComponent } <span class="text-brand-300">from</span> <span class="text-emerald-300">'./leads-table.component'</span>;
+<span class="text-brand-300">import</span> { LeadsService } <span class="text-brand-300">from</span> <span class="text-emerald-300">'./leads.service'</span>;
+
+<span class="text-amber-300">@Component</span>({
+  selector: <span class="text-emerald-300">'app-leads-page'</span>,
+  standalone: <span class="text-brand-300">true</span>,
+  imports: [LeadsTableComponent],
+  templateUrl: <span class="text-emerald-300">'./leads-page.component.html'</span>,
+})
+<span class="text-brand-300">export class</span> <span class="text-white">LeadsPageComponent</span> <span class="text-brand-300">implements</span> OnInit {
+  <span class="text-brand-300">private</span> leadsService = <span class="text-emerald-300">inject</span>(LeadsService);
+
+  leads   = <span class="text-emerald-300">signal</span>&lt;Lead[]&gt;([]);
+  loading = <span class="text-emerald-300">signal</span>(<span class="text-brand-300">true</span>);
+
+  <span class="text-brand-300">async</span> <span class="text-emerald-300">ngOnInit</span>() {
+    <span class="text-amber-300">this</span>.leads.<span class="text-emerald-300">set</span>(<span class="text-brand-300">await</span> <span class="text-amber-300">this</span>.leadsService.<span class="text-emerald-300">fetchAll</span>());
+    <span class="text-amber-300">this</span>.loading.<span class="text-emerald-300">set</span>(<span class="text-brand-300">false</span>);
+  }
+}</code></pre>
+                </div>
+
+                <!-- Java -->
                 <div data-code-panel="java" hidden>
-                  <div class="border-b border-white/5 bg-white/[0.03] px-4 py-1.5 font-mono text-[11px] text-ink-300">LeadResource.java</div>
+                  <div role="tablist" aria-label="Java framework"
+                       class="no-scrollbar flex w-full items-center gap-0.5 overflow-x-auto whitespace-nowrap border-b border-white/5 bg-white/[0.03] px-3 py-1.5 font-mono text-[11px]">
+                    <button role="tab" aria-selected="true"  data-java-file="spring"  class="shrink-0 rounded px-2 py-0.5 text-white bg-white/10 transition">SpringLeadController.java</button>
+                    <button role="tab" aria-selected="false" data-java-file="quarkus" class="shrink-0 rounded px-2 py-0.5 text-ink-300 transition hover:bg-white/5 hover:text-white">QuarkusLeadResource.java</button>
+                    <button role="tab" aria-selected="false" data-java-file="jakarta" class="shrink-0 rounded px-2 py-0.5 text-ink-300 transition hover:bg-white/5 hover:text-white">JakartaLeadResource.java</button>
+                  </div>
+
+                  <div data-java-file-panel="spring">
+                  <pre class="overflow-x-auto px-4 py-4 font-mono text-[12.5px] leading-relaxed text-ink-100"><code><span class="text-brand-300">package</span> app.leads;
+
+<span class="text-brand-300">import</span> org.springframework.web.bind.annotation.*;
+<span class="text-brand-300">import</span> org.springframework.http.ResponseEntity;
+
+<span class="text-amber-300">@RestController</span>
+<span class="text-amber-300">@RequestMapping</span>(<span class="text-emerald-300">"/leads"</span>)
+<span class="text-brand-300">public class</span> <span class="text-white">LeadController</span> {
+
+  <span class="text-brand-300">private final</span> LeadService leads;
+
+  <span class="text-brand-300">public</span> <span class="text-emerald-300">LeadController</span>(LeadService leads) {
+    <span class="text-brand-300">this</span>.leads = leads;
+  }
+
+  <span class="text-amber-300">@PostMapping</span>
+  <span class="text-brand-300">public</span> ResponseEntity&lt;LeadView&gt; <span class="text-emerald-300">ingest</span>(<span class="text-amber-300">@RequestBody</span> IngestLead cmd) {
+    LeadView view = leads.<span class="text-emerald-300">ingest</span>(cmd);
+    <span class="text-brand-300">return</span> ResponseEntity.<span class="text-emerald-300">ok</span>(view);
+  }
+}</code></pre>
+                  </div>
+
+                  <div data-java-file-panel="quarkus" hidden>
                   <pre class="overflow-x-auto px-4 py-4 font-mono text-[12.5px] leading-relaxed text-ink-100"><code><span class="text-brand-300">package</span> app.leads;
 
 <span class="text-brand-300">import</span> jakarta.ws.rs.*;
@@ -404,11 +582,147 @@
         .<span class="text-emerald-300">map</span>(LeadView::<span class="text-emerald-300">from</span>);
   }
 }</code></pre>
+                  </div>
+
+                  <div data-java-file-panel="jakarta" hidden>
+                  <pre class="overflow-x-auto px-4 py-4 font-mono text-[12.5px] leading-relaxed text-ink-100"><code><span class="text-brand-300">package</span> app.leads;
+
+<span class="text-brand-300">import</span> jakarta.ws.rs.*;
+<span class="text-brand-300">import</span> jakarta.ws.rs.core.MediaType;
+<span class="text-brand-300">import</span> jakarta.inject.Inject;
+<span class="text-brand-300">import</span> jakarta.enterprise.context.RequestScoped;
+
+<span class="text-amber-300">@Path</span>(<span class="text-emerald-300">"/leads"</span>)
+<span class="text-amber-300">@RequestScoped</span>
+<span class="text-amber-300">@Produces</span>(MediaType.APPLICATION_JSON)
+<span class="text-amber-300">@Consumes</span>(MediaType.APPLICATION_JSON)
+<span class="text-brand-300">public class</span> <span class="text-white">LeadResource</span> {
+
+  <span class="text-amber-300">@Inject</span> LeadService leads;
+
+  <span class="text-amber-300">@POST</span>
+  <span class="text-brand-300">public</span> LeadView <span class="text-emerald-300">ingest</span>(IngestLead cmd) {
+    <span class="text-brand-300">return</span> LeadView.<span class="text-emerald-300">from</span>(leads.<span class="text-emerald-300">ingest</span>(cmd));
+  }
+}</code></pre>
+                  </div>
+                </div>
+
+                <!-- Go -->
+                <div data-code-panel="go" hidden>
+                  <div role="tablist" aria-label="Go framework"
+                       class="no-scrollbar flex w-full items-center gap-0.5 overflow-x-auto whitespace-nowrap border-b border-white/5 bg-white/[0.03] px-3 py-1.5 font-mono text-[11px]">
+                    <button role="tab" aria-selected="true"  data-go-file="nethttp" class="shrink-0 rounded px-2 py-0.5 text-white bg-white/10 transition">NetHTTPLeadHandler.go</button>
+                    <button role="tab" aria-selected="false" data-go-file="gin"     class="shrink-0 rounded px-2 py-0.5 text-ink-300 transition hover:bg-white/5 hover:text-white">GinLeadHandler.go</button>
+                    <button role="tab" aria-selected="false" data-go-file="fiber"   class="shrink-0 rounded px-2 py-0.5 text-ink-300 transition hover:bg-white/5 hover:text-white">FiberLeadHandler.go</button>
+                  </div>
+
+                  <div data-go-file-panel="nethttp">
+                  <pre class="overflow-x-auto px-4 py-4 font-mono text-[12.5px] leading-relaxed text-ink-100"><code><span class="text-brand-300">package</span> leads
+
+<span class="text-brand-300">func</span> <span class="text-emerald-300">HandleIngest</span>(scoring ScoringService, repo Repository, bus EventPublisher) http.HandlerFunc {
+    <span class="text-brand-300">return func</span>(w http.ResponseWriter, r <span class="text-brand-300">*</span>http.Request) {
+        <span class="text-brand-300">var</span> <span class="text-amber-300">cmd</span> IngestLead
+        <span class="text-brand-300">if</span> <span class="text-amber-300">err</span> := json.<span class="text-emerald-300">NewDecoder</span>(r.Body).<span class="text-emerald-300">Decode</span>(<span class="text-brand-300">&amp;</span>cmd); err <span class="text-brand-300">!=</span> <span class="text-brand-300">nil</span> {
+            http.<span class="text-emerald-300">Error</span>(w, err.<span class="text-emerald-300">Error</span>(), http.StatusBadRequest)
+            <span class="text-brand-300">return</span>
+        }
+
+        <span class="text-amber-300">lead</span> := NewLeadFromCommand(cmd)
+        <span class="text-amber-300">score</span>, <span class="text-amber-300">err</span> := scoring.<span class="text-emerald-300">Evaluate</span>(r.Context(), lead)
+        <span class="text-brand-300">if</span> err <span class="text-brand-300">!=</span> <span class="text-brand-300">nil</span> {
+            http.<span class="text-emerald-300">Error</span>(w, err.<span class="text-emerald-300">Error</span>(), http.StatusInternalServerError)
+            <span class="text-brand-300">return</span>
+        }
+
+        lead <span class="text-brand-300">=</span> lead.<span class="text-emerald-300">WithScore</span>(score)
+        repo.<span class="text-emerald-300">Save</span>(r.Context(), lead)
+        bus.<span class="text-emerald-300">Publish</span>(r.Context(), LeadIngested{ID: lead.ID})
+
+        json.<span class="text-emerald-300">NewEncoder</span>(w).<span class="text-emerald-300">Encode</span>(lead)
+    }
+}</code></pre>
+                  </div>
+
+                  <div data-go-file-panel="gin" hidden>
+                  <pre class="overflow-x-auto px-4 py-4 font-mono text-[12.5px] leading-relaxed text-ink-100"><code><span class="text-brand-300">package</span> leads
+
+<span class="text-brand-300">func</span> <span class="text-emerald-300">RegisterRoutes</span>(r <span class="text-brand-300">*</span>gin.Engine, scoring ScoringService, repo Repository, bus EventPublisher) {
+    r.<span class="text-emerald-300">POST</span>(<span class="text-emerald-300">"/leads"</span>, <span class="text-brand-300">func</span>(c <span class="text-brand-300">*</span>gin.Context) {
+        <span class="text-brand-300">var</span> <span class="text-amber-300">cmd</span> IngestLead
+        <span class="text-brand-300">if</span> <span class="text-amber-300">err</span> := c.<span class="text-emerald-300">ShouldBindJSON</span>(<span class="text-brand-300">&amp;</span>cmd); err <span class="text-brand-300">!=</span> <span class="text-brand-300">nil</span> {
+            c.<span class="text-emerald-300">JSON</span>(http.StatusBadRequest, gin.H{<span class="text-emerald-300">"error"</span>: err.<span class="text-emerald-300">Error</span>()})
+            <span class="text-brand-300">return</span>
+        }
+
+        <span class="text-amber-300">lead</span> := NewLeadFromCommand(cmd)
+        <span class="text-amber-300">score</span>, <span class="text-amber-300">err</span> := scoring.<span class="text-emerald-300">Evaluate</span>(c, lead)
+        <span class="text-brand-300">if</span> err <span class="text-brand-300">!=</span> <span class="text-brand-300">nil</span> {
+            c.<span class="text-emerald-300">JSON</span>(http.StatusInternalServerError, gin.H{<span class="text-emerald-300">"error"</span>: err.<span class="text-emerald-300">Error</span>()})
+            <span class="text-brand-300">return</span>
+        }
+
+        lead <span class="text-brand-300">=</span> lead.<span class="text-emerald-300">WithScore</span>(score)
+        repo.<span class="text-emerald-300">Save</span>(c, lead)
+        bus.<span class="text-emerald-300">Publish</span>(c, LeadIngested{ID: lead.ID})
+
+        c.<span class="text-emerald-300">JSON</span>(http.StatusOK, lead)
+    })
+}</code></pre>
+                  </div>
+
+                  <div data-go-file-panel="fiber" hidden>
+                  <pre class="overflow-x-auto px-4 py-4 font-mono text-[12.5px] leading-relaxed text-ink-100"><code><span class="text-brand-300">package</span> leads
+
+<span class="text-brand-300">func</span> <span class="text-emerald-300">RegisterRoutes</span>(app <span class="text-brand-300">*</span>fiber.App, scoring ScoringService, repo Repository, bus EventPublisher) {
+    app.<span class="text-emerald-300">Post</span>(<span class="text-emerald-300">"/leads"</span>, <span class="text-brand-300">func</span>(c <span class="text-brand-300">*</span>fiber.Ctx) <span class="text-ink-300">error</span> {
+        <span class="text-brand-300">var</span> <span class="text-amber-300">cmd</span> IngestLead
+        <span class="text-brand-300">if</span> <span class="text-amber-300">err</span> := c.<span class="text-emerald-300">BodyParser</span>(<span class="text-brand-300">&amp;</span>cmd); err <span class="text-brand-300">!=</span> <span class="text-brand-300">nil</span> {
+            <span class="text-brand-300">return</span> fiber.<span class="text-emerald-300">NewError</span>(fiber.StatusBadRequest, err.<span class="text-emerald-300">Error</span>())
+        }
+
+        <span class="text-amber-300">lead</span> := NewLeadFromCommand(cmd)
+        <span class="text-amber-300">score</span>, <span class="text-amber-300">err</span> := scoring.<span class="text-emerald-300">Evaluate</span>(c.Context(), lead)
+        <span class="text-brand-300">if</span> err <span class="text-brand-300">!=</span> <span class="text-brand-300">nil</span> {
+            <span class="text-brand-300">return</span> err
+        }
+
+        lead <span class="text-brand-300">=</span> lead.<span class="text-emerald-300">WithScore</span>(score)
+        repo.<span class="text-emerald-300">Save</span>(c.Context(), lead)
+        bus.<span class="text-emerald-300">Publish</span>(c.Context(), LeadIngested{ID: lead.ID})
+
+        <span class="text-brand-300">return</span> c.<span class="text-emerald-300">JSON</span>(lead)
+    })
+}</code></pre>
+                  </div>
                 </div>
 
                 <!-- SQL -->
                 <div data-code-panel="sql" hidden>
-                  <div class="border-b border-white/5 bg-white/[0.03] px-4 py-1.5 font-mono text-[11px] text-ink-300">leads_revenue_by_cohort.sql</div>
+                  <div role="tablist" aria-label="Database"
+                       class="no-scrollbar flex w-full items-center gap-0.5 overflow-x-auto whitespace-nowrap border-b border-white/5 bg-white/[0.03] px-3 py-1.5 font-mono text-[11px]">
+                    <button role="tab" aria-selected="false" data-sql-file="mysql"    class="shrink-0 rounded px-2 py-0.5 text-ink-300 transition hover:bg-white/5 hover:text-white">MySQLLeadsQuery.sql</button>
+                    <button role="tab" aria-selected="true"  data-sql-file="postgres" class="shrink-0 rounded px-2 py-0.5 text-white bg-white/10 transition">PostgresLeadsQuery.sql</button>
+                    <button role="tab" aria-selected="false" data-sql-file="oracle"   class="shrink-0 rounded px-2 py-0.5 text-ink-300 transition hover:bg-white/5 hover:text-white">OracleLeadsQuery.sql</button>
+                    <button role="tab" aria-selected="false" data-sql-file="mongo"    class="shrink-0 rounded px-2 py-0.5 text-ink-300 transition hover:bg-white/5 hover:text-white">MongoLeadsQuery.js</button>
+                  </div>
+
+                  <div data-sql-file-panel="mysql" hidden>
+                  <pre class="overflow-x-auto px-4 py-4 font-mono text-[12.5px] leading-relaxed text-ink-100"><code><span class="text-brand-300">SELECT</span>
+  <span class="text-emerald-300">DATE_FORMAT</span>(l.created_at, <span class="text-emerald-300">'%Y-%m-01'</span>) <span class="text-brand-300">AS</span> cohort,
+  <span class="text-emerald-300">COUNT</span>(<span class="text-brand-300">DISTINCT</span> l.id)                  <span class="text-brand-300">AS</span> customers,
+  <span class="text-emerald-300">SUM</span>(s.amount)                         <span class="text-brand-300">AS</span> mrr,
+  <span class="text-emerald-300">ROUND</span>(<span class="text-emerald-300">AVG</span>(s.amount), <span class="text-amber-300">2</span>)               <span class="text-brand-300">AS</span> arpu
+<span class="text-brand-300">FROM</span> leads l
+<span class="text-brand-300">JOIN</span> subscriptions s <span class="text-brand-300">ON</span> s.lead_id = l.id
+<span class="text-brand-300">WHERE</span> l.status = <span class="text-emerald-300">'converted'</span> <span class="text-brand-300">AND</span> s.active = <span class="text-amber-300">1</span>
+<span class="text-brand-300">GROUP BY</span> cohort
+<span class="text-brand-300">HAVING</span> <span class="text-emerald-300">COUNT</span>(<span class="text-brand-300">DISTINCT</span> l.id) &gt; <span class="text-amber-300">50</span>
+<span class="text-brand-300">ORDER BY</span> cohort <span class="text-brand-300">DESC</span>
+<span class="text-brand-300">LIMIT</span> <span class="text-amber-300">24</span>;</code></pre>
+                  </div>
+
+                  <div data-sql-file-panel="postgres">
                   <pre class="overflow-x-auto px-4 py-4 font-mono text-[12.5px] leading-relaxed text-ink-100"><code><span class="text-brand-300">WITH</span> cohorts <span class="text-brand-300">AS</span> (
   <span class="text-brand-300">SELECT</span> id,
          <span class="text-emerald-300">date_trunc</span>(<span class="text-emerald-300">'month'</span>, created_at) <span class="text-brand-300">AS</span> cohort
@@ -427,6 +741,51 @@
 <span class="text-brand-300">HAVING</span>    <span class="text-emerald-300">COUNT</span>(<span class="text-brand-300">DISTINCT</span> c.id) &gt; <span class="text-amber-300">50</span>
 <span class="text-brand-300">ORDER BY</span>  c.cohort <span class="text-brand-300">DESC</span>
 <span class="text-brand-300">LIMIT</span>     <span class="text-amber-300">24</span>;</code></pre>
+                  </div>
+
+                  <div data-sql-file-panel="oracle" hidden>
+                  <pre class="overflow-x-auto px-4 py-4 font-mono text-[12.5px] leading-relaxed text-ink-100"><code><span class="text-brand-300">SELECT</span> cohort, customers, mrr, arpu <span class="text-brand-300">FROM</span> (
+  <span class="text-brand-300">SELECT</span>
+    <span class="text-emerald-300">TRUNC</span>(l.created_at, <span class="text-emerald-300">'MM'</span>)      <span class="text-brand-300">AS</span> cohort,
+    <span class="text-emerald-300">COUNT</span>(<span class="text-brand-300">DISTINCT</span> l.id)           <span class="text-brand-300">AS</span> customers,
+    <span class="text-emerald-300">SUM</span>(s.amount)                  <span class="text-brand-300">AS</span> mrr,
+    <span class="text-emerald-300">ROUND</span>(<span class="text-emerald-300">AVG</span>(s.amount), <span class="text-amber-300">2</span>)        <span class="text-brand-300">AS</span> arpu
+  <span class="text-brand-300">FROM</span> leads l
+  <span class="text-brand-300">JOIN</span> subscriptions s <span class="text-brand-300">ON</span> s.lead_id = l.id
+  <span class="text-brand-300">WHERE</span> l.status = <span class="text-emerald-300">'converted'</span> <span class="text-brand-300">AND</span> s.active = <span class="text-amber-300">1</span>
+  <span class="text-brand-300">GROUP BY</span> <span class="text-emerald-300">TRUNC</span>(l.created_at, <span class="text-emerald-300">'MM'</span>)
+  <span class="text-brand-300">HAVING</span> <span class="text-emerald-300">COUNT</span>(<span class="text-brand-300">DISTINCT</span> l.id) &gt; <span class="text-amber-300">50</span>
+)
+<span class="text-brand-300">ORDER BY</span> cohort <span class="text-brand-300">DESC</span>
+<span class="text-brand-300">FETCH FIRST</span> <span class="text-amber-300">24</span> <span class="text-brand-300">ROWS ONLY</span>;</code></pre>
+                  </div>
+
+                  <div data-sql-file-panel="mongo" hidden>
+                  <pre class="overflow-x-auto px-4 py-4 font-mono text-[12.5px] leading-relaxed text-ink-100"><code>db.leads.<span class="text-emerald-300">aggregate</span>([
+  { <span class="text-brand-300">$match</span>: { status: <span class="text-emerald-300">'converted'</span> } },
+  {
+    <span class="text-brand-300">$lookup</span>: {
+      from: <span class="text-emerald-300">'subscriptions'</span>,
+      localField: <span class="text-emerald-300">'_id'</span>,
+      foreignField: <span class="text-emerald-300">'leadId'</span>,
+      as: <span class="text-emerald-300">'subs'</span>,
+    },
+  },
+  { <span class="text-brand-300">$unwind</span>: <span class="text-emerald-300">'$subs'</span> },
+  { <span class="text-brand-300">$match</span>: { <span class="text-emerald-300">'subs.active'</span>: <span class="text-brand-300">true</span> } },
+  {
+    <span class="text-brand-300">$group</span>: {
+      _id: { <span class="text-brand-300">$dateTrunc</span>: { date: <span class="text-emerald-300">'$createdAt'</span>, unit: <span class="text-emerald-300">'month'</span> } },
+      customers: { <span class="text-brand-300">$addToSet</span>: <span class="text-emerald-300">'$_id'</span> },
+      mrr: { <span class="text-brand-300">$sum</span>: <span class="text-emerald-300">'$subs.amount'</span> },
+      arpu: { <span class="text-brand-300">$avg</span>: <span class="text-emerald-300">'$subs.amount'</span> },
+    },
+  },
+  { <span class="text-brand-300">$match</span>: { <span class="text-brand-300">$expr</span>: { <span class="text-brand-300">$gt</span>: [{ <span class="text-brand-300">$size</span>: <span class="text-emerald-300">'$customers'</span> }, <span class="text-amber-300">50</span>] } } },
+  { <span class="text-brand-300">$sort</span>: { _id: <span class="text-amber-300">-1</span> } },
+  { <span class="text-brand-300">$limit</span>: <span class="text-amber-300">24</span> },
+]);</code></pre>
+                  </div>
                 </div>
 
                 <!-- Docker -->
@@ -518,25 +877,25 @@
                 </div>
               </div>
 
-              <footer class="flex items-center justify-between border-t border-white/5 bg-white/5 px-4 py-2 font-mono text-[11px] text-ink-300">
-                <span>DDD · Hexagonal · CQRS-lite</span>
+              <div class="flex items-center justify-between border-t border-white/5 bg-white/5 px-4 py-2 font-mono text-[11px] text-ink-300">
+                <span id="code-architecture">DDD · Hexagonal · CQRS-lite</span>
                 <span id="code-runtime" class="text-brand-300">php 8.3 · symfony</span>
-              </footer>
+              </div>
             </div>
           </div>
         </aside>
       </div>
     </section>
 
-    <div class="mx-auto max-w-5xl px-4 sm:px-6"><div class="hairline"></div></div>
+    <div class="mx-auto max-w-6xl px-4 sm:px-6"><div class="hairline"></div></div>
 
     <!-- ============================ ABOUT ============================ -->
-    <section id="about" class="mx-auto max-w-5xl px-4 py-10 sm:px-6">
+    <section id="about" class="mx-auto max-w-6xl px-4 py-10 sm:px-6">
       <div class="grid gap-6 lg:grid-cols-12">
         <header class="reveal lg:col-span-4">
           <div class="relative inline-block">
             <div class="absolute -inset-1 rounded-full bg-gradient-to-br from-brand-400/40 via-brand-600/20 to-transparent blur"></div>
-            <img src="profile.jpg" alt="Dário Gabriel"
+            <img src="profile.jpg" alt="Dário Gabriel" width="144" height="144" loading="lazy"
                  class="relative h-32 w-32 rounded-full object-cover ring-2 ring-white/10 sm:h-36 sm:w-36" />
           </div>
           <p class="mt-5 font-mono text-[11px] uppercase tracking-widest text-brand-300" data-i18n="about.label">01 — About</p>
@@ -545,12 +904,16 @@
 
         <div class="reveal lg:col-span-8">
           <p class="text-sm leading-relaxed text-ink-200 sm:text-base" data-i18n-html="about.p1">
-            I'm Dário, a Senior Backend Engineer from the Amazon, currently completing a contract with
+            I'm Dário, a Senior Backend Engineer from the Amazon, currently building
+            <span class="font-semibold text-white">Node.js/TypeScript/NestJS</span> microservices at
+            <a href="https://globalhitss.com/br/" target="_blank" rel="noopener" class="font-semibold text-white underline decoration-brand-400/40 underline-offset-2 transition hover:decoration-brand-400">HITSS Brasil</a>
+            in Brasília — my second stint with the company.
+            Previously, I contributed to a Stripe payments integration (SDK, webhooks, wallets) at
             <a href="https://leadtech.com" target="_blank" rel="noopener" class="font-semibold text-white underline decoration-brand-400/40 underline-offset-2 transition hover:decoration-brand-400">Leadtech</a>
             <span class="text-ink-300">(via <a href="https://www.ciklum.com" target="_blank" rel="noopener" class="underline decoration-brand-400/40 underline-offset-2 transition hover:decoration-brand-400">Ciklum</a>)</span>
-            in Barcelona, ending May 2026 — open to my next senior backend role.
-            Over the past <strong class="text-white">eight years</strong> I've worked alongside cross-functional teams across
-            <strong class="text-white">PHP, Node.js and Java</strong>, modernized legacy monoliths and shipped
+            in Barcelona.
+            Over the past <strong class="text-white">9+ years</strong> I've worked alongside cross-functional teams across
+            <strong class="text-white">PHP, Node.js, Java and Go</strong>, modernized legacy monoliths and shipped
             event-driven, government-scale systems for companies in Brazil, Spain and Latin America.
           </p>
           <p class="mt-3 text-sm leading-relaxed text-ink-200 sm:text-base" data-i18n="about.p2">
@@ -583,17 +946,17 @@
             </li>
             <li class="flex items-start gap-3 text-sm leading-6 text-ink-200">
               <span class="mt-[9px] inline-block h-1.5 w-1.5 shrink-0 rounded-full bg-brand-400" aria-hidden="true"></span>
-              <span data-i18n="about.skill.6">Fluent in PT (native) · EN (B2) · ES (C1)</span>
+              <span data-i18n="about.skill.6">Fluent in PT (native) · EN (C1) · ES (C1)</span>
             </li>
           </ul>
         </div>
       </div>
     </section>
 
-    <div class="mx-auto max-w-5xl px-4 sm:px-6"><div class="hairline"></div></div>
+    <div class="mx-auto max-w-6xl px-4 sm:px-6"><div class="hairline"></div></div>
 
     <!-- ============================ STACK ============================ -->
-    <section id="stack" class="mx-auto max-w-5xl px-4 py-10 sm:px-6">
+    <section id="stack" class="mx-auto max-w-6xl px-4 py-10 sm:px-6">
       <header class="reveal max-w-2xl">
         <p class="font-mono text-[11px] uppercase tracking-widest text-brand-300" data-i18n="stack.label">02 — Stack</p>
         <h2 class="mt-1 text-2xl font-bold text-white sm:text-3xl" data-i18n="stack.title">Tools I reach for every day.</h2>
@@ -604,7 +967,7 @@
         <article class="reveal card rounded-xl p-4">
           <h3 class="font-mono text-[11px] uppercase tracking-widest text-brand-300" data-i18n="stack.backend">Backend</h3>
           <ul class="mt-2 flex flex-wrap gap-1.5" data-tags>
-            <li>PHP 8</li><li>Symfony</li><li>Laravel</li><li>Node.js</li><li>NestJS</li><li>TypeScript</li><li>Java</li><li>Spring</li><li>Quarkus</li><li>Doctrine</li><li>REST</li><li>GraphQL</li>
+            <li>PHP 8</li><li>Symfony</li><li>Laravel</li><li>Yii</li><li>Node.js</li><li>NestJS</li><li>TypeScript</li><li>Java</li><li>Spring</li><li>Quarkus</li><li>Go</li><li>Doctrine</li><li>REST</li><li>GraphQL</li>
           </ul>
         </article>
 
@@ -632,7 +995,7 @@
         <article class="reveal card rounded-xl p-4" style="transition-delay:.06s">
           <h3 class="font-mono text-[11px] uppercase tracking-widest text-brand-300" data-i18n="stack.frontend">Frontend</h3>
           <ul class="mt-2 flex flex-wrap gap-1.5" data-tags>
-            <li>TypeScript</li><li>Vue.js</li><li>React</li><li>Next.js</li><li>Tailwind CSS</li><li>HTML5</li>
+            <li>TypeScript</li><li>Vue.js</li><li>React</li><li>Next.js</li><li>Angular</li><li>Tailwind CSS</li><li>HTML5</li>
           </ul>
         </article>
 
@@ -645,43 +1008,58 @@
       </div>
     </section>
 
-    <div class="mx-auto max-w-5xl px-4 sm:px-6"><div class="hairline"></div></div>
+    <div class="mx-auto max-w-6xl px-4 sm:px-6"><div class="hairline"></div></div>
 
     <!-- ============================ EXPERIENCE ============================ -->
-    <section id="experience" class="mx-auto max-w-5xl px-4 py-10 sm:px-6">
+    <section id="experience" class="mx-auto max-w-6xl px-4 py-10 sm:px-6">
       <header class="reveal max-w-2xl">
         <p class="font-mono text-[11px] uppercase tracking-widest text-brand-300" data-i18n="exp.label">03 — Experience</p>
-        <h2 class="mt-1 text-2xl font-bold text-white sm:text-3xl" data-i18n="exp.title">Seven years shipping production software.</h2>
+        <h2 class="mt-1 text-2xl font-bold text-white sm:text-3xl" data-i18n="exp.title">9+ years shipping production software.</h2>
       </header>
 
       <ol class="mt-6 relative ml-2 space-y-5 border-l border-dashed border-white/10 pl-8">
         <li class="reveal node relative">
           <div class="flex flex-wrap items-center gap-2">
             <span class="chip" data-i18n="exp.current">Current</span>
-            <span class="font-mono text-xs text-ink-400">Sep 2025 — May 2026</span>
+            <span class="font-mono text-xs text-ink-400">May 2026 — Present</span>
           </div>
           <h3 class="mt-2 text-lg font-semibold text-white">
             <span data-i18n="exp.role.senior">Senior Backend Engineer</span> ·
-            <a href="https://leadtech.com" target="_blank" rel="noopener" class="underline decoration-brand-400/40 underline-offset-2 transition hover:text-brand-300 hover:decoration-brand-400">Leadtech</a>
-            <span class="text-sm font-normal text-ink-300">(via <a href="https://www.ciklum.com" target="_blank" rel="noopener" class="underline decoration-brand-400/40 underline-offset-2 transition hover:text-brand-300 hover:decoration-brand-400">Ciklum</a>)</span>
+            <a href="https://globalhitss.com/br/" target="_blank" rel="noopener" class="underline decoration-brand-400/40 underline-offset-2 transition hover:text-brand-300 hover:decoration-brand-400">HITSS Brasil</a>
           </h3>
-          <p class="font-mono text-xs text-ink-400" data-i18n="exp.1.location">Barcelona, Spain · Remote</p>
+          <p class="font-mono text-xs text-ink-400" data-i18n="exp.1.location">Brasília, Brazil · Remote</p>
           <p class="mt-2 text-sm leading-relaxed text-ink-200" data-i18n="exp.1.desc">
-            Designing and owning APIs for payments, subscriptions, e-signatures and AI-driven
-            document workflows on PHP 8 + Symfony + Doctrine + GraphQL/REST + PostgreSQL +
-            RabbitMQ. Architecture grounded in DDD, Hexagonal and SOLID — explicit aggregates,
-            idempotent transactions and clean bounded contexts that scale with new markets.
+            Building Node.js/TypeScript/NestJS microservices — my second engagement with HITSS
+            after the government-platforms project in Rio de Janeiro, this time focused on
+            distributed service design and API delivery from Brasília.
           </p>
         </li>
 
         <li class="reveal node relative">
-          <span class="font-mono text-xs text-ink-400">Oct 2023 — 2025</span>
+          <span class="font-mono text-xs text-ink-400">Sep 2025 — Jun 2026</span>
+          <h3 class="mt-1.5 text-lg font-semibold text-white">
+            <span data-i18n="exp.role.senior">Senior Backend Engineer</span> ·
+            <a href="https://leadtech.com" target="_blank" rel="noopener" class="underline decoration-brand-400/40 underline-offset-2 transition hover:text-brand-300 hover:decoration-brand-400">Leadtech</a>
+            <span class="text-sm font-normal text-ink-300">(via <a href="https://www.ciklum.com" target="_blank" rel="noopener" class="underline decoration-brand-400/40 underline-offset-2 transition hover:text-brand-300 hover:decoration-brand-400">Ciklum</a>)</span>
+          </h3>
+          <p class="font-mono text-xs text-ink-400" data-i18n="exp.2.location">Barcelona, Spain · Remote</p>
+          <p class="mt-2 text-sm leading-relaxed text-ink-200" data-i18n="exp.2.desc">
+            Contributed to APIs for payments, subscriptions, e-signatures and AI-driven
+            document workflows on PHP 8 + Symfony + Doctrine + GraphQL/REST + PostgreSQL +
+            RabbitMQ, including a Stripe integration (SDK, webhooks, wallets). Architecture
+            grounded in DDD, Hexagonal and SOLID — explicit aggregates, idempotent transactions
+            and clean bounded contexts that scale with new markets.
+          </p>
+        </li>
+
+        <li class="reveal node relative">
+          <span class="font-mono text-xs text-ink-400">Oct 2023 — Oct 2025</span>
           <h3 class="mt-1.5 text-lg font-semibold text-white">
             <span data-i18n="exp.role.senior">Senior Backend Engineer</span> ·
             <a href="https://www.globalhitss.com" target="_blank" rel="noopener" class="underline decoration-brand-400/40 underline-offset-2 transition hover:text-brand-300 hover:decoration-brand-400">Global HITSS Brasil</a>
           </h3>
-          <p class="font-mono text-xs text-ink-400" data-i18n="exp.2.location">Rio de Janeiro, Brazil</p>
-          <p class="mt-2 text-sm leading-relaxed text-ink-200" data-i18n="exp.2.desc">
+          <p class="font-mono text-xs text-ink-400" data-i18n="exp.3.location">Rio de Janeiro, Brazil</p>
+          <p class="mt-2 text-sm leading-relaxed text-ink-200" data-i18n="exp.3.desc">
             Multi-stack senior on Brazilian government platforms across multiple ministries
             (Agriculture, Fisheries). Delivered services in PHP/Symfony, Node.js/NestJS/TypeScript
             and Java/Spring Boot/Quarkus/JPA, with Next.js + React frontends. Engineered a complex
@@ -697,14 +1075,14 @@
             <span data-i18n="exp.role.senior">Senior Backend Engineer</span> ·
             <a href="https://www.westwing.com.br" target="_blank" rel="noopener" class="underline decoration-brand-400/40 underline-offset-2 transition hover:text-brand-300 hover:decoration-brand-400">Westwing Brasil</a>
           </h3>
-          <p class="font-mono text-xs text-ink-400" data-i18n="exp.3.location">São Paulo, Brazil</p>
-          <p class="mt-2 text-sm leading-relaxed text-ink-200" data-i18n="exp.3.desc">
+          <p class="font-mono text-xs text-ink-400" data-i18n="exp.4.location">São Paulo, Brazil</p>
+          <p class="mt-2 text-sm leading-relaxed text-ink-200" data-i18n="exp.4.desc">
             Backend on a high-traffic e-commerce platform — millions of monthly sessions.
             Shipped checkout, order and inventory features across Symfony, Laravel and Node.js,
-            with Vue.js frontends. Built financial systems for supplier payments, settlements
-            and dividend processing, integrated with Adyen, PIX and Salesforce. Optimized
-            production via Redis caching strategies and Elasticsearch log analysis across
-            production and staging environments.
+            with Vue.js frontends, and used Go for performance-critical microservices. Built
+            financial systems for supplier payments, settlements and dividend processing,
+            integrated with Adyen, PIX and Salesforce. Optimized production via Redis caching
+            strategies and Elasticsearch log analysis across production and staging environments.
           </p>
         </li>
 
@@ -713,8 +1091,8 @@
           <h3 class="mt-1.5 text-lg font-semibold text-white">
             <span data-i18n="exp.role.senior">Senior Backend Engineer</span> · Vekttor · iComanda
           </h3>
-          <p class="font-mono text-xs text-ink-400" data-i18n="exp.4.location">Manaus, Brazil</p>
-          <p class="mt-2 text-sm leading-relaxed text-ink-200" data-i18n="exp.4.desc">
+          <p class="font-mono text-xs text-ink-400" data-i18n="exp.5.location">Manaus, Brazil</p>
+          <p class="mt-2 text-sm leading-relaxed text-ink-200" data-i18n="exp.5.desc">
             Led the team in modernizing legacy PHP systems. Built internal tools in Node.js,
             Vue.js and React, and shipped features like SAT fiscal invoice issuance,
             a WhatsApp messaging API and a distributed P2P server for offline-capable POS.
@@ -724,10 +1102,10 @@
       </ol>
     </section>
 
-    <div class="mx-auto max-w-5xl px-4 sm:px-6"><div class="hairline"></div></div>
+    <div class="mx-auto max-w-6xl px-4 sm:px-6"><div class="hairline"></div></div>
 
     <!-- ============================ PROJECTS ============================ -->
-    <section id="projects" class="mx-auto max-w-5xl px-4 py-10 sm:px-6">
+    <section id="projects" class="mx-auto max-w-6xl px-4 py-10 sm:px-6">
       <header class="reveal max-w-2xl">
         <p class="font-mono text-[11px] uppercase tracking-widest text-brand-300" data-i18n="proj.label">04 — Projects</p>
         <h2 class="mt-1 text-2xl font-bold text-white sm:text-3xl" data-i18n="proj.title">Selected work.</h2>
@@ -875,10 +1253,10 @@
       </div>
     </section>
 
-    <div class="mx-auto max-w-5xl px-4 sm:px-6"><div class="hairline"></div></div>
+    <div class="mx-auto max-w-6xl px-4 sm:px-6"><div class="hairline"></div></div>
 
     <!-- ============================ CONTACT ============================ -->
-    <section id="contact" class="mx-auto max-w-5xl px-4 py-10 sm:px-6">
+    <section id="contact" class="mx-auto max-w-6xl px-4 py-10 sm:px-6">
       <div class="reveal relative overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-br from-brand-900/60 via-ink-800/60 to-ink-900 p-6 sm:p-8">
         <div class="absolute -right-24 -top-24 h-72 w-72 rounded-full bg-brand-500/20 blur-3xl"></div>
         <div class="absolute -bottom-24 -left-24 h-72 w-72 rounded-full bg-brand-700/20 blur-3xl"></div>
@@ -931,7 +1309,7 @@
               </div>
               <div class="flex items-center justify-between rounded-lg border border-white/10 bg-white/5 px-4 py-2.5">
                 <dt class="font-mono text-xs uppercase tracking-wider text-ink-300" data-i18n="contact.languages">Languages</dt>
-                <dd class="font-medium text-white">PT · EN (B2) · ES (C1)</dd>
+                <dd class="font-medium text-white">PT · EN (C1) · ES (C1)</dd>
               </div>
             </dl>
           </div>
@@ -942,7 +1320,7 @@
 
   <!-- ============================ FOOTER ============================ -->
   <footer class="border-t border-white/5 bg-ink-950/60 py-4">
-    <div class="mx-auto flex max-w-5xl flex-col items-center justify-between gap-2 px-4 text-xs text-ink-400 sm:flex-row sm:px-6">
+    <div class="mx-auto flex max-w-6xl flex-col items-center justify-between gap-2 px-4 text-xs text-ink-400 sm:flex-row sm:px-6">
       <p>&copy; <span id="year"></span> Dário Gabriel — <span data-i18n="footer.crafted">Crafted with HTML, Tailwind CSS and vanilla JS.</span></p>
       <p class="font-mono" data-i18n="footer.tagline">from the Amazon to the world</p>
     </div>
@@ -954,7 +1332,7 @@
     <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
   </button>
 
-  <script src="assets/js/main.js"></script>
-  <script src="assets/js/notify.js" defer></script>
+  <script type="module" src="assets/js/main.js"></script>
+  <script type="module" src="assets/js/notify.js"></script>
 </body>
 </html>
