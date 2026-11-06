@@ -45,66 +45,9 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
 
-  <!-- Tailwind via CDN with project-scoped config (brand palette + motion) -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      darkMode: 'class',
-      theme: {
-        extend: {
-          colors: {
-            brand: {
-              50:  '#eef6ff',
-              100: '#d9ebff',
-              200: '#bcdcff',
-              300: '#8ec7ff',
-              400: '#58a6ff',
-              500: '#2f83f4',
-              600: '#1864d8',
-              700: '#154fae',
-              800: '#14448c',
-              900: '#122f5f',
-              950: '#0b1f42',
-            },
-            ink: {
-              50:  '#f1f5f9',
-              100: '#e2e8f0',
-              200: '#cbd5e1',
-              300: '#94a3b8',
-              400: '#64748b',
-              500: '#475569',
-              600: '#334155',
-              700: '#1e293b',
-              800: '#0f172a',
-              900: '#0b1220',
-              950: '#060912',
-            },
-          },
-          fontFamily: {
-            sans: ['Inter', 'system-ui', 'sans-serif'],
-            mono: ['"JetBrains Mono"', 'ui-monospace', 'monospace'],
-          },
-          boxShadow: {
-            'glow': '0 0 0 1px rgb(47 131 244 / 0.25), 0 24px 48px -24px rgb(47 131 244 / 0.45)',
-            'card': '0 1px 0 0 rgb(255 255 255 / 0.04) inset, 0 20px 40px -24px rgb(0 0 0 / 0.6)',
-          },
-          animation: {
-            'fade-up': 'fadeUp .7s cubic-bezier(.2,.7,.2,1) both',
-            'blink':   'blink 1s steps(1) infinite',
-            'float':   'float 7s ease-in-out infinite',
-            'pulse-ring': 'pulseRing 2.2s cubic-bezier(.2,.7,.2,1) infinite',
-          },
-          keyframes: {
-            fadeUp: { '0%': { opacity: 0, transform: 'translateY(20px)' }, '100%': { opacity: 1, transform: 'none' } },
-            blink:  { '50%': { opacity: 0 } },
-            float:  { '0%,100%': { transform: 'translateY(0)' }, '50%': { transform: 'translateY(-8px)' } },
-            pulseRing: { '0%': { transform: 'scale(.8)', opacity: .6 }, '100%': { transform: 'scale(2.2)', opacity: 0 } },
-          },
-        },
-      },
-    };
-  </script>
-
+  <!-- Prebuilt Tailwind (compiled from the classes actually used) — replaces the
+       runtime CDN so the browser never ships/compiles Tailwind's JIT engine. -->
+  <link rel="stylesheet" href="assets/css/tailwind.css" />
   <!-- Project-level CSS: surface treatments the utility layer doesn't give for free -->
   <link rel="stylesheet" href="assets/css/style.css" />
 </head>
