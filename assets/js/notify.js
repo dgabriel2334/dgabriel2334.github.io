@@ -46,6 +46,7 @@ import { getGeo } from './geo.js';
           'Title':    title,
           'Tags':     tags,
           'Priority': priority,
+          'Markdown': 'yes',
           'Click':    location.href,
         },
         keepalive: true,
@@ -199,30 +200,41 @@ import { getGeo } from './geo.js';
     const isFirst = !localStorage.getItem(FIRST_VISIT_KEY);
     if (isFirst) localStorage.setItem(FIRST_VISIT_KEY, new Date().toISOString());
 
-    const where = geo ? [geo.country, geo.region, geo.city].filter(Boolean).join(' · ') : '';
+    const where  = geo ? [geo.country, geo.region, geo.city].filter(Boolean).join(' · ') : '';
+    const place  = geo ? [geo.city, geo.country].filter(Boolean).join(', ') : '';
+    const source = parseReferrer();
+    const fromAd = source && source !== 'direct' && source !== 'internal';
     const hw = [
       navigator.hardwareConcurrency ? `${navigator.hardwareConcurrency} cores` : null,
       navigator.deviceMemory        ? `${navigator.deviceMemory} GB`           : null,
     ].filter(Boolean).join(' · ');
+    const net = network();
 
-    const lines = [
-      where || null,
-      geo && geo.ip ? `IP: ${geo.ip}${geo.org ? ' · ' + geo.org : ''}` : null,
+    // Smart title: the key signal (where + how they arrived) at a glance.
+    const title =
+      (place ? `👀 ${place}` : '👀 New visitor') + (fromAd ? ` · via ${source}` : '');
+
+    const body = [
+      '**📍 Location**',
+      where || '_unknown_',
+      geo && geo.ip ? `\`${geo.ip}\`${geo.org ? ' · ' + geo.org : ''}` : null,
+      '',
+      '**💻 Device**',
       `${deviceClass()} · ${browserName()} / ${osName()}${isTouch() ? ' · touch' : ''}`,
-      `Viewport: ${viewport()}`,
-      hw || null,
-      network() ? `Net: ${network()}` : null,
-      `From: ${parseReferrer()}`,
-      `Lang: ${navigator.language}${timeZone() ? ' · ' + timeZone() : ''}`,
-      `Local time: ${localTime()}`,
-      isFirst ? '✦ First visit' : 'Returning visitor',
-    ].filter(Boolean);
+      [viewport(), hw, net && net !== 'unavailable (Safari/Firefox)' ? net : null]
+        .filter(Boolean).join(' · '),
+      '',
+      '**🔗 Source**',
+      `From **${source}** · ${navigator.language}${timeZone() ? ' · ' + timeZone() : ''}`,
+      '',
+      `🕐 ${localTime()} local · ${isFirst ? '✦ **First visit**' : '↩︎ Returning visitor'}`,
+    ].filter((l) => l !== null).join('\n');
 
     send(
-      'New visitor on portfolio',
-      lines.join('\n'),
+      title,
+      body,
       isFirst ? 'sparkles,eyes' : 'eyes',
-      'default'
+      isFirst && fromAd ? 'high' : 'default',
     );
   };
 
@@ -341,21 +353,29 @@ import { getGeo } from './geo.js';
     const sections = [...session.sectionsViewed];
     const tabs     = [...session.codeTabsViewed];
 
-    const lines = [
-      `Time: ${formatDuration(totalSec)}${activeSec && activeSec !== totalSec ? ` (active ${formatDuration(activeSec)})` : ''}`,
-      `Scroll: ${session.scrollMax}%`,
-      sections.length ? `Sections: ${sections.join(', ')}` : null,
-      tabs.length     ? `Code tabs: ${tabs.join(', ')}`    : null,
-      session.langSwitches  ? `Lang switches: ${session.langSwitches}` : null,
-      session.downloadedResume ? '✓ Downloaded CV'     : null,
-      session.emailEngaged     ? '✓ Engaged with email' : null,
-      session.whatsappClicked  ? '✓ Clicked WhatsApp'   : null,
-      session.githubClicked    ? '✓ Clicked GitHub'     : null,
-      session.reachedContact   ? '✓ Reached Contact'    : null,
-      lcp || ttfb() ? `Perf: TTFB ${ttfb()}ms${lcp ? ` · LCP ${lcp}ms` : ''}` : null,
+    const actions = [
+      session.downloadedResume ? '📄 Downloaded CV'    : null,
+      session.emailEngaged     ? '✉️ Engaged with email' : null,
+      session.whatsappClicked  ? '💬 Clicked WhatsApp'  : null,
+      session.githubClicked    ? '🐙 Clicked GitHub'    : null,
+      session.reachedContact   ? '👀 Reached Contact'   : null,
     ].filter(Boolean);
+    const hot = session.downloadedResume || session.emailEngaged || session.whatsappClicked;
 
-    send('Session ended', lines.join('\n'), 'bar_chart', 'low');
+    const title = `📊 Session · ${formatDuration(totalSec)} · ${session.scrollMax}% scroll`;
+    const body = [
+      `**⏱ Time** ${formatDuration(totalSec)}${activeSec && activeSec !== totalSec ? ` (active ${formatDuration(activeSec)})` : ''} · **scroll** ${session.scrollMax}%`,
+      sections.length ? `**📑 Sections** ${sections.join(', ')}` : null,
+      tabs.length     ? `**&lt;/&gt; Code** ${tabs.join(', ')}` : null,
+      session.langSwitches ? `**🌐 Lang switches** ${session.langSwitches}` : null,
+      actions.length ? '' : null,
+      actions.length ? '**🔥 High-intent actions**' : null,
+      actions.length ? actions.join('\n') : null,
+      '',
+      (lcp || ttfb()) ? `_perf: TTFB ${ttfb()}ms${lcp ? ` · LCP ${lcp}ms` : ''}_` : null,
+    ].filter((l) => l !== null).join('\n');
+
+    send(title, body, hot ? 'fire,bar_chart' : 'bar_chart', hot ? 'default' : 'low');
   };
 
   // pagehide is the modern, reliable signal across desktop and mobile;
