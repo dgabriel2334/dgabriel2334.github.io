@@ -225,20 +225,21 @@
             </a>
           </div>
 
-          <dl class="mt-7 grid max-w-md grid-cols-3 gap-4 border-t border-white/5 pt-4">
-            <div>
-              <dt class="font-mono text-[10px] uppercase tracking-widest text-ink-400" data-i18n="hero.stats.exp">Experience</dt>
-              <dd class="mt-0.5 text-xl font-semibold text-white">9+ <span class="text-xs font-medium text-ink-400" data-i18n="hero.stats.yrs">yrs</span></dd>
+          <dl class="mt-8 grid max-w-md grid-cols-3 divide-x divide-white/10 overflow-hidden rounded-xl border border-white/10 bg-white/[0.03] text-center">
+            <div class="px-2 py-4">
+              <dd class="gradient-text text-3xl font-extrabold leading-none sm:text-4xl">9+</dd>
+              <dt class="mt-1.5 font-mono text-[9px] uppercase tracking-widest text-ink-400 sm:text-[10px]" data-i18n="hero.stats.years">Years shipping</dt>
             </div>
-            <div>
-              <dt class="font-mono text-[10px] uppercase tracking-widest text-ink-400" data-i18n="hero.stats.current">Current</dt>
-              <dd class="mt-0.5 text-base font-semibold text-white">HITSS Brasil <span class="text-xs font-normal text-ink-400">(Brasília)</span></dd>
+            <div class="px-2 py-4">
+              <dd class="gradient-text text-3xl font-extrabold leading-none sm:text-4xl">1M+</dd>
+              <dt class="mt-1.5 font-mono text-[9px] uppercase tracking-widest text-ink-400 sm:text-[10px]" data-i18n="hero.stats.tx">Daily tx</dt>
             </div>
-            <div>
-              <dt class="font-mono text-[10px] uppercase tracking-widest text-ink-400" data-i18n="hero.stats.based">Based in</dt>
-              <dd class="mt-0.5 text-xl font-semibold text-white">Manaus, BR</dd>
+            <div class="px-2 py-4">
+              <dd class="gradient-text text-3xl font-extrabold leading-none sm:text-4xl">40+</dd>
+              <dt class="mt-1.5 font-mono text-[9px] uppercase tracking-widest text-ink-400 sm:text-[10px]" data-i18n="hero.stats.countries">Countries</dt>
             </div>
           </dl>
+          <p class="mt-3 font-mono text-[11px] text-ink-400" data-i18n="hero.loc">Manaus, Brazil · UTC-4 · Remote</p>
         </div>
 
         <!-- Hero code card: visual anchor emphasising backend/architecture focus -->
@@ -1145,19 +1146,22 @@ router.<span class="text-emerald-300">post</span>(<span class="text-emerald-300"
                 <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 18a4 4 0 0 0 0-8 6 6 0 0 0-11.5-1A4.5 4.5 0 0 0 6 18z"/></svg>
               </span>
               <div>
-                <h3 class="text-base font-semibold text-white">Cloud-Native SaaS Platform</h3>
-                <p class="font-mono text-[11px] text-ink-400">NestJS · TypeORM · React · AWS EKS</p>
+                <h3 class="text-base font-semibold text-white">Pista Quente — Multi-Tenant SaaS</h3>
+                <p class="font-mono text-[11px] text-ink-400">NestJS · Prisma · PostgreSQL · Stripe · Next.js</p>
               </div>
             </div>
-            <span class="chip">Platform</span>
+            <span class="chip">Founder</span>
           </div>
           <p class="mt-3 text-sm leading-relaxed text-ink-200" data-i18n="proj.2.desc">
-            Side-project SaaS platform built end-to-end with NestJS + TypeORM on PostgreSQL,
-            Redis caching and MinIO storage on the backend, React frontend, deployed to
-            AWS EKS / RDS / ECR with GitLab CI pipelines and infrastructure as code.
+            Multi-tenant B2B SaaS I built end to end — ~1,100 commits across API, web and native mobile.
+            NestJS with hexagonal architecture and CQRS, PostgreSQL with row-level security for tenant
+            isolation, contract-first OpenAPI, and a full recurring-billing engine (plans, subscriptions,
+            proration, retries) on a provider-agnostic Stripe gateway with idempotent webhooks. Next.js PWA
+            plus native iOS (SwiftUI) and Android (Compose) on a Kotlin Multiplatform core — shipped on k3s
+            with GitHub Actions and Playwright E2E, now live on the App Store.
           </p>
           <ul class="mt-3 flex flex-wrap gap-1.5" data-tags>
-            <li>NestJS</li><li>TypeORM</li><li>EKS</li><li>GitLab CI</li><li>MinIO</li>
+            <li>NestJS</li><li>CQRS</li><li>Prisma · RLS</li><li>Stripe</li><li>Kotlin MP</li><li>k3s</li>
           </ul>
         </article>
 
